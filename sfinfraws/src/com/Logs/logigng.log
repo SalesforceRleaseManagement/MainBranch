@@ -1,0 +1,574 @@
+2015-10-19 13:23:53 INFO  CustomObjectTest:179 - ASA__DeploymentSetting__c
+2015-10-19 13:26:32 INFO  CustomObjectTest:179 - ASA__DeploymentSetting__c
+2015-10-19 13:26:35 INFO  CustomObjectTest:179 - ASA__DeploymentSetting__c
+ASA__DeploymentSetting__c
+ASA__DeploymentSetting__c
+2015-10-19 13:53:27 INFO  CustomObjectTest:179 - ASA__DeploymentSetting__c
+2015-10-19 13:54:04 ERROR CustomObjectTest:179 - ASA__DeploymentSetting__c
+2015-10-19 14:02:10 DEBUG HttpClient:72 - Java version: 1.6.0_45
+2015-10-19 14:02:10 DEBUG HttpClient:73 - Java vendor: Sun Microsystems Inc.
+2015-10-19 14:02:10 DEBUG HttpClient:74 - Java class path: /home/root6/srikanth-projects/salesforce/sfinfraws/src/com:/home/root6/srikanth-projects/salesforce/sfinfraws/target/classes:/home/root6/softwares/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar:/home/root6/softwares/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar:/home/root6/.m2/repository/org/daisy/libs/commons-httpclient/3.1.0/commons-httpclient-3.1.0.jar:/home/root6/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar:/home/root6/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar:/home/root6/.m2/repository/commons-codec/commons-codec/1.2/commons-codec-1.2.jar:/home/root6/.m2/repository/junit/junit/4.4/junit-4.4.jar:/home/root6/.m2/repository/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar:/home/root6/.m2/repository/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar:/home/root6/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:/home/root6/.m2/repository/org/json/json/20140107/json-20140107.jar:/home/root6/.m2/repository/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar:/home/root6/.m2/repository/com/infrascape/obmimic/1.0/obmimic-1.0.jar:/home/root6/.m2/repository/com/infrascape/oauth/1.2/oauth-1.2.jar:/home/root6/.m2/repository/com/infrascape/enterprise/1.0/enterprise-1.0.jar:/home/root6/.m2/repository/com/infrascape/force-wsc-34.0.0/1.0/force-wsc-34.0.0-1.0.jar:/home/root6/.m2/repository/com/infrascape/force-wsc-34.0.0-uber/1.0/force-wsc-34.0.0-uber-1.0.jar:/home/root6/.m2/repository/com/infrascape/metadata/1.0/metadata-1.0.jar:/home/root6/.m2/repository/com/infrascape/tooling/1.0/tooling-1.0.jar:/home/root6/.m2/repository/org/apache/axis/axis/1.4/axis-1.4.jar:/home/root6/.m2/repository/org/apache/axis/axis-jaxrpc/1.4/axis-jaxrpc-1.4.jar:/home/root6/.m2/repository/com/sun/xml/ws/jaxws-rt/2.2.3/jaxws-rt-2.2.3.jar:/home/root6/.m2/repository/javax/xml/ws/jaxws-api/2.2.3/jaxws-api-2.2.3.jar:/home/root6/.m2/repository/javax/xml/soap/saaj-api/1.3.2/saaj-api-1.3.2.jar:/home/root6/.m2/repository/org/glassfish/javax.annotation/3.1-b35/javax.annotation-3.1-b35.jar:/home/root6/.m2/repository/javax/jws/jsr181-api/1.0-MR1/jsr181-api-1.0-MR1.jar:/home/root6/.m2/repository/com/sun/xml/bind/jaxb-impl/2.2.3-1/jaxb-impl-2.2.3-1.jar:/home/root6/.m2/repository/com/sun/xml/messaging/saaj/saaj-impl/1.3.8/saaj-impl-1.3.8.jar:/home/root6/.m2/repository/com/sun/xml/stream/buffer/streambuffer/1.2/streambuffer-1.2.jar:/home/root6/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/root6/.m2/repository/org/codehaus/woodstox/wstx-asl/3.2.1/wstx-asl-3.2.1.jar:/home/root6/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar:/home/root6/.m2/repository/org/jvnet/staxex/stax-ex/1.4/stax-ex-1.4.jar:/home/root6/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar:/home/root6/.m2/repository/com/sun/org/apache/xml/internal/resolver/20050927/resolver-20050927.jar:/home/root6/.m2/repository/org/jvnet/mimepull/1.5/mimepull-1.5.jar:/home/root6/.m2/repository/com/sun/xml/ws/policy/2.2.2/policy-2.2.2.jar:/home/root6/.m2/repository/com/sun/xml/txw2/txw2/20090102/txw2-20090102.jar:/home/root6/.m2/repository/com/sun/istack/istack-commons-runtime/2.2.1/istack-commons-runtime-2.2.1.jar:/home/root6/.m2/repository/org/glassfish/gmbal/gmbal-api-only/3.1.0-b001/gmbal-api-only-3.1.0-b001.jar:/home/root6/.m2/repository/org/glassfish/external/management-api/3.0.0-b012/management-api-3.0.0-b012.jar:/home/root6/.m2/repository/org/glassfish/ha/ha-api/3.1.8/ha-api-3.1.8.jar:/home/root6/.m2/repository/javax/xml/bind/jaxb-api/2.2.12/jaxb-api-2.2.12.jar:/home/root6/.m2/repository/org/postgresql/postgresql/9.3-1102-jdbc41/postgresql-9.3-1102-jdbc41.jar:/home/root6/.m2/repository/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar:/home/root6/.m2/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar
+2015-10-19 14:02:10 DEBUG HttpClient:75 - Operating system name: Linux
+2015-10-19 14:02:10 DEBUG HttpClient:76 - Operating system architecture: amd64
+2015-10-19 14:02:10 DEBUG HttpClient:77 - Operating system version: 3.16.0-28-generic
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SUN 1.6: SUN (DSA key/parameter generation; DSA signing; SHA-1, MD5 digests; SecureRandom; X.509 certificates; JKS keystore; PKIX CertPathValidator; PKIX CertPathBuilder; LDAP, Collection CertStores, JavaPolicy Policy; JavaLoginConfig Configuration)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunRsaSign 1.5: Sun RSA signature provider
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunJSSE 1.6: Sun JSSE provider(PKCS12, SunX509 key/trust factories, SSLv3, TLSv1)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunJCE 1.6: SunJCE Provider (implements RSA, DES, Triple DES, AES, Blowfish, ARCFOUR, RC2, PBE, Diffie-Hellman, HMAC)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunJGSS 1.0: Sun (Kerberos v5, SPNEGO)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunSASL 1.5: Sun SASL provider(implements client mechanisms for: DIGEST-MD5, GSSAPI, EXTERNAL, PLAIN, CRAM-MD5; server mechanisms for: DIGEST-MD5, GSSAPI, CRAM-MD5)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - XMLDSig 1.0: XMLDSig (DOM XMLSignatureFactory; DOM KeyInfoFactory)
+2015-10-19 14:02:10 DEBUG HttpClient:82 - SunPCSC 1.6: Sun PC/SC provider
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.useragent = Jakarta Commons-HttpClient/3.1
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.protocol.version = HTTP/1.1
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.connection-manager.class = class org.apache.commons.httpclient.SimpleHttpConnectionManager
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.protocol.cookie-policy = default
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.protocol.element-charset = US-ASCII
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.protocol.content-charset = ISO-8859-1
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.method.retry-handler = org.apache.commons.httpclient.DefaultHttpMethodRetryHandler@3bc0f2e5
+2015-10-19 14:02:10 DEBUG DefaultHttpParams:151 - Set parameter http.dateparser.patterns = [EEE, dd MMM yyyy HH:mm:ss zzz, EEEE, dd-MMM-yy HH:mm:ss zzz, EEE MMM d HH:mm:ss yyyy, EEE, dd-MMM-yyyy HH:mm:ss z, EEE, dd-MMM-yyyy HH-mm-ss z, EEE, dd MMM yy HH:mm:ss z, EEE dd-MMM-yyyy HH:mm:ss z, EEE dd MMM yyyy HH:mm:ss z, EEE dd-MMM-yyyy HH-mm-ss z, EEE dd-MMM-yy HH:mm:ss z, EEE dd MMM yy HH:mm:ss z, EEE,dd-MMM-yy HH:mm:ss z, EEE,dd-MMM-yyyy HH:mm:ss z, EEE, dd-MM-yyyy HH:mm:ss z]
+2015-10-19 14:02:10 DEBUG PostMethod:265 - enter PostMethod.addParameter(String, String)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:150 - enter EntityEnclosingMethod.clearRequestBody()
+2015-10-19 14:02:10 DEBUG PostMethod:265 - enter PostMethod.addParameter(String, String)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:150 - enter EntityEnclosingMethod.clearRequestBody()
+2015-10-19 14:02:10 DEBUG PostMethod:265 - enter PostMethod.addParameter(String, String)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:150 - enter EntityEnclosingMethod.clearRequestBody()
+2015-10-19 14:02:10 DEBUG PostMethod:265 - enter PostMethod.addParameter(String, String)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:150 - enter EntityEnclosingMethod.clearRequestBody()
+2015-10-19 14:02:10 DEBUG HttpClient:321 - enter HttpClient.executeMethod(HttpMethod)
+2015-10-19 14:02:10 DEBUG HttpClient:374 - enter HttpClient.executeMethod(HostConfiguration,HttpMethod,HttpState)
+2015-10-19 14:02:10 DEBUG HttpMethodDirector:379 - Attempt number 1 to process request
+2015-10-19 14:02:10 DEBUG HttpConnection:685 - enter HttpConnection.open()
+2015-10-19 14:02:10 DEBUG HttpConnection:692 - Open connection to na34.salesforce.com:443
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1079 - enter HttpMethodBase.execute(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2057 - enter HttpMethodBase.writeRequest(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2212 - enter HttpMethodBase.writeRequestLine(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1496 - enter HttpMethodBase.generateRequestLine(HttpConnection, String, String, String, String)
+2015-10-19 14:02:10 DEBUG header:70 - >> "POST /services/oauth2/token HTTP/1.1[\r][\n]"
+2015-10-19 14:02:10 DEBUG HttpConnection:1032 - enter HttpConnection.print(String)
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2175 - enter HttpMethodBase.writeRequestHeaders(HttpState,HttpConnection)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:370 - enter EntityEnclosingMethod.addRequestHeaders(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG ExpectContinueMethod:183 - enter ExpectContinueMethod.addRequestHeaders(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1417 - enter HttpMethodBase.addRequestHeaders(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1442 - enter HttpMethodBase.addUserAgentRequestHeaders(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1328 - enter HttpMethodBase.addHostRequestHeader(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1352 - Adding Host request header
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1266 - enter HttpMethodBase.addCookieRequestHeader(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpState:173 - enter HttpState.getCookies()
+2015-10-19 14:02:10 DEBUG CookieSpec:549 - enter CookieSpecBase.match(String, int, String, boolean, Cookie[])
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1379 - enter HttpMethodBase.addProxyConnectionHeader(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:401 - enter EntityEnclosingMethod.addContentLengthRequestHeader(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:325 - enter EntityEnclosingMethod.getRequestContentLength()
+2015-10-19 14:02:10 DEBUG PostMethod:135 - enter PostMethod.hasRequestContent()
+2015-10-19 14:02:10 DEBUG PostMethod:240 - enter PostMethod.getParameters()
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2324 - enter getContentCharSet( Header contentheader )
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2342 - Default charset used: ISO-8859-1
+2015-10-19 14:02:10 DEBUG HttpMethodBase:386 - HttpMethodBase.addRequestHeader(Header)
+2015-10-19 14:02:10 DEBUG PostMethod:240 - enter PostMethod.getParameters()
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2324 - enter getContentCharSet( Header contentheader )
+2015-10-19 14:02:10 DEBUG HeaderElement:238 - enter HeaderElement.parseElements(String)
+2015-10-19 14:02:10 DEBUG HeaderElement:194 - enter HeaderElement.parseElements(char[])
+2015-10-19 14:02:10 DEBUG HeaderElement:279 - enter HeaderElement.getParameterByName(String)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:2342 - Default charset used: ISO-8859-1
+2015-10-19 14:02:10 DEBUG header:70 - >> "User-Agent: Jakarta Commons-HttpClient/3.1[\r][\n]"
+2015-10-19 14:02:10 DEBUG HttpConnection:1032 - enter HttpConnection.print(String)
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG header:70 - >> "Host: na34.salesforce.com[\r][\n]"
+2015-10-19 14:02:10 DEBUG HttpConnection:1032 - enter HttpConnection.print(String)
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG header:70 - >> "Content-Length: 256[\r][\n]"
+2015-10-19 14:02:10 DEBUG HttpConnection:1032 - enter HttpConnection.print(String)
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG header:70 - >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2015-10-19 14:02:10 DEBUG HttpConnection:1032 - enter HttpConnection.print(String)
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG HttpConnection:1001 - enter HttpConnection.writeLine()
+2015-10-19 14:02:10 DEBUG HttpConnection:942 - enter HttpConnection.write(byte[])
+2015-10-19 14:02:10 DEBUG HttpConnection:963 - enter HttpConnection.write(byte[], int, int)
+2015-10-19 14:02:10 DEBUG header:70 - >> "[\r][\n]"
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:469 - enter EntityEnclosingMethod.writeRequestBody(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG PostMethod:135 - enter PostMethod.hasRequestContent()
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:325 - enter EntityEnclosingMethod.getRequestContentLength()
+2015-10-19 14:02:10 DEBUG PostMethod:135 - enter PostMethod.hasRequestContent()
+2015-10-19 14:02:10 DEBUG HttpConnection:840 - enter HttpConnection.getRequestOutputStream()
+2015-10-19 14:02:10 DEBUG content:84 - >> "grant_type=refresh_token&client_id=3MVG9fMtCkV6eLhckipcGtsdEsbYJXSOdJrdCVqxaLEyjnLDaPGLekViuBqlQJcWVyZodXI42r34WH9F5wexo&client_secret=1673914982220759042&refresh_token=5Aep861tbt360sO1.uO0UjNoRyP9rNbAguo__QeBtE9I0DtmCAWn8r4UIu4tzqbg2okzwzEmBzokQe8gXPTDFXb"
+2015-10-19 14:02:10 DEBUG EntityEnclosingMethod:508 - Request body sent
+2015-10-19 14:02:10 DEBUG HttpConnection:826 - enter HttpConnection.flushRequestOutputStream()
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1730 - enter HttpMethodBase.readResponse(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpMethodBase:1964 - enter HttpMethodBase.readStatusLine(HttpState, HttpConnection)
+2015-10-19 14:02:10 DEBUG HttpConnection:1113 - enter HttpConnection.readLine()
+2015-10-19 14:02:10 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:10 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-10-19 14:02:11 DEBUG header:70 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1930 - enter HttpMethodBase.readResponseHeaders(HttpState,HttpConnection)
+2015-10-19 14:02:11 DEBUG HttpConnection:857 - enter HttpConnection.getResponseInputStream()
+2015-10-19 14:02:11 DEBUG HttpParser:170 - enter HeaderParser.parseHeaders(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Date: Mon, 19 Oct 2015 08:32:10 GMT[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Set-Cookie: BrowserId=3yk8FJUdQe6kTa_aiPkdVw;Path=/;Domain=.salesforce.com;Expires=Fri, 18-Dec-2015 08:32:10 GMT[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Expires: Thu, 01 Jan 1970 00:00:00 GMT[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Pragma: no-cache[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Cache-Control: no-store[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "Transfer-Encoding: chunked[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpParser:105 - enter HttpParser.readLine(InputStream, String)
+2015-10-19 14:02:11 DEBUG HttpParser:74 - enter HttpParser.readRawLine()
+2015-10-19 14:02:11 DEBUG header:70 - << "[\r][\n]"
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1579 - enter HttpMethodBase.processResponseHeaders(HttpState, HttpConnection)
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1615 - enter HttpMethodBase.processCookieHeaders(Header[], HttpState, HttpConnection)
+2015-10-19 14:02:11 DEBUG CookieSpec:243 - enter CookieSpecBase.parse(String, port, path, boolean, String)
+2015-10-19 14:02:11 DEBUG CookieSpec:113 - enter CookieSpecBase.parse(String, port, path, boolean, Header)
+2015-10-19 14:02:11 DEBUG Cookie:107 - enter Cookie(String, String, String, String, Date, boolean)
+2015-10-19 14:02:11 DEBUG CookieSpec:137 - enter RFC2109Spec.validate(String, int, String, boolean, Cookie)
+2015-10-19 14:02:11 DEBUG CookieSpec:369 - enter CookieSpecBase.validate(String, port, path, boolean, Cookie)
+2015-10-19 14:02:11 DEBUG HttpState:125 - enter HttpState.addCookie(Cookie)
+2015-10-19 14:02:11 DEBUG CookieSpec:250 - enter RFC2109Spec.formatCookie(Cookie)
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1651 - Cookie accepted: "$Version=0; BrowserId=3yk8FJUdQe6kTa_aiPkdVw; $Path=/; $Domain=.salesforce.com"
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1781 - enter HttpMethodBase.readResponseBody(HttpState, HttpConnection)
+2015-10-19 14:02:11 DEBUG HttpMethodBase:1816 - enter HttpMethodBase.readResponseBody(HttpConnection)
+2015-10-19 14:02:11 DEBUG HttpConnection:857 - enter HttpConnection.getResponseInputStream()
+2015-10-19 14:02:11 DEBUG HttpMethodBase:2281 - enter HttpMethodBase.canResponseHaveBody(int)
+2015-10-19 14:02:11 DEBUG HeaderElement:238 - enter HeaderElement.parseElements(String)
+2015-10-19 14:02:11 DEBUG HeaderElement:194 - enter HeaderElement.parseElements(char[])
+2015-10-19 14:02:11 DEBUG HttpConnection:894 - enter HttpConnection.isResponseAvailable(int)
+2015-10-19 14:02:11 DEBUG content:84 - << "1"
+2015-10-19 14:02:11 DEBUG content:84 - << "C"
+2015-10-19 14:02:11 DEBUG content:84 - << "D"
+2015-10-19 14:02:11 DEBUG content:84 - << "[\r]"
+2015-10-19 14:02:11 DEBUG content:70 - << "[\n]"
+2015-10-19 14:02:11 DEBUG content:84 - << "{"access_token":"00D610000006tjP!AQ4AQEpMOB3JhdpbGzwxPcUg4F77GRyqeoRyEeclslhkyRzxzuq_iy7G9lPgLvXjz2ImNUVTQKvxGs07PnhRdxjc2kBzZMES","signature":"z5VKrSVdjuiRn2VOfBmcoFaT8BqKEdlB8u/ZJ7gX1Qk=","scope":"refresh_token visualforce wave_api custom_permissions web openid chatter_api api id full","instance_url":"https://na34.salesforce.com","id":"https://login.salesforce.com/id/00D610000006tjPEAQ/00561000000OgxxAAC","token_type":"Bearer","issued_at":"1445243530783"}"
+2015-10-19 14:02:13 INFO  CustomObjectTest:180 - ASA__DeploymentSetting__c
+2015-10-19 14:05:08 INFO  CustomObjectTest:180 - ASA__DeploymentSetting__c
+2015-10-19 15:34:24 INFO  CustomObjectTest:90 - start time for connection:15:34:24
+2015-10-19 15:34:27 INFO  CustomObjectTest:93 - Time difference connection:15:34:24
+2015-10-19 15:34:29 INFO  CustomObjectTest:185 - ASA__DeploymentSetting__c
+2015-10-19 15:35:07 INFO  CustomObjectTest:90 - start time for connection:15:35:07
+2015-10-19 15:35:10 INFO  CustomObjectTest:93 - Time difference connection:15:35:07
+2015-10-19 15:35:10 INFO  CustomObjectTest:185 - ASA__DeploymentSetting__c
+2015-10-19 15:36:50 INFO  CustomObjectTest:90 - start time for connection:15:36:50
+2015-10-19 15:36:54 INFO  CustomObjectTest:93 - Time difference connection:15:36:50
+2015-10-19 15:36:55 INFO  CustomObjectTest:186 - ASA__DeploymentSetting__c
+2015-10-19 15:36:55 INFO  CustomObjectTest:98 - rrsrsrws Time difference connection:15:36:50
+2015-10-19 15:44:03 INFO  CustomObjectTest:91 - start time for connection1445249643078
+2015-10-19 15:44:06 INFO  CustomObjectTest:96 - Time difference for connection:3422
+2015-10-19 15:44:07 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 15:44:07 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:15:44:03
+2015-10-19 15:46:11 INFO  CustomObjectTest:91 - start time for connection1445249771931
+2015-10-19 15:46:14 INFO  CustomObjectTest:96 - Time difference for connection:2
+2015-10-19 15:46:15 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 15:46:15 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:15:46:11
+2015-10-19 15:49:17 INFO  CustomObjectTest:92 - start time for connection1445249957541
+2015-10-19 15:49:20 INFO  CustomObjectTest:99 - Time difference for connection:0
+2015-10-19 15:49:21 INFO  CustomObjectTest:192 - ASA__DeploymentSetting__c
+2015-10-19 15:49:22 INFO  CustomObjectTest:104 - rrsrsrws Time difference connection:15:49:17
+2015-10-19 15:52:02 INFO  CustomObjectTest:91 - start time for connection1445250122699
+2015-10-19 15:52:07 INFO  CustomObjectTest:96 - Time difference for connection:4milliseconds
+2015-10-19 15:52:09 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 15:52:09 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:15:52:02
+2015-10-19 16:02:06 INFO  CustomObjectTest:91 - start time for connection1445250726910
+2015-10-19 16:02:11 INFO  CustomObjectTest:96 - Time difference for connection:4milliseconds
+2015-10-19 16:02:12 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:02:12 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:02:06
+2015-10-19 16:03:19 INFO  CustomObjectTest:91 - start time for connection1445250799342
+2015-10-19 16:03:22 INFO  CustomObjectTest:96 - Time difference for connection:3 milliseconds
+2015-10-19 16:03:24 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:03:24 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:03:19
+2015-10-19 16:04:50 INFO  CustomObjectTest:91 - start time for connection22968129930443
+2015-10-19 16:04:54 INFO  CustomObjectTest:96 - Time difference for connection:4 milliseconds
+2015-10-19 16:04:57 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:04:57 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:04:50
+2015-10-19 16:05:41 INFO  CustomObjectTest:91 - start time for connection1445250941452
+2015-10-19 16:05:45 INFO  CustomObjectTest:96 - Time difference for connection:3 milliseconds
+2015-10-19 16:05:46 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:05:46 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:05:41
+2015-10-19 16:07:02 INFO  CustomObjectTest:91 - start for connection
+2015-10-19 16:07:06 INFO  CustomObjectTest:96 - Time difference for connection:3 milliseconds
+2015-10-19 16:07:07 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:07:07 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:07:02
+2015-10-19 16:08:46 INFO  CustomObjectTest:91 - start for connection
+2015-10-19 16:08:49 INFO  CustomObjectTest:96 - Time difference for connection:3 seconds
+2015-10-19 16:08:50 INFO  CustomObjectTest:189 - ASA__DeploymentSetting__c
+2015-10-19 16:08:51 INFO  CustomObjectTest:101 - rrsrsrws Time difference connection:16:08:46
+2015-10-19 16:39:48 INFO  CustomObjectTest:68 - start for connection
+2015-10-19 16:39:50 INFO  CustomObjectTest:73 - Time difference for connection:1 seconds
+2015-10-19 16:39:52 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-19 16:39:52 INFO  CustomObjectTest:157 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-20 14:42:43 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:42:44 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 14:43:39 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:43:44 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List4 seconds
+2015-10-20 14:48:35 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:48:37 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 14:49:27 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:49:31 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List3 seconds
+2015-10-20 14:55:23 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:55:24 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 14:55:26 INFO  ReleaseEnvService:141 - Package Creating in Base Org
+2015-10-20 14:55:31 INFO  ReleaseEnvService:150 - Total Time Taken to Create Package in Base Org List4 seconds
+2015-10-20 14:56:15 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:56:18 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List2 seconds
+2015-10-20 14:58:28 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:58:29 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 14:58:31 INFO  ReleaseEnvService:141 - Package Creating in Base Org
+2015-10-20 14:58:36 INFO  ReleaseEnvService:150 - Total Time Taken to Create Package in Base Org List5 seconds
+2015-10-20 14:59:28 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 14:59:30 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List2 seconds
+2015-10-20 15:14:04 INFO  ReleaseEnvService:66 - deleting Packages start getting connection
+2015-10-20 15:14:07 INFO  ReleaseEnvService:86 - Total Time Taken to Delete Packages List2 seconds
+2015-10-20 15:14:13 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 15:14:14 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 15:14:16 INFO  ReleaseEnvService:150 - Package Creating in Base Org
+2015-10-20 15:14:22 INFO  ReleaseEnvService:159 - Total Time Taken to Create Package in Base Org List5 seconds
+2015-10-20 15:15:06 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 15:15:09 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List3 seconds
+2015-10-20 15:24:27 INFO  ReleaseEnvService:68 - deleting Packages start getting connection
+2015-10-20 15:24:30 INFO  ReleaseEnvService:94 - Total Time Taken to List All Environemnts List2 seconds
+2015-10-20 15:24:32 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 15:24:34 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List1 seconds
+2015-10-20 15:24:35 INFO  ReleaseEnvService:154 - Package Creating in Base Org
+2015-10-20 15:24:42 INFO  ReleaseEnvService:163 - Total Time Taken to Create Package in Base Org List6 seconds
+2015-10-20 15:25:25 INFO  GetPkgInfoList:47 - start connection for Get PackageInformation List
+2015-10-20 15:25:29 INFO  GetPkgInfoList:54 - Total Time Taken to process GetPackageInformation List3 seconds
+2015-10-21 10:35:57 INFO  CustomObjectTest:68 - start for connection
+2015-10-21 10:35:58 INFO  CustomObjectTest:73 - Time difference for connection:1 seconds
+2015-10-21 10:56:43 INFO  CustomObjectTest:68 - start for connection
+2015-10-21 10:56:46 INFO  CustomObjectTest:73 - Time difference for connection:2 seconds
+2015-10-21 10:57:07 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-21 10:57:08 INFO  CustomObjectTest:157 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 11:00:16 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-21 11:00:47 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-21 11:00:55 INFO  CustomObjectTest:158 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 11:04:23 INFO  CustomObjectTest:68 - start for connection
+2015-10-21 11:04:25 INFO  CustomObjectTest:73 - Time difference for connection:2 seconds
+2015-10-21 11:04:27 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-21 11:04:27 INFO  CustomObjectTest:158 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 11:06:16 INFO  CustomObjectTest:68 - start for connection
+2015-10-21 11:06:18 INFO  CustomObjectTest:73 - Time difference for connection:2 seconds
+2015-10-21 11:06:27 INFO  CustomObjectTest:155 - Custom Setting There or not  :true
+2015-10-21 11:06:34 INFO  CustomObjectTest:158 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 11:11:12 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 11:11:14 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 11:11:22 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 11:11:35 INFO  CustomObjectTest:74 - Time difference for connection:12 seconds
+2015-10-21 11:11:40 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 11:11:41 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 11:16:14 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 11:16:16 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 11:16:16 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 11:16:16 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:01:04 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:01:06 INFO  CustomObjectTest:74 - Time difference for connection:2 seconds
+2015-10-21 12:01:12 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 12:01:12 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:03:02 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:03:04 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:03:05 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 12:03:05 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:05:32 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:05:34 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:05:35 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 12:05:35 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:07:48 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:07:50 INFO  CustomObjectTest:74 - Time difference for connection:2 seconds
+2015-10-21 12:07:51 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 12:07:51 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:10:17 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:10:20 INFO  CustomObjectTest:74 - Time difference for connection:2 seconds
+2015-10-21 12:10:21 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 12:10:21 INFO  CustomObjectTest:159 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:15:39 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:15:41 INFO  CustomObjectTest:74 - Time difference for connection:2 seconds
+2015-10-21 12:15:42 INFO  CustomObjectTest:157 - Custom Setting There or not  :true
+2015-10-21 12:15:42 INFO  CustomObjectTest:160 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:16:03 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:16:06 INFO  CustomObjectTest:74 - Time difference for connection:2 seconds
+2015-10-21 12:16:07 INFO  CustomObjectTest:157 - Custom Setting There or not  :false
+2015-10-21 12:16:07 INFO  CustomObjectTest:160 - SObject Name  :ASA__MetadataDescription__c
+2015-10-21 12:35:01 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:35:02 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:35:05 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:35:05 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:37:06 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:37:08 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:37:08 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:37:08 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:38:04 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:38:06 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:38:07 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:38:07 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:38:51 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:38:53 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:38:53 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:38:53 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:39:36 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:39:37 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:39:38 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:39:38 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 12:56:45 INFO  CustomObjectTest:69 - start for connection
+2015-10-21 12:56:47 INFO  CustomObjectTest:74 - Time difference for connection:1 seconds
+2015-10-21 12:56:47 INFO  CustomObjectTest:159 - Custom Setting There or not  :true
+2015-10-21 12:56:47 INFO  CustomObjectTest:162 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 13:06:39 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 13:06:41 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 13:06:44 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 13:06:44 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 13:09:23 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 13:09:25 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 13:09:26 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 13:09:26 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 13:27:35 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 13:27:37 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 13:27:39 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 13:27:39 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 14:24:31 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 14:24:33 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 14:24:39 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 14:24:39 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 14:48:20 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 14:48:22 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 14:48:24 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 14:48:24 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 14:49:03 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 14:49:05 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 14:49:06 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 14:49:06 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:01:05 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:01:07 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:01:08 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:01:08 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:02:48 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:02:50 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:02:51 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:02:51 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:03:17 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:03:19 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:03:20 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:03:20 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:26 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:28 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:05:29 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:29 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:31 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:34 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:05:35 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:35 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:37 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:39 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:05:40 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:40 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:43 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:46 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:05:46 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:46 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:49 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:51 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:05:52 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:52 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:05:55 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:05:57 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:05:58 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:05:58 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:01 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:04 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:06:05 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:05 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:28 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:31 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:06:32 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:32 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:34 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:36 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:06:37 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:37 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:39 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:42 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:06:43 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:43 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:45 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:47 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:06:49 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:49 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:51 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:06:53 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:06:55 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:06:55 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:06:58 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:00 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:07:01 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:07:01 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:07:04 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:06 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:07:07 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:07:07 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:07:10 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:31 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:33 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:07:39 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:07:39 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:07:41 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:43 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:07:46 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:07:46 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:07:48 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:50 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:07:52 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:07:52 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:07:54 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:07:56 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:08:19 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:08:22 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:08:32 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:08:33 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:10:01 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:10:04 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:10:43 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:10:45 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:10:47 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:10:47 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:10:49 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:10:51 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:10:53 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:10:53 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:10:55 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:11:25 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:11:27 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:11:28 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:11:28 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:12:40 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:12:41 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:12:43 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:12:43 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:13:19 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:13:22 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:13:30 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:13:32 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:15:48 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:15:50 INFO  CustomObjectTest:75 - Time difference for connection:1 seconds
+2015-10-21 15:15:50 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:15:50 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:17:37 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:17:39 INFO  CustomObjectTest:75 - Time difference for connection:2 seconds
+2015-10-21 15:17:40 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:17:40 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:23:23 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:23:23 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:23:25 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:23:25 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:23:40 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:23:40 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:23:42 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:23:42 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:24:25 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:24:25 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:24:42 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:24:44 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:25:44 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:25:45 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:25:46 INFO  CustomObjectTest:161 - Custom Setting There or not  :false
+2015-10-21 15:25:46 INFO  CustomObjectTest:166 - SObject Name  :ASA__MetadataDescription__c
+2015-10-21 15:30:18 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:30:19 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:31:11 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:31:12 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:31:14 INFO  CustomObjectTest:161 - Custom Setting There or not  :false
+2015-10-21 15:31:14 INFO  CustomObjectTest:166 - SObject Name  :ASA__MetadataLog__c
+2015-10-21 15:39:44 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:39:45 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:39:46 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:39:46 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:41:12 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:41:13 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:41:14 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:41:14 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:50:33 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:50:34 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:50:35 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:50:35 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:52:13 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:52:14 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:52:15 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:52:15 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:52:40 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:52:41 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:53:02 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:53:03 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:54:15 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:54:15 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:54:19 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:54:19 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:54:59 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:55:00 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:55:01 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:55:01 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:59:04 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:59:04 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:59:06 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:59:06 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 15:59:48 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 15:59:49 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 15:59:50 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 15:59:50 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:00:57 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:00:58 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:00:59 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:00:59 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:02:45 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:02:46 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:02:51 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:02:51 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:13:31 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:13:32 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:13:34 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:13:34 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:22:12 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:22:13 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:22:13 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:22:13 INFO  CustomObjectTest:166 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:23:26 INFO  CustomObjectTest:65 - start for connection
+2015-10-21 16:23:26 INFO  CustomObjectTest:70 - Time difference for connection:0 seconds
+2015-10-21 16:23:28 INFO  CustomObjectTest:156 - Custom Setting There or not  :true
+2015-10-21 16:23:28 INFO  CustomObjectTest:161 - SObject Name  :ASA__DeploymentSetting__c
+2015-10-21 16:28:12 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:28:13 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:28:15 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:28:15 INFO  CustomObjectTest:166 - SObject Name  :AccountSplit__c
+2015-10-21 16:29:22 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:29:22 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:29:24 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:29:24 INFO  CustomObjectTest:166 - SObject Name  :Calendars__c
+2015-10-21 16:30:33 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:30:34 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:30:35 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:30:35 INFO  CustomObjectTest:166 - SObject Name  :Calendars__c
+2015-10-21 16:31:14 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:31:15 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:31:25 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:31:27 INFO  CustomObjectTest:166 - SObject Name  :Calendars__c
+2015-10-21 16:34:37 INFO  CustomObjectTest:70 - start for connection
+2015-10-21 16:34:37 INFO  CustomObjectTest:75 - Time difference for connection:0 seconds
+2015-10-21 16:34:39 INFO  CustomObjectTest:161 - Custom Setting There or not  :true
+2015-10-21 16:34:39 INFO  CustomObjectTest:166 - SObject Name  :Case_Description_Lock__c
+2015-10-21 16:35:26 INFO  CustomObjectTest:67 - start for connection
+2015-10-21 16:35:27 INFO  CustomObjectTest:72 - Time difference for connection:0 seconds
+2015-10-21 16:35:28 INFO  CustomObjectTest:158 - Custom Setting There or not  :true
+2015-10-21 16:35:28 INFO  CustomObjectTest:163 - SObject Name  :ASA__DeploymentSetting__c

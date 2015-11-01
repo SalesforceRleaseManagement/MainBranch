@@ -1,6 +1,6 @@
 #!/bin/bash
-#git clone https://github.com/SalesforceRleaseManagement/MainBranch
-cd ./MainBranch/instruere
+git clone https://github.com/SalesforceRleaseManagement/MainBranch
+cd ./MainBranch/sfinfraws
 echo $PWD
 maven clean
 maven install

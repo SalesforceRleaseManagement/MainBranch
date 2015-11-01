@@ -26,9 +26,11 @@ public class DeploySalesforcePackages {
 	public DeploySalesforcePackages() {
 		init();
 		// deploy server packages
+		System.out.println("Deploying Salesforce Server Packages....");
 		prepareServerPkgs();
 		DeployPackages(Constants.SERVER);
 
+		System.out.println("Deploying Salesforce Client Packages....");
 		// deploy client packages
 		prepareClientPkgs();
 		DeployPackages(Constants.CLIENT);

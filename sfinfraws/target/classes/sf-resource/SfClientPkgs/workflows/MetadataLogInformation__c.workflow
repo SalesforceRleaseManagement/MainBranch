@@ -19,7 +19,7 @@
         <fields>TargetOrgTokenNonEncrypted__c</fields>
         <fields>TargetOrgToken__c</fields>
         <includeSessionId>false</includeSessionId>
-        <integrationUser></integrationUser>
+        <integrationUser>anand@developmentclient.com</integrationUser>
         <name>RetriveMetadataForClient</name>
         <protected>false</protected>
         <useDeadLetterQueue>false</useDeadLetterQueue>

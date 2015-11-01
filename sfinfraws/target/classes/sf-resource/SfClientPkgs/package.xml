@@ -72,9 +72,5 @@
         <members>*</members>
         <name>Workflow</name>
     </types>
-    <types>
-        <members>*</members>
-        <name>Settings</name>
-    </types>
     <version>35.0</version>
 </Package>

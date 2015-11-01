@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import com.sforce.ws.ConnectionException;
 import com.util.Constants;
 import com.util.ZipHelper;
+import com.util.common.LoadSFConfigurations;
 import com.util.common.file.FileUtil;
 
 public class DeploySalesforcePackages {
@@ -16,7 +17,8 @@ public class DeploySalesforcePackages {
 	String sfTestSrcFilePath;
 	String sfCodePkgSrcFilePath;
 	String targetFilePath;
-
+	LoadSFConfigurations loadSFConfig;
+	
 	public static void main(String[] args) {
 		DeploySalesforcePackages zf = new DeploySalesforcePackages();
 	}
@@ -25,17 +27,17 @@ public class DeploySalesforcePackages {
 		init();
 		// deploy server packages
 		prepareServerPkgs();
-		DeployPackages();
+		DeployPackages(Constants.SERVER);
 
 		// deploy client packages
 		prepareClientPkgs();
-		DeployPackages();
+		DeployPackages(Constants.CLIENT);
 	}
 
-	public void DeployPackages() {
+	public void DeployPackages(String instance) {
 		try {
-			DeployService deploy = new DeployService();
-			deploy.deployZip();
+			DeployService deploy = new DeployService(getLoadSFConfig(),instance);
+			deploy.deployZip(instance);
 		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,23 +52,14 @@ public class DeploySalesforcePackages {
 
 	private void init() {
 		try {
+			loadSFConfig = new LoadSFConfigurations();
 			ClassLoader classLoader = getClass().getClassLoader();
-
 			File file = new File(classLoader.getResource(
 					"sf-resource/" + Constants.SF_REPO_CLIENT_PKG).getFile());
 			setSfClientSrcFilePath(file.getAbsolutePath());
 			file = new File(classLoader.getResource(
 					"sf-resource/" + Constants.SF_REPO_SERVER_PKG).getFile());
 			setSfServerSrcFilePath(file.getAbsolutePath());
-
-			file = new File(classLoader.getResource(
-					"sf-resource/" + Constants.SF_REPO_TEST_PKG).getFile());
-			setSfTestSrcFilePath(file.getAbsolutePath());
-
-			file = new File(classLoader.getResource(
-					"sf-resource/" + Constants.SF_REPO_CODE_PKG).getFile());
-			setSfCodePkgSrcFilePath(file.getAbsolutePath());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -200,4 +193,13 @@ public class DeploySalesforcePackages {
 		this.sfCodePkgSrcFilePath = sfCodePkgSrcFilePath;
 	}
 
+	public LoadSFConfigurations getLoadSFConfig() {
+		return loadSFConfig;
+	}
+
+	public void setLoadSFConfig(LoadSFConfigurations loadSFConfig) {
+		this.loadSFConfig = loadSFConfig;
+	}
+
+	
 }

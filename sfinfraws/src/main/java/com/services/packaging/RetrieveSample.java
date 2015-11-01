@@ -1,4 +1,4 @@
-package com.instruere.services.packaging;
+package com.services.packaging;
 
 
 import java.io.*;

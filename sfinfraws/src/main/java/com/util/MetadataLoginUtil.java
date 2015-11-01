@@ -11,16 +11,20 @@ import com.sforce.ws.ConnectorConfig;
  */
 public class MetadataLoginUtil {
 
+    public static MetadataConnection login(String userName, String passwd, String url) throws ConnectionException {
+		final LoginResult loginResult = loginToSalesforce(userName, passwd, url);
+        return createMetadataConnection(loginResult);
+    }
+
     public static MetadataConnection login() throws ConnectionException {
     	String USERNAME = "ikhan@infrascape.com";
-		// This is only a sample. Hard coding passwords in source files is a bad
-		// practice.
 		String PASSWORD = "infrascape4PRMR4PdaH7Ew7ZZRa4asglNsH";
 		String URL = "https://login.salesforce.com/services/Soap/c/33.0";
 		final LoginResult loginResult = loginToSalesforce(USERNAME, PASSWORD, URL);
         return createMetadataConnection(loginResult);
     }
 
+    
     private static MetadataConnection createMetadataConnection(
             final LoginResult loginResult) throws ConnectionException {
         final ConnectorConfig config = new ConnectorConfig();

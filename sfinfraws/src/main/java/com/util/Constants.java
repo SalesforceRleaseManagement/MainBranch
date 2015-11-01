@@ -98,5 +98,8 @@ public class Constants {
 	public static String SF_REPO_SERVER_PKG = "SfServerPkgs";
 	public static String SF_REPO_TEST_PKG = "mypkg";
 	public static String SF_REPO_CODE_PKG = "codepkg";
+	public static String SF_Config_File = "sfconfig.properties";
 	
+	public static String CLIENT = "client";
+	public static String SERVER = "server";
 }

@@ -143,7 +143,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.4.0</version>
 				<configuration>
-					<mainClass>com.sinfraws.services.packaging.DeploySalesforcePackages</mainClass>
+					<mainClass>com.services.packaging.DeploySalesforcePackages</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>

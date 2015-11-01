@@ -1,4 +1,4 @@
-package com.instruere.util.services.packaging;
+package com.util.packaging;
 
 import java.io.BufferedReader;
 import java.io.File;

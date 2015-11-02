@@ -135,6 +135,7 @@ public class ReleaseEnvService {
 												.getInstance();
 										calendar.setTime(new Date());
 										pkgInfoDO.setCalendar(calendar);
+										
 										pkgInfoDAO
 												.updatePackageRetrievedTime(
 														pkgInfoDO,
@@ -170,6 +171,7 @@ public class ReleaseEnvService {
 														.getUserInfo()
 														.getOrganizationId()
 												+ "";
+										System.out.println("Time" +pkgInfoDO.getCalendar());
 										linkedlist.add(new GetPackageProcess(
 												Pkgdescription));
 										List<Object> pkgCompList = (new GetPkgCompList(

@@ -270,6 +270,7 @@ public class PackageInformationDAO implements ISFBaseDAO {
 			newEnvObj.setASAClient__Description__c(lObj.getDescription());
 			newEnvObj.setASAClient__Release__c(lObj.getReleaseInformationId());
 			newEnvObj.setASAClient__ReadyForDeployment__c(lObj.getReadyForDeployment());
+			newEnvObj.setASAClient__Package_Retrieved_Time__c(lObj.getCalendar());
 			// Set the value of Package_Retrieved_Time__c to null
 			newEnvObj.setFieldsToNull(new String[] {"ASAClient__Package_Retrieved_Time__c"});
 			com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[] mobj = new com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[1];

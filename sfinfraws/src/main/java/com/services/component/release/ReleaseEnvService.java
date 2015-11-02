@@ -171,7 +171,7 @@ public class ReleaseEnvService {
 														.getUserInfo()
 														.getOrganizationId()
 												+ "";
-										System.out.println("Time" +pkgInfoDO.getCalendar());
+										System.out.println("Time" +pkgInfoDO.getCalendar().getTimeInMillis());
 										linkedlist.add(new GetPackageProcess(
 												Pkgdescription));
 										List<Object> pkgCompList = (new GetPkgCompList(

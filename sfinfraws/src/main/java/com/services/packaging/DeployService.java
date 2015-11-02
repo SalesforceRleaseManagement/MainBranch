@@ -62,9 +62,9 @@ public class DeployService {
 			if (Constants.SERVER.equals(toServer)) {
 				//this.metadataConnection = MetadataLoginUtil.login();
 				this.metadataConnection = MetadataLoginUtil.login(
-						loadSFConfig.getIkhanUsername(),
-						loadSFConfig.getIkhanPassword(),
-						loadSFConfig.getIkhanURL());
+						loadSFConfig.getServerUsername(),
+						loadSFConfig.getServerPassword(),
+						loadSFConfig.getServerURL());
 			} else if (Constants.CLIENT.equals(toServer)) {
 				//this.metadataConnection = MetadataLoginUtil.login();
 				this.metadataConnection = MetadataLoginUtil.login(

@@ -135,6 +135,7 @@ public class ReleaseEnvService {
 												.getInstance();
 										calendar.setTime(new Date());
 										pkgInfoDO.setCalendar(calendar);
+										System.out.println(pkgInfoDO.getCalendar().getTime());
 										
 										pkgInfoDAO
 												.updatePackageRetrievedTime(

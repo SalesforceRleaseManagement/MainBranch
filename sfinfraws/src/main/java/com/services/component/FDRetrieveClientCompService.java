@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.domain.EnvironmentDO;
+import com.domain.EnvironmentInformationDO;
 import com.domain.MetaBean;
 import com.domain.MetadataLogInformationDO;
 import com.exception.SFErrorCodes;
@@ -68,10 +69,12 @@ public class FDRetrieveClientCompService {
 					RefreshTokens.getoAuthToken();
 					
 					//Creating EnvironmentDO Object
-					EnvironmentDO envSoureDO=new EnvironmentDO(bOrgId, bOrgToken, bOrgURL);
-					
-					//Setting NewToken in EnvironmentDO Object
-					envSoureDO.setToken(newSToken);
+					EnvironmentInformationDO envSoureDO = RDAppService.getEnv1(
+							metadataLogInformationDO.getSourceOrgId(),
+							FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
+									bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+					String newSToken1 = RefreshTokens.refreshClientCustomSFHandle(envSoureDO, bOrgId, bOrgToken, bOrgURL, refreshToken);
+					envSoureDO.setToken(newSToken1);
 
 					// refresh connection
 					FDGetSFoAuthHandleService.setSfHandleToNUll();

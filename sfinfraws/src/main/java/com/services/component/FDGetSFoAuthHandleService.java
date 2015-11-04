@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import com.domain.EnvironmentDO;
+import com.domain.EnvironmentInformationDO;
 import com.domain.SFoAuthHandleDO;
 import com.exception.SFErrorCodes;
 import com.exception.SFException;
@@ -151,7 +152,28 @@ public class FDGetSFoAuthHandleService {
 		}
 		return sfHandle;
 	}
+	public static SFoAuthHandle getSFoAuthHandle(EnvironmentInformationDO envDO,
+			String orgType) throws SFException {
+		if (instance == null) {
+			instance = getInstance();
+		}
+		if (sfHandle != null) {
+			sfHandle.nullify();
+			sfHandle = null;
+		}
 
+		SFoAuthHandleDO authDO = new SFoAuthHandleDO(envDO.getOrgId(),
+				envDO.getToken(), envDO.getServerURL(),
+				envDO.getRefreshtoken(), orgType);
+		sfHandle = getSFoAuthHandleFFT(authDO);
+		sfHandle = getSFoAuthHandleFFT(authDO);
+		try {
+			sfHandle = getSfHandle().getValidConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sfHandle;
+	}
 	private static SFoAuthHandle getSFoAuthHandleFFT(SFoAuthHandleDO authDO)
 			throws SFException {
 		if (instance == null) {

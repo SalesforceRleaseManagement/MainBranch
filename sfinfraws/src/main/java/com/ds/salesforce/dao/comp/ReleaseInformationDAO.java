@@ -12,6 +12,7 @@ import com.sforce.soap.enterprise.QueryResult;
 import com.sforce.soap.enterprise.UpsertResult;
 import com.sforce.soap.enterprise.sobject.ASAClient__ReleaseInformation__c;
 import com.sforce.soap.enterprise.sobject.SObject;
+import com.util.Constants;
 import com.util.SFoAuthHandle;
 import com.util.sql.ReleaseInformationSQLStmts;
 
@@ -26,7 +27,6 @@ public class ReleaseInformationDAO implements ISFBaseDAO {
 	public ReleaseInformationDAO() {
 		super();
 	}
-
 
 	@Override
 	public List<Object> findById(String id, SFoAuthHandle sfHandle) {
@@ -51,11 +51,12 @@ public class ReleaseInformationDAO implements ISFBaseDAO {
 					System.out.println(" - ParentReleaseID: "
 							+ locObj.getASAClient__ParentReleaseID__c());
 					System.out.println(" - Name: " + locObj.getName());
-					System.out.println(" - Status: " + locObj.getASAClient__Status__c());
+					System.out.println(" - Status: "
+							+ locObj.getASAClient__Status__c());
 
 					retObj = new ReleaseInformationDO(locObj.getId(),
-							locObj.getASAClient__ParentReleaseID__c(), locObj.getName(),
-							locObj.getASAClient__Status__c());
+							locObj.getASAClient__ParentReleaseID__c(),
+							locObj.getName(), locObj.getASAClient__Status__c());
 					list.add(retObj);
 				}
 			} else {
@@ -80,7 +81,9 @@ public class ReleaseInformationDAO implements ISFBaseDAO {
 		List list = new ArrayList();
 		try {
 			EnterpriseConnection conn = sfHandle.getEnterpriseConnection();
-			System.out.println("sri....."+sfHandle.getEnterpriseConnection().getUserInfo().getOrganizationId());
+			System.out.println("sri....."
+					+ sfHandle.getEnterpriseConnection().getUserInfo()
+							.getOrganizationId());
 			System.out.println(" sql : "
 					+ ReleaseInformationSQLStmts.getParentRIQuery(id));
 			QueryResult queryResults = conn.query(ReleaseInformationSQLStmts
@@ -96,12 +99,17 @@ public class ReleaseInformationDAO implements ISFBaseDAO {
 					System.out.println(" - ParentReleaseID: "
 							+ locObj.getASAClient__ParentReleaseID__c());
 					System.out.println(" - Name: " + locObj.getName());
-					System.out.println(" - Status: " + locObj.getASAClient__Status__c());
+					System.out.println(" - Status: "
+							+ locObj.getASAClient__Status__c());
 
-					retObj = new ReleaseInformationDO(locObj.getId(),
-							locObj.getASAClient__ParentReleaseID__c(), locObj.getName(),
-							locObj.getASAClient__Status__c());
-					list.add(retObj);
+					if (locObj.getASAClient__Status__c().equals(
+							Constants.RELEASE_STATUS_ACTIVE)) {
+						retObj = new ReleaseInformationDO(locObj.getId(),
+								locObj.getASAClient__ParentReleaseID__c(),
+								locObj.getName(),
+								locObj.getASAClient__Status__c());
+						list.add(retObj);
+					}
 				}
 			} else {
 				System.out.println(" There are no records size is - : "
@@ -152,7 +160,8 @@ public class ReleaseInformationDAO implements ISFBaseDAO {
 		ReleaseInformationDO lObj = (ReleaseInformationDO) obj;
 		try {
 			newRelObj.setId(lObj.getId());
-			newRelObj.setASAClient__ParentReleaseID__c(lObj.getParentReleaseID());
+			newRelObj.setASAClient__ParentReleaseID__c(lObj
+					.getParentReleaseID());
 			newRelObj.setASAClient__Status__c(lObj.getStatus());
 			com.sforce.soap.enterprise.sobject.ASAClient__ReleaseInformation__c[] mobj = new com.sforce.soap.enterprise.sobject.ASAClient__ReleaseInformation__c[1];
 			mobj[0] = newRelObj;

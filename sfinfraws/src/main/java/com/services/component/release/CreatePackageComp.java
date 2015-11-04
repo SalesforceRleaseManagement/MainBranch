@@ -47,27 +47,6 @@ public class CreatePackageComp {
 			pkgCompDO.setPkgParentId(pid);
 			pkgCompDO.setParentPackageCompID(pkgCompInfoDO.getId());
 			PackageComponentDAO pkgCompDAO = new PackageComponentDAO();
-			/*
-			 * List list =
-			 * pkgCompDAO.findByParentPackageCompID(pkgCompDO.getParentPackageCompID
-			 * (), sfHandle); if (list.size() > 0) { PackageComponentDO dsDO =
-			 * null; for (Iterator iterator1 = list.iterator(); iterator1
-			 * .hasNext();) { dsDO = (PackageComponentDO) iterator1 .next();
-			 * dsDO.setObjName(pkgCompDO.getObjName());
-			 * dsDO.setOrder(pkgCompDO.getOrder());
-			 * dsDO.setParentPackageCompID(pkgCompDO.getParentPackageCompID());
-			 * dsDO.setPkgCompName(pkgCompDO.getPkgCompName());
-			 * dsDO.setPkgParentId(pkgCompDO.getPkgParentId());
-			 * dsDO.setSourceOrganizationId
-			 * (pkgCompDO.getSourceOrganizationId());
-			 * dsDO.setType(pkgCompDO.getType());
-			 * 
-			 * pkgCompDAO.update(dsDO,
-			 * FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg())); }
-			 * 
-			 * 
-			 * } else {
-			 */
 			pkgCompDAO.insert(pkgCompDO,
 					FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg()));
 			try {
@@ -83,9 +62,38 @@ public class CreatePackageComp {
 			} catch (Exception e) {
 
 			}
+		}
+	}
 
-			/* } */
+	public void create(String pid, SFoAuthHandle sfHandle) {
+		// Create PackageComponent objects in Base Org
+		// set the earlier created Package id to these
+		// PackageComponents
+		for (Iterator iterator = getPackageCompList().iterator(); iterator
+				.hasNext();) {
 
+			PackageCompInfoDO pkgCompInfoDO = (PackageCompInfoDO) iterator
+					.next();
+
+			PackageComponentDO pkgCompDO = pkgCompInfoDO.getPkgCompDO();
+
+			pkgCompDO.setPkgParentId(pid);
+			pkgCompDO.setParentPackageCompID(pkgCompInfoDO.getId());
+			PackageComponentDAO pkgCompDAO = new PackageComponentDAO();
+			pkgCompDAO.insert(pkgCompDO,
+					FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg()));
+			try {
+				String description = "Package Component "
+						+ pkgCompDO.getObjName()
+						+ "is created for  package ID "
+						+ pkgCompDO.getPkgParentId()
+						+ "in  Base Org  :"
+						+ FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg())
+								.getEnterpriseConnection().getUserInfo()
+								.getOrganizationId() + "";
+			} catch (Exception e) {
+
+			}
 		}
 	}
 

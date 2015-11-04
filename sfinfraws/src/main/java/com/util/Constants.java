@@ -60,7 +60,9 @@ public class Constants {
 	public static final String RETRIEVE_SUCESS_MESSAGE = "Retrieve request sucessfully processed";
 	public static final String DEPLOY_SUCESS_MESSAGE = "Deploy request sucessfully processed";
 	public static final String SUCCESFULLY_STATUS = "sucessfully completed";
-
+	public static final String SUCCES_STATUS = "success";
+	public static final String FAILURE_STATUS = "failure";
+	public static final String INITIATED_STATUS = "initiated";
 	public static final String Retrieve_CSV_File = "retreive.csv";
 	public static final String MetadataDescription_Name = "ASA__MetadataDescription__c";
 	public static final String MetadataDescriptionInformation_Name = "ASAClient__MetadataDescriptionInformation__c";
@@ -76,6 +78,10 @@ public class Constants {
 	public static String BaseOrgID = "0";
 	public static String CustomOrgID = "1";
 	public static String CustomBaseOrgID = "2";
+	public static String CustomClientOrgID="3";
+	public static String BaseOrgTypeID = "0";
+	public static String CustomOrgTypeID = "1";
+	public static String CustomBaseOrgTypeID = "2";
 
 	public static String Token_URL = "/services/oauth2/token";
 
@@ -88,6 +94,7 @@ public class Constants {
 	public static final String ACTION_DEPLOY = "Deploy";
 	public static final String ACTION_RETRIEVE = "Retrieve";
 	public static final String ACTION_UPDATEPACKAGES = "UpdatePackages";
+	public static final String SUBMIT_FOR_APPROVAL = "SubmitForApproval";
 	public static final String jspURL = "secur/frontdoor.jsp";
 
 	public static String SALESFORCE_CLIENT_PKG = "SFClientPkg";

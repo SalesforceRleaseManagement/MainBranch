@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.domain.DeploymentSettingsDO;
 import com.domain.EnvironmentDO;
+import com.domain.EnvironmentInformationDO;
 import com.ds.salesforce.dao.comp.DeployDetailsDAO;
 import com.ds.salesforce.dao.comp.DeploySettingsDAO;
 import com.ds.salesforce.dao.comp.EnvironmentDAO;
+import com.ds.salesforce.dao.comp.EnvironmentInformationDAO;
 import com.exception.SFErrorCodes;
 import com.exception.SFException;
 import com.services.component.FDGetSFoAuthHandleService;
@@ -152,7 +154,39 @@ public class RefreshTokens {
 		}
 		return customBaseAuthToken;
 	}
+	public static String refreshClientCustomSFHandle(EnvironmentInformationDO envDO,String bOrgId, String bOrgToken, String bOrgURL,
+			String refreshToken)
+			throws SFException {
+		EnvironmentInformationDAO envDAO = new EnvironmentInformationDAO();
+		try {
+			
+			customAuthToken = FDGetSFoAuthHandleService.getSFAuthToken(
+					envDO.getOrgId(), envDO.getToken(), envDO.getServerURL(),
+					envDO.getRefreshtoken(), Constants.CustomClientOrgID);
+			System.out.println(customAuthToken);
+			
+		
+			List envLogList = envDAO.findById(envDO.getOrgId(),
+					FDGetSFoAuthHandleService.getSFoAuthHandle(
+							bOrgId, bOrgToken,bOrgURL,refreshToken,Constants.BaseOrgID));
 
+			for (Iterator iterator = envLogList.iterator(); iterator.hasNext();) {
+				envDO = (EnvironmentInformationDO) iterator.next();
+			}
+			envDO.setTokenCodeNonEncrypted(customAuthToken);
+
+			System.out.println("customAuthToken new Token: " + envDO.getTokenCodeNonEncrypted());
+			envDAO.update(envDO, FDGetSFoAuthHandleService.getSFoAuthHandle(
+					bOrgId, bOrgToken,bOrgURL,refreshToken,Constants.CustomBaseOrgID));
+			
+			FDGetSFoAuthHandleService.setSfHandleToNUll();
+			
+		} catch (SFException e) {
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Update_Error);
+		}
+		return customAuthToken;
+	}
 
 	public static String getBaseAuthToken() {
 		return baseAuthToken;

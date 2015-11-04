@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.domain.EnvironmentDO;
+import com.domain.EnvironmentInformationDO;
 import com.domain.ErrorLogBean;
 import com.domain.MetadataLogDO;
 import com.domain.MetadataLogInformationDO;
@@ -100,7 +101,19 @@ public class RDAppService {
 		}
 		return envDO;
 	}
-
+	public static EnvironmentInformationDO getEnv1(String orgId, SFoAuthHandle sfHandle) {
+		EnvironmentInformationDO envDO = null;
+		EnvironmentDAO envDAO = new EnvironmentDAO();
+		try {
+			List envList = envDAO.findById(orgId, sfHandle);
+			for (Iterator iterator = envList.iterator(); iterator.hasNext();) {
+				envDO = (EnvironmentInformationDO) iterator.next();
+			}
+		} catch (SFException e) {
+			throw e;
+		}
+		return envDO;
+	}
 	public static void updateMetadataLogStatus(MetadataLogDO metadataLogDO,
 			String status, SFoAuthHandle sfHandle) {
 		MetadataLogDAO metadataLogDAO = new MetadataLogDAO();

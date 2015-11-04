@@ -114,7 +114,7 @@ public class PackageDAO implements ISFBaseDAO {
 	}
 
 	
-	public boolean deleteRecords(String[] ids,SFoAuthHandle sfHandle) {
+	public boolean deleteRecords(String[] ids, SFoAuthHandle sfHandle) {
 		   try {
 			   com.sforce.soap.enterprise.DeleteResult[] deleteResults = sfHandle.getEnterpriseConnection().delete(ids);
 		      for (int i = 0; i < deleteResults.length; i++) {

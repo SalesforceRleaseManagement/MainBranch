@@ -1,27 +1,16 @@
-package com.services.component.packages.updatepackage;
+package com.services.component.packages;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import com.domain.EnvironmentDO;
-import com.domain.PackageDO;
 import com.domain.PackageInformationDO;
-import com.domain.ReleaseInformationDO;
-import com.domain.ReleasePackageDO;
-import com.ds.salesforce.dao.comp.PackageDAO;
 import com.ds.salesforce.dao.comp.PackageInformationDAO;
-import com.ds.salesforce.dao.comp.ReleaseInformationDAO;
-import com.ds.salesforce.dao.comp.ReleasePackageDAO;
 import com.exception.SFException;
 import com.services.application.RDAppService;
 import com.services.component.FDGetSFoAuthHandleService;
 import com.services.component.env.EnvService;
-import com.services.component.release.CreatePackage;
-import com.services.component.release.CreatePackageComp;
-import com.services.component.release.GetPkgCompList;
-import com.services.component.release.GetPkgInfoList;
 import com.util.Constants;
 import com.util.Org;
 

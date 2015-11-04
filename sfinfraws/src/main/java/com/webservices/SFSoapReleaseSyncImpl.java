@@ -23,7 +23,6 @@ public class SFSoapReleaseSyncImpl implements NotificationPort {
 		String eUrl = enterpriseUrl;
 		String pUrl = partnerUrl;
 		String metadataLogId = "";
-		String tOrgId = "";
 
 		// TODO Auto-generated method stub
 		System.out.println("Hello Release");
@@ -38,6 +37,10 @@ public class SFSoapReleaseSyncImpl implements NotificationPort {
 		String bOrgId = null;
 		String bOrgURL = null;
 		String bOrgRefreshToken = null;
+		String tOrgToken = null;
+		String tOrgId = null;
+		String tOrgURL = null;
+		String tOrgRefreshToken = null;
 		String releaseName = "";
 		String releaseId = "";
 		String releaseStatus = "";
@@ -110,6 +113,20 @@ public class SFSoapReleaseSyncImpl implements NotificationPort {
 				deploymentService.updatePackages(bOrgId, bOrgToken, bOrgURL,
 						bOrgRefreshToken, metadataLogId, status,
 						packageParentId);
+				return true;
+			}
+			// releseSync - with SubmitForApproval
+			else if ((metadataLogId != null && !metadataLogId.isEmpty())
+					&& packageAction.equals(Constants.SUBMIT_FOR_APPROVAL)) {
+				System.out.println("SubmitForApproval");
+				status = sobject.getASAStatusC().getValue();
+				System.out.println("status: " + status + " ~"
+						+ "packageParentId: " + packageParentId);
+
+				/*deploymentService.submitForApproval(metadataLogId, sOrgId,
+						sOrgToken, sOrgURL, sOrgRefreshToken, tOrgId,
+						tOrgToken, tOrgURL, tOrgRefreshToken, releaseParentId,
+						releaseParentName, releaseStatus);*/
 				return true;
 			}
 		} catch (Exception e) {

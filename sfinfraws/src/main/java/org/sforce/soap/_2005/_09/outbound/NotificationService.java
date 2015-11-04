@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "NotificationService", targetNamespace = "http://soap.sforce.com/2005/09/outbound", wsdlLocation = "file:/home/root6/srikanth-projects/salesforce/wsc/releaseClient.wsdl")
+@WebServiceClient(name = "NotificationService", targetNamespace = "http://soap.sforce.com/2005/09/outbound", wsdlLocation = "file:/D:/srikanth-javaprojects/salesforce/client.wsdl")
 public class NotificationService
     extends Service
 {
@@ -32,9 +32,9 @@ public class NotificationService
         try {
             URL baseUrl;
             baseUrl = com.sforce.soap._2005._09.outbound.NotificationService.class.getResource(".");
-            url = new URL(baseUrl, "file:/home/root6/srikanth-projects/salesforce/wsc/releaseClient.wsdl");
+            url = new URL(baseUrl, "file:/D:/srikanth-javaprojects/salesforce/client.wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/home/root6/srikanth-projects/salesforce/wsc/releaseClient.wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'file:/D:/srikanth-javaprojects/salesforce/client.wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         NOTIFICATIONSERVICE_WSDL_LOCATION = url;

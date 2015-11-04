@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 import org.sforce.soap.local.sobject.ASAClientMetadataLogInformationC;
 
 
-
 /**
  * <p>Java class for ASAClient__MetadataLogInformation__cNotification complex type.
  * 

@@ -26,7 +26,9 @@ public class ObjectFactory {
 
     private final static QName _ASAClientMetadataLogInformationCASAClientTargetOrgTokenNonEncryptedC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__TargetOrgTokenNonEncrypted__c");
     private final static QName _ASAClientMetadataLogInformationCASAClientIDC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__ID__c");
+    private final static QName _ASAClientMetadataLogInformationCASAClientActionC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__Action__c");
     private final static QName _ASAClientMetadataLogInformationCASAClientBaseOrgIdC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__BaseOrgId__c");
+    private final static QName _ASAClientMetadataLogInformationCASAClientStatusC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__Status__c");
     private final static QName _ASAClientMetadataLogInformationCASAClientBaseOrgTokenC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__BaseOrgToken__c");
     private final static QName _ASAClientMetadataLogInformationCASAClientSourceOrganizationURLC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__SourceOrganizationURL__c");
     private final static QName _ASAClientMetadataLogInformationCASAClientTargetOrgRefreshTokenC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASAClient__TargetOrgRefreshToken__c");
@@ -91,9 +93,27 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "ASAClient__Action__c", scope = ASAClientMetadataLogInformationC.class)
+    public JAXBElement<String> createASAClientMetadataLogInformationCASAClientActionC(String value) {
+        return new JAXBElement<String>(_ASAClientMetadataLogInformationCASAClientActionC_QNAME, String.class, ASAClientMetadataLogInformationC.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "ASAClient__BaseOrgId__c", scope = ASAClientMetadataLogInformationC.class)
     public JAXBElement<String> createASAClientMetadataLogInformationCASAClientBaseOrgIdC(String value) {
         return new JAXBElement<String>(_ASAClientMetadataLogInformationCASAClientBaseOrgIdC_QNAME, String.class, ASAClientMetadataLogInformationC.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "ASAClient__Status__c", scope = ASAClientMetadataLogInformationC.class)
+    public JAXBElement<String> createASAClientMetadataLogInformationCASAClientStatusC(String value) {
+        return new JAXBElement<String>(_ASAClientMetadataLogInformationCASAClientStatusC_QNAME, String.class, ASAClientMetadataLogInformationC.class, value);
     }
 
     /**

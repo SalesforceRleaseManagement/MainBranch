@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{urn:sobject.enterprise.soap.sforce.com}sObject">
  *       &lt;sequence>
+ *         &lt;element name="ASAClient__Action__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__BaseOrgId__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__BaseOrgRefreshToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__BaseOrgToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="ASAClient__SourceOrgRefreshToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__SourceOrgToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__SourceOrganizationURL__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ASAClient__Status__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__TargetOrgRefreshToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__TargetOrgTokenNonEncrypted__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ASAClient__TargetOrgToken__c" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ASAClient__MetadataLogInformation__c", propOrder = {
+    "asaClientActionC",
     "asaClientBaseOrgIdC",
     "asaClientBaseOrgRefreshTokenC",
     "asaClientBaseOrgTokenC",
@@ -51,6 +54,7 @@ import javax.xml.bind.annotation.XmlType;
     "asaClientSourceOrgRefreshTokenC",
     "asaClientSourceOrgTokenC",
     "asaClientSourceOrganizationURLC",
+    "asaClientStatusC",
     "asaClientTargetOrgRefreshTokenC",
     "asaClientTargetOrgTokenNonEncryptedC",
     "asaClientTargetOrgTokenC"
@@ -59,6 +63,8 @@ public class ASAClientMetadataLogInformationC
     extends SObject
 {
 
+    @XmlElementRef(name = "ASAClient__Action__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
+    protected JAXBElement<String> asaClientActionC;
     @XmlElementRef(name = "ASAClient__BaseOrgId__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaClientBaseOrgIdC;
     @XmlElementRef(name = "ASAClient__BaseOrgRefreshToken__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
@@ -79,12 +85,38 @@ public class ASAClientMetadataLogInformationC
     protected JAXBElement<String> asaClientSourceOrgTokenC;
     @XmlElementRef(name = "ASAClient__SourceOrganizationURL__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaClientSourceOrganizationURLC;
+    @XmlElementRef(name = "ASAClient__Status__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
+    protected JAXBElement<String> asaClientStatusC;
     @XmlElementRef(name = "ASAClient__TargetOrgRefreshToken__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaClientTargetOrgRefreshTokenC;
     @XmlElementRef(name = "ASAClient__TargetOrgTokenNonEncrypted__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaClientTargetOrgTokenNonEncryptedC;
     @XmlElementRef(name = "ASAClient__TargetOrgToken__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaClientTargetOrgTokenC;
+
+    /**
+     * Gets the value of the asaClientActionC property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getASAClientActionC() {
+        return asaClientActionC;
+    }
+
+    /**
+     * Sets the value of the asaClientActionC property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setASAClientActionC(JAXBElement<String> value) {
+        this.asaClientActionC = ((JAXBElement<String> ) value);
+    }
 
     /**
      * Gets the value of the asaClientBaseOrgIdC property.
@@ -324,6 +356,30 @@ public class ASAClientMetadataLogInformationC
      */
     public void setASAClientSourceOrganizationURLC(JAXBElement<String> value) {
         this.asaClientSourceOrganizationURLC = ((JAXBElement<String> ) value);
+    }
+
+    /**
+     * Gets the value of the asaClientStatusC property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getASAClientStatusC() {
+        return asaClientStatusC;
+    }
+
+    /**
+     * Sets the value of the asaClientStatusC property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setASAClientStatusC(JAXBElement<String> value) {
+        this.asaClientStatusC = ((JAXBElement<String> ) value);
     }
 
     /**

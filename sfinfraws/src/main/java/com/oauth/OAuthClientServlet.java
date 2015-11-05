@@ -47,9 +47,9 @@ import com.util.SFoAuthHandle;
 @WebServlet(name = "OAuthClientServlet", urlPatterns = { "/OAuthClientServlet/*",
 		"/OAuthClientServlet" }, initParams = {
 // clientId is 'Consumer Key' in the Remote Access UI
-		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsT_8gl4HnWkfcmcXxX6buP7x9O4StuXvKu6ET9hySt_35GbOOob2kfjtaMSB"),
+		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsZqXGXSs976uKfivATtaFl6rhaqwmMvzgd26NEEvc3wpiPBjxaMR2s3ITjsa"),
 		// clientSecret is 'Consumer Secret' in the Remote Access UI
-		@WebInitParam(name = "clientSecret", value = "4246984817416806707"),
+		@WebInitParam(name = "clientSecret", value = "4904334507055360250"),
 		// This must be identical to 'Callback URL' in the Remote Access UI
 		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/OAuthClientServlet/callback"),
 		//this is the Environment Which is getting Back

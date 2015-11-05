@@ -72,7 +72,7 @@ public class FDRetrieveClientCompService {
 					EnvironmentInformationDO envSoureDO = RDAppService.getEnv1(
 							metadataLogInformationDO.getSourceOrgId(),
 							FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-									bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+									bOrgToken, bOrgURL, refreshToken, Constants.CustomBaseOrgID));
 					String newSToken1 = RefreshTokens.refreshClientCustomSFHandle(envSoureDO, bOrgId, bOrgToken, bOrgURL, refreshToken);
 					envSoureDO.setToken(newSToken1);
 

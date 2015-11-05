@@ -96,7 +96,7 @@ public class SFClientMetalogInformationRequestsImpl implements NotificationPort 
 				
 				
 				status = sobject.getASAClientStatusC().getValue();
-				pkgId=sobject.getASAClientRecordIdC().getValue();
+				pkgId=sobject.getASAClientIDC().getValue();
 				System.out.println("status: " + status + " ~"
 						+ "packageId: " + pkgId);
 

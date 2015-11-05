@@ -62,7 +62,6 @@ public class ReleaseEnvService {
 		SFoAuthHandle sfhandle = FDGetSFoAuthHandleService
 				.getSFoAuthHandle(getBorg());
 		LOG.info("deleting Packages start getting connection");
-		startTime = System.currentTimeMillis();
 		List<Object> rpkgDOList = rpkgDAO.findByReleaseId(releaseId, sfhandle);
 		for (Iterator<Object> iteratord = rpkgDOList.iterator(); iteratord
 				.hasNext();) {

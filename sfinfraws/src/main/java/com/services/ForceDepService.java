@@ -42,22 +42,19 @@ public class ForceDepService {
 		 * // releaseParentName, releaseStatus);
 		 */
 
-		/*
-		 * String bOrgId = "00D610000006tjPEAQ"; String bOrgToken =
-		 * "00D610000006tjP!AQ4AQLpMKFRZYlHFja7spuak1Eq_C4DoCZVc8qrx8L1ry.5B1LSIG_40GXjIqGyY_JCihNpeFT8JVdFvkEodeROS1PcgFRGD"
-		 * ; String bOrgURL = "https://na34.salesforce.com"; String refreshToken
-		 * =
-		 * "5Aep861tbt360sO1.uO0UjNoRyP9rNbAguo__QeBtE9I0DtmCAWn8r4UIu4tzqbg2okzwzEmBzokQe8gXPTDFXb"
-		 * ; String releasename = "Oct5Release"; String releaseId =
-		 * "a0B61000000mnDvEAI"; String releaseStatus = "Active"; String
-		 * metadataLogId = "a0561000000zIFq"; String
-		 * packageParentId="a0561000000b1HUAAY"; //getPackages(bOrgId,
-		 * bOrgToken, bOrgURL, refreshToken, releaseId, releasename,
-		 * releaseStatus, metadataLogId); updatePackages(bOrgId, bOrgToken,
-		 * bOrgURL, refreshToken, metadataLogId, "False", packageParentId);
-		 */
+		
+		/* String bOrgId = "00D280000015PQNEA2"; 
+		 String bOrgToken ="00D280000015PQN!ARcAQNUvsM72PP5XrXv.nbd6Kz3PtxvZzhtUNFKxulGYmb8EuatLx3bpLzgnTHY9R4FU17LCSuTuwAR1pl3saS3CxXiYMy.t";
+		 String bOrgURL = "https://ap2.salesforce.com"; 
+		 String refreshToken="5Aep861TSESvWeug_ytZDT0kfhfRrZrur.x0WtU9rQ1FUR1vzhy2q222c7rre5NCCNBAY6cdcr66LRYbw9o8qSj";
+		 String releaseParentName = "releasetest"; 
+		 String releaseParentId="a0B28000000fWDOEA2";
+		 String releaseStatus = "Active"; 
+		 String metadataLogId = "a0528000002bf9C";
+		 getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken,releaseParentId, releaseParentName, releaseStatus, metadataLogId);*/
+		 
 
-		String metadataLogId = "a0361000004SlxL";
+		/*String metadataLogId = "a0361000004SlxL";
 		String bOrgId = "00D610000007yNVEAY";
 		String bOrgToken = "00D610000007yNV!ARcAQHRg06nkk_4oU6b5Ngnc59._NLgeK3Pcxv2VC5mnK6WrUSRHUIi0MM7UEd7SSHxzCu0Wk_BX9qSfH5uZDLMKw_Cu4KQ6";
 		String bOrgURL = "https://na34.salesforce.com";
@@ -77,7 +74,7 @@ public class ForceDepService {
 		String pkgId = "a05610000016IGxAAM";
 		submitForApproval(bOrgId, bOrgToken, bOrgURL, bOrgRefreshToken, sOrgId,
 				sOrgToken, sOrgURL, sOrgRefreshToken, tOrgId, tOrgToken,
-				tOrgURL, tOrgRefreshToken, status, pkgId, metadataLogId);
+				tOrgURL, tOrgRefreshToken, status, pkgId, metadataLogId);*/
 		
 		
 		/*

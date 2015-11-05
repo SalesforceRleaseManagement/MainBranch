@@ -33,7 +33,9 @@ public class EnvService extends BaseService {
 	public List<Object> ListAllEnv(Org org) {
 		EnvironmentDAO dao = new EnvironmentDAO();
 		List<Object> envList = dao.listAll(FDGetSFoAuthHandleService
-				.getSFoAuthHandle(getRequest().getOrg()));
+				.getSFoAuthHandle(org));
+		/*List<Object> envList = dao.listAll(FDGetSFoAuthHandleService
+				.getSFoAuthHandle(getRequest().getOrg()));*/
 
 		return envList;
 	}

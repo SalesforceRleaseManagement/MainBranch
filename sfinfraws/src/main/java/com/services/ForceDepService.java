@@ -57,19 +57,35 @@ public class ForceDepService {
 		 * bOrgURL, refreshToken, metadataLogId, "False", packageParentId);
 		 */
 
-		String metadataLogId = "a0561000001G0Fc";
-		String bOrgId = "00D280000015PQNEA2";
-		String bOrgToken = "00D280000015PQN!ARcAQILsXvs5xULSLbrh23hvg4yzkNj6qi7yGQ0u3KVdREgy8HNLIJC5XN56XDiwXyB5U1l3I67BN215o6SEnaPOmQgFSy3d";
-		String bOrgURL = "https://ap2.salesforce.com";
-		String refreshToken = "5Aep861TSESvWeug_ytZDT0kfhfRrZrur.x0WtU9rQ1FUR1vzgSBU5.lbwDVYiI7IcbGs2vraRk.46K3JhnbM5A";
-		String releaseParentId = "a0B28000000fXRJEA2";
+		String metadataLogId = "a0361000004SlxL";
+		String bOrgId = "00D610000007yNVEAY";
+		String bOrgToken = "00D610000007yNV!ARcAQHRg06nkk_4oU6b5Ngnc59._NLgeK3Pcxv2VC5mnK6WrUSRHUIi0MM7UEd7SSHxzCu0Wk_BX9qSfH5uZDLMKw_Cu4KQ6";
+		String bOrgURL = "https://na34.salesforce.com";
+		String bOrgRefreshToken = "5Aep861tbt360sO1.skXKEfcaogqPgWJf14yO4wDCxuG5pNkRrNI3BUV8RwxKYj.8eS8IrTWpJPDYmwD3K7gBFz";
 
-		String releaseParentName = "test";
-		String releaseStatus = "Active";
-		getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken, releaseParentId,
-				releaseParentName, releaseStatus, metadataLogId);
-		getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken, releaseParentId,
-				releaseParentName, releaseStatus, metadataLogId);
+		String sOrgId = "00D280000015PQNEA2";
+		String sOrgToken = "00D280000015PQN!ARcAQNUvsM72PP5XrXv.nbd6Kz3PtxvZzhtUNFKxulGYmb8EuatLx3bpLzgnTHY9R4FU17LCSuTuwAR1pl3saS3CxXiYMy.t";
+		String sOrgURL = "https://ap2.salesforce.com";
+		String sOrgRefreshToken = "5Aep861TSESvWeug_ytZDT0kfhfRrZrur.x0WtU9rQ1FUR1vzhy2q222c7rre5NCCNBAY6cdcr66LRYbw9o8qSj";
+
+		String tOrgId = "";
+		String tOrgToken = "";
+		String tOrgURL = "";
+		String tOrgRefreshToken = "";
+
+		String status = "Active";
+		String pkgId = "a05610000016IGxAAM";
+		submitForApproval(bOrgId, bOrgToken, bOrgURL, bOrgRefreshToken, sOrgId,
+				sOrgToken, sOrgURL, sOrgRefreshToken, tOrgId, tOrgToken,
+				tOrgURL, tOrgRefreshToken, status, pkgId, metadataLogId);
+		
+		
+		/*
+		 * getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken,
+		 * releaseParentId, releaseParentName, releaseStatus, metadataLogId);
+		 * getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken,
+		 * releaseParentId, releaseParentName, releaseStatus, metadataLogId);
+		 */
 
 	}
 
@@ -132,24 +148,34 @@ public class ForceDepService {
 		return true;
 	}
 
-	public boolean submitForApproval(String metadataLogId, String sOrgId,
+	public boolean submitForApproval(String bOrgId, String bOrgToken,
+			String bOrgURL, String bOrgRefreshToken, String sOrgId,
 			String sOrgToken, String sOrgURL, String sOrgRefreshToken,
 			String tOrgId, String tOrgToken, String tOrgURL,
-			String tOrgRefreshToken, String releaseParentId,
-			String releaseParentName, String releaseStatus) {
+			String tOrgRefreshToken, String status, String pkgId,
+			String metadataLogId) {
+
 		Runnable task;
 		try {
-			task = new SubmitForApprovalTask(metadataLogId, sOrgId, sOrgToken,
-					sOrgURL, sOrgRefreshToken, tOrgId, tOrgToken, tOrgURL,
-					tOrgRefreshToken, releaseParentId, releaseParentName,
-					releaseStatus);
+			task = new SubmitForApprovalTask(bOrgId, bOrgToken, bOrgURL,
+					bOrgRefreshToken, sOrgId, sOrgToken, sOrgURL,
+					sOrgRefreshToken, tOrgId, tOrgURL, tOrgToken,
+					tOrgRefreshToken, status, pkgId, metadataLogId);
+			/*
+			 String bOrgId,
+			String bOrgToken, String bOrgURL, String bOrgRefreshToken,String sOrgId,
+			String sOrgToken, String sOrgURL, String sOrgRefreshToken,String tOrgId,
+			String tOrgToken, String tOrgURL, String tOrgRefreshToken,
+			String status, String pkgId, String metadataLogId
+			 */
 			Thread t = new Thread(task);
 			t.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("Retrieve operation Initiated for requestId: "
-					+ metadataLogId);
+			System.out
+					.println("Submit for Approval operation Initiated for requestId: "
+							+ metadataLogId);
 		}
 		return true;
 	}

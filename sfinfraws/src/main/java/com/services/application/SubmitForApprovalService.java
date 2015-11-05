@@ -25,28 +25,26 @@ import com.util.Org;
 import com.util.SFoAuthHandle;
 
 public class SubmitForApprovalService {
-
+    Org bOrg;
 	Org sOrg;
 	Org tOrg;
+	String status;
+	String pkgId;
 	String metadataLogId;
-	String releaseId;
-	String releaseName;
-	String releaseStatus;
-	long startTime;
-	private static final Logger LOG = LoggerFactory
-			.getLogger(SubmitForApprovalService.class);
+	
+	
 
-	public SubmitForApprovalService(Org sOrg, Org tOrg, String metadataLogId,
-			String releaseId, String releaseName, String releaseStatus) {
+	public SubmitForApprovalService(Org bOrg,Org sOrg, Org tOrg, String status,String pkgId,String metadataLogId) {
 		super();
+		this.bOrg=bOrg;
 		this.sOrg = sOrg;
 		this.tOrg = tOrg;
+		this.status=status;
+		this.pkgId=pkgId;
 		this.metadataLogId = metadataLogId;
-		this.releaseId = releaseId;
-		this.releaseName = releaseName;
-		this.releaseStatus = releaseStatus;
 	}
-
+	
+/*
 	public void delPkgInfoListFromBase() {
 		if (getsOrg() != null) {
 			ReleaseInformationDAO riDAO = new ReleaseInformationDAO();
@@ -83,11 +81,14 @@ public class SubmitForApprovalService {
 			// delete Packages
 			pkgDAO.deleteRecords(ids, sfhandle);
 		}
-	}
+	}*/
 
 	public void initiate() {
 		// delete packages from Base
-		delPkgInfoListFromBase();
+		//delPkgInfoListFromBase();
+		EnvironmentDO bEnvDO = new EnvironmentDO(getbOrg().getOrgId(),
+				getbOrg().getOrgToken(),getbOrg().getOrgURL(), "", getbOrg()
+						.getRefreshToken());
 		EnvironmentDO sEnvDO = new EnvironmentDO(getsOrg().getOrgId(),
 				getsOrg().getOrgToken(), getsOrg().getOrgURL(), "", getsOrg()
 						.getRefreshToken());
@@ -96,64 +97,70 @@ public class SubmitForApprovalService {
 						.getRefreshToken());
 
 		// Get the ReleaseInformation in the each of Source environments.
-		ReleaseInformationDAO riDAO = new ReleaseInformationDAO();
-		List<Object> relInfoList = riDAO.findByParentId(releaseId,
-				FDGetSFoAuthHandleService.getSFoAuthHandle(sEnvDO,
-						Constants.CustomOrgID));
-		for (Iterator iterator = relInfoList.iterator(); iterator.hasNext();) {
-			List<Object> pkgInfoList = (new GetPkgInfoList(relInfoList, sEnvDO))
-					.getList();
+		PackageInformationDAO pkgInfoDAO=new PackageInformationDAO();
+
+		List<Object> pkgInfoList=pkgInfoDAO.findById(pkgId, FDGetSFoAuthHandleService.getSFoAuthHandle(bEnvDO,
+						Constants.CustomBaseOrgID));
+		
+		
 			for (Iterator<Object> iterator2 = pkgInfoList.iterator(); iterator2
 					.hasNext();) {
 				PackageInformationDO pkgInfoDO = (PackageInformationDO) iterator2
 						.next();
 				if (pkgInfoDO.getReadyForDeployment() != null
 						&& pkgInfoDO.getReadyForDeployment().booleanValue()) {
-					PackageInformationDAO pkgInfoDAO = new PackageInformationDAO();
+			
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime(new Date());
 					pkgInfoDO.setCalendar(calendar);
 					System.out.println(pkgInfoDO.getCalendar().getTime());
 
 					pkgInfoDAO.updatePackageRetrievedTime(pkgInfoDO,
-							FDGetSFoAuthHandleService.getSFoAuthHandle(sEnvDO,
-									Constants.CustomOrgID));
+							FDGetSFoAuthHandleService.getSFoAuthHandle(bEnvDO,
+									Constants.CustomBaseOrgID));
+                      
+					
+					String pid = (new CreatePackage(
+							getsOrg()))
+							.create(pkgInfoDO,
+									FDGetSFoAuthHandleService.getSFoAuthHandle(sEnvDO,
+											Constants.CustomOrgID));
 
-					LOG.info("Package Creating in Base Org");
-					startTime = System.currentTimeMillis();
-					String pid = (new CreatePackage(gettOrg())).create(
-							pkgInfoDO, FDGetSFoAuthHandleService
-									.getSFoAuthHandle(gettOrg()));
-					long endTime = System.currentTimeMillis();
-					long total = endTime - startTime;
-					LOG.info("Total Time Taken to Create Package in Base Org List"
-							+ total / 1000 + " seconds");
-
-					List<Object> pkgCompList = (new GetPkgCompList(relInfoList,
-							sEnvDO, pkgInfoDO.getId())).getList();
-					(new CreatePackageComp(gettOrg(), pkgCompList)).create(pid,
+					List<Object> pkgCompList = (new GetPkgCompList(
+							bEnvDO, pkgInfoDO.getId())).getListClient();
+					(new CreatePackageComp(getsOrg(), pkgCompList)).create(pid,
 							FDGetSFoAuthHandleService
-									.getSFoAuthHandle(gettOrg()));
-
-					PackageInformationDAO pkginofDAO = new PackageInformationDAO();
-
+									.getSFoAuthHandle(getsOrg()));
+					
 					// Associate package with release
-					ReleasePackageDAO relPkgDAO = new ReleasePackageDAO();
+					/*ReleasePackageDAO relPkgDAO = new ReleasePackageDAO();
 
-					List<Object> relePkgList = relPkgDAO.findByPkgIDAndRID(pid,
-							getReleaseId(), FDGetSFoAuthHandleService
-									.getSFoAuthHandle(gettOrg()));
-					if (!relePkgList.isEmpty()) {
-						ReleasePackageDO relPkgDO = new ReleasePackageDO("1",
-								pid, getReleaseId());
-						String pkgId = relPkgDAO.insertAndGetId(relPkgDO,
-								FDGetSFoAuthHandleService
-										.getSFoAuthHandle(gettOrg()));
+					List<Object> relePkgList = relPkgDAO
+							.findByPkgIDAndRID(
+									pid,
+									pkgInfoDO.getReleaseInformationId(),
+									FDGetSFoAuthHandleService
+											.getSFoAuthHandle(getsOrg()));
+					if (relePkgList.size() > 0) {
+
+					}
+
+					else {
+						ReleasePackageDO relPkgDO = new ReleasePackageDO(
+								"1", pid, pkgInfoDO.getReleaseInformationId());
+
+						String pkgId = relPkgDAO
+								.insertAndGetId(
+										relPkgDO,
+										FDGetSFoAuthHandleService
+												.getSFoAuthHandle(getsOrg()));
+					}*/
+			
 					}
 				}
 			}
-		}
-	}
+		
+	
 
 	public Org getsOrg() {
 		return sOrg;
@@ -171,44 +178,35 @@ public class SubmitForApprovalService {
 		this.tOrg = tOrg;
 	}
 
-	public String getReleaseStatus() {
-		return releaseStatus;
+	public Org getbOrg() {
+		return bOrg;
 	}
 
-	public void setReleaseStatus(String releaseStatus) {
-		this.releaseStatus = releaseStatus;
+
+	public void setbOrg(Org bOrg) {
+		this.bOrg = bOrg;
 	}
 
-	public long getStartTime() {
-		return startTime;
+
+	public String getStatus() {
+		return status;
 	}
 
-	public void setStartTime(long startTime) {
-		this.startTime = startTime;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getReleaseId() {
-		return releaseId;
+
+	public String getPkgId() {
+		return pkgId;
 	}
 
-	public void setReleaseId(String releaseId) {
-		this.releaseId = releaseId;
+
+	public void setPkgId(String pkgId) {
+		this.pkgId = pkgId;
 	}
 
-	public String getReleaseName() {
-		return releaseName;
-	}
 
-	public void setReleaseName(String releaseName) {
-		this.releaseName = releaseName;
-	}
-
-	private String getMetadataLogId() {
-		return metadataLogId;
-	}
-
-	private void setMetadataLogId(String metadataLogId) {
-		this.metadataLogId = metadataLogId;
-	}
-
+	
 }

@@ -9,9 +9,9 @@
 		url-pattern="/retrieve" />
 	<endpoint name="SFSoapDeployImpl" implementation="com.webservices.SFSoapDeployImpl"
 		url-pattern="/deploy" />
-	<endpoint name="SFSoapReleaseSyncImpl" implementation="com.webservices.SFSoapReleaseSyncImpl"
+	<endpoint name="SFServerMetadatalogRequestsImpl" implementation="com.webservices.SFServerMetadatalogRequestsImpl"
 		url-pattern="/releaseSync" />
-	<endpoint name="SFSoapRetrieveClientImpl" implementation="com.webservices.SFSoapRetrieveClientImpl"
+	<endpoint name="SFClientMetalogInformationRequestsImpl" implementation="com.webservices.SFClientMetalogInformationRequestsImpl"
 		url-pattern="/retrieveclient" />
 	<endpoint name="SFSoapUpdatePackagesImpl" implementation="com.webservices.SFSoapUpdatePackagesImpl"
 		url-pattern="/updatePackage" />

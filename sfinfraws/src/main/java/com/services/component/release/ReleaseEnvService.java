@@ -38,6 +38,7 @@ public class ReleaseEnvService {
 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ReleaseEnvService.class);
+
 	public ReleaseEnvService() {
 		super();
 	}
@@ -56,14 +57,13 @@ public class ReleaseEnvService {
 
 		// Deleting Packages From BaseOrg
 
-	
 		ReleasePackageDAO rpkgDAO = new ReleasePackageDAO();
 
-		SFoAuthHandle sfhandle=FDGetSFoAuthHandleService.getSFoAuthHandle(getBorg());
+		SFoAuthHandle sfhandle = FDGetSFoAuthHandleService
+				.getSFoAuthHandle(getBorg());
 		LOG.info("deleting Packages start getting connection");
-		 startTime = System.currentTimeMillis();
-		List<Object> rpkgDOList = rpkgDAO.findByReleaseId(releaseId,
-				sfhandle);
+		startTime = System.currentTimeMillis();
+		List<Object> rpkgDOList = rpkgDAO.findByReleaseId(releaseId, sfhandle);
 		for (Iterator<Object> iteratord = rpkgDOList.iterator(); iteratord
 				.hasNext();) {
 			ReleasePackageDO rpkgDO = (ReleasePackageDO) iteratord.next();
@@ -71,17 +71,15 @@ public class ReleaseEnvService {
 			String[] ids = new String[1];
 			ids[0] = rpkgDO.getPackageC();
 			PackageDAO pkgDAO = new PackageDAO();
-			List<Object> pkgList = pkgDAO.findById(ids[0],
-					sfhandle);
+			List<Object> pkgList = pkgDAO.findById(ids[0], sfhandle);
 			if (pkgList.size() > 0) {
 				// delete Packages
-				pkgDAO.deleteRecords(ids,
-						sfhandle);
+				pkgDAO.deleteRecords(ids, sfhandle);
 			}
 			long endTime = System.currentTimeMillis();
 			long total = endTime - startTime;
-			LOG.info("Total Time Taken to Delete Packages List"
-					+ total / 1000 +" seconds");
+			LOG.info("Total Time Taken to Delete Packages List" + total / 1000
+					+ " seconds");
 		}
 
 		// prepare baseOrg
@@ -135,8 +133,9 @@ public class ReleaseEnvService {
 												.getInstance();
 										calendar.setTime(new Date());
 										pkgInfoDO.setCalendar(calendar);
-										System.out.println(pkgInfoDO.getCalendar().getTime());
-										
+										System.out.println(pkgInfoDO
+												.getCalendar().getTime());
+
 										pkgInfoDAO
 												.updatePackageRetrievedTime(
 														pkgInfoDO,
@@ -145,7 +144,6 @@ public class ReleaseEnvService {
 																		envDO,
 																		Constants.CustomOrgID));
 
-										
 										LOG.info("Package Creating in Base Org");
 										startTime = System.currentTimeMillis();
 										String pid = (new CreatePackage(
@@ -153,10 +151,11 @@ public class ReleaseEnvService {
 												.create(pkgInfoDO,
 														FDGetSFoAuthHandleService
 																.getSFoAuthHandle(getBorg()));
-										long endTime = System.currentTimeMillis();
+										long endTime = System
+												.currentTimeMillis();
 										long total = endTime - startTime;
 										LOG.info("Total Time Taken to Create Package in Base Org List"
-												+ total / 1000 +" seconds");
+												+ total / 1000 + " seconds");
 
 										String Pkgdescription = "Package  "
 												+ pkgInfoDO.getName()
@@ -172,7 +171,9 @@ public class ReleaseEnvService {
 														.getUserInfo()
 														.getOrganizationId()
 												+ "";
-										System.out.println("Time" +pkgInfoDO.getCalendar().getTimeInMillis());
+										System.out.println("Time"
+												+ pkgInfoDO.getCalendar()
+														.getTimeInMillis());
 										linkedlist.add(new GetPackageProcess(
 												Pkgdescription));
 										List<Object> pkgCompList = (new GetPkgCompList(
@@ -211,7 +212,8 @@ public class ReleaseEnvService {
 																	.getSFoAuthHandle(getBorg()));
 											if (pkgId != "") {
 												String ReleasePkgdescription = "Release Package  "
-														+ relPkgDO.getPackageC()
+														+ relPkgDO
+																.getPackageC()
 														+ " "
 														+ "is created for Release ID "
 														+ relPkgDO

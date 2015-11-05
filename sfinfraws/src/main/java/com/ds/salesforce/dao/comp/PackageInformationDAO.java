@@ -54,7 +54,59 @@ public class PackageInformationDAO implements ISFBaseDAO {
 	public List<Object> findById(String id, SFoAuthHandle sfHandle) {
 		// TODO Auto-generated method stub
 
-		return null;
+
+		// TODO Auto-generated method stub
+		PackageInformationDO retObj = null;
+		retObj = null;
+		List list = new ArrayList();
+		try {
+			EnterpriseConnection conn = sfHandle.getEnterpriseConnection();
+			System.out
+					.println(" sql : "
+							+ PackageInformationSQLStmts
+									.getPkgInfo(id));
+			QueryResult queryResults = conn.query(PackageInformationSQLStmts
+					.getPkgInfo(id));
+
+			if (queryResults.getSize() > 0) {
+				for (int i = 0; i < queryResults.getRecords().length; i++) {
+					// cast the SObject to a strongly-typed Contact
+					com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c locObj = (com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c) queryResults
+							.getRecords()[i];
+
+					System.out.println(" - Id: " + locObj.getId());
+					System.out.println(" - Name : " + locObj.getName());
+					System.out.println(" - desc: "
+							+ locObj.getASAClient__Description__c());
+					System.out.println(" - release Id: "
+							+ locObj.getASAClient__Release__c());
+					System.out.println(" - release Name: "
+							+ locObj.getASAClient__Release__r().getName());
+					
+					System.out.println("Package Status: "+locObj.getASAClient__ReadyForDeployment__c());
+					retObj = new PackageInformationDO(locObj.getId(),
+							locObj.getName(),
+							locObj.getASAClient__Description__c(),
+							locObj.getASAClient__Release__c(),
+							locObj.getASAClient__ReadyForDeployment__c(),
+							locObj.getASAClient__Package_Retrieved_Time__c());
+
+					list.add(retObj);
+				}
+			} else {
+				System.out.println(" There are no records size is - : "
+						+ queryResults.getSize());
+			}
+		} catch (SFException e) {
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Query_Error);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Query_Error);
+		}
+		return list;
+	
 	}
 
 	public List<Object> findByReadyForDepId(String id, SFoAuthHandle sfHandle) {

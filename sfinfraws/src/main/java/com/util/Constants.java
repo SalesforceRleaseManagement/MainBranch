@@ -94,7 +94,7 @@ public class Constants {
 	public static final String ACTION_DEPLOY = "Deploy";
 	public static final String ACTION_RETRIEVE = "Retrieve";
 	public static final String ACTION_UPDATEPACKAGES = "UpdatePackages";
-	public static final String SUBMIT_FOR_APPROVAL = "SubmitForApproval";
+	public static final String SUBMIT_FOR_APPROVAL = "Commit";
 	public static final String jspURL = "secur/frontdoor.jsp";
 
 	public static String SALESFORCE_CLIENT_PKG = "SFClientPkg";

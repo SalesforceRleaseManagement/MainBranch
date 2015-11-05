@@ -48,6 +48,33 @@ public class GetPkgCompList {
 		
 		
 	}
+	public GetPkgCompList(EnvironmentDO envDO,String pkgid){
+		this.envDO = envDO;
+		this.pkgid=pkgid;
+	}
+
+	public List<Object> getListClient(){
+		// Iterate thru the release information list in the target
+		// env
+		List<Object> packageCompList=null;
+		
+			
+
+				PackageCompInfoDAO pkgCompInfoDAO = new PackageCompInfoDAO();
+
+				// find the PackageComponents associated with
+				// PackageInformation
+				packageCompList = pkgCompInfoDAO
+						.findByPackageId(pkgid,
+								FDGetSFoAuthHandleService
+										.getSFoAuthHandle(envDO,
+												Constants.CustomOrgID));
+
+				return packageCompList;
+			
+		
+		
+	}
 
 	private List<Object> getRelInfoList() {
 		return relInfoList;

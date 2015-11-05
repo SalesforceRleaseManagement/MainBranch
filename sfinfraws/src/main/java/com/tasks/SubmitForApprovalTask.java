@@ -17,6 +17,10 @@ import com.util.Org;
 public class SubmitForApprovalTask implements Runnable {
 
 	String metadataLogId;
+	String bOrgId;
+	String bOrgToken;
+	String bOrgURL;
+	String bOrgRefreshToken;
 	String sOrgId;
 	String sOrgToken;
 	String sOrgURL;
@@ -25,27 +29,63 @@ public class SubmitForApprovalTask implements Runnable {
 	String tOrgToken;
 	String tOrgURL;
 	String tOrgRefreshToken;
-	String releaseParentId;
-	String releaseParentName;
-	String releaseStatus;
+	String status;
+	String  pkgId;
 
-	public SubmitForApprovalTask(String metadataLogId, String sOrgId,
-			String sOrgToken, String sOrgURL, String sOrgRefreshToken,
-			String tOrgId, String tOrgToken, String tOrgURL,
-			String tOrgRefreshToken, String releaseParentId,
-			String releaseParentName, String releaseStatus) {
+	public SubmitForApprovalTask(String bOrgId,
+			String bOrgToken, String bOrgURL, String bOrgRefreshToken,String sOrgId,
+			String sOrgToken, String sOrgURL, String sOrgRefreshToken,String tOrgId,
+			String tOrgToken, String tOrgURL, String tOrgRefreshToken,
+			String status, String pkgId, String metadataLogId) {
 		this.metadataLogId = metadataLogId;
+		this.bOrgId=bOrgId;
+		this.bOrgURL=bOrgURL;
+		this.bOrgToken=bOrgToken;
+		this.bOrgRefreshToken=bOrgRefreshToken;
 		this.sOrgId = sOrgId;
 		this.sOrgToken = sOrgToken;
 		this.sOrgURL = sOrgURL;
 		this.sOrgRefreshToken = sOrgRefreshToken;
-		this.tOrgId = tOrgId;
-		this.tOrgToken = tOrgToken;
-		this.tOrgURL = tOrgURL;
-		this.tOrgRefreshToken = tOrgRefreshToken;
-		this.releaseParentId = releaseParentId;
-		this.releaseParentName = releaseParentName;
-		this.releaseStatus = releaseStatus;
+		this.tOrgId=tOrgId;
+		this.tOrgURL=tOrgURL;
+		this.tOrgToken=tOrgToken;
+		this.tOrgRefreshToken=tOrgRefreshToken;
+		this.status=status;
+		this.pkgId=pkgId;
+		
+		
+	}
+
+	public String getbOrgId() {
+		return bOrgId;
+	}
+
+	public void setbOrgId(String bOrgId) {
+		this.bOrgId = bOrgId;
+	}
+
+	public String getbOrgToken() {
+		return bOrgToken;
+	}
+
+	public void setbOrgToken(String bOrgToken) {
+		this.bOrgToken = bOrgToken;
+	}
+
+	public String getbOrgURL() {
+		return bOrgURL;
+	}
+
+	public void setbOrgURL(String bOrgURL) {
+		this.bOrgURL = bOrgURL;
+	}
+
+	public String getbOrgRefreshToken() {
+		return bOrgRefreshToken;
+	}
+
+	public void setbOrgRefreshToken(String bOrgRefreshToken) {
+		this.bOrgRefreshToken = bOrgRefreshToken;
 	}
 
 	@Override
@@ -53,13 +93,15 @@ public class SubmitForApprovalTask implements Runnable {
 		String errors = null;
 		boolean errorFlag = false;
 		try {
+			
+			Org bOrg = new Org(getbOrgId(), getbOrgToken(), getbOrgURL(),
+					getbOrgRefreshToken(), Constants.CustomBaseOrgID);
 			Org sOrg = new Org(getsOrgId(), getsOrgToken(), getsOrgURL(),
 					getsOrgRefreshToken(), Constants.CustomOrgTypeID);
 			Org tOrg = new Org(gettOrgId(), gettOrgToken(), gettOrgURL(),
 					gettOrgRefreshToken(), Constants.CustomOrgTypeID);
-			SubmitForApprovalService subForAppService = new SubmitForApprovalService(
-					sOrg, tOrg, getMetadataLogId(), getReleaseParentId(),
-					getReleaseParentName(), getReleaseStatus());
+			SubmitForApprovalService subForAppService = new SubmitForApprovalService(bOrg,
+					sOrg, tOrg,getStatus(),getPkgId(),getMetadataLogId());
 			subForAppService.initiate();
 		} catch (Exception e) {
 			errorFlag = true;
@@ -68,13 +110,29 @@ public class SubmitForApprovalTask implements Runnable {
 			errors = lerrors.toString();
 		} finally {
 			if (errorFlag) {
-				System.out.println("Release Operation Complete for requestId: "
-						+ getReleaseParentId() + "\nWith Errors: " + errors);
+				System.out.println("Package Operation Complete for requestId: "
+						+ getPkgId() + "\nWith Errors: " + errors);
 			} else {
-				System.out.println("Release Operation Complete for requestId: "
-						+ getReleaseParentId());
+				System.out.println("Package Operation Complete for requestId: "
+						+ getPkgId());
 			}
 		}
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getPkgId() {
+		return pkgId;
+	}
+
+	public void setPkgId(String pkgId) {
+		this.pkgId = pkgId;
 	}
 
 	public String getMetadataLogId() {
@@ -149,28 +207,6 @@ public class SubmitForApprovalTask implements Runnable {
 		this.tOrgRefreshToken = tOrgRefreshToken;
 	}
 
-	public String getReleaseParentId() {
-		return releaseParentId;
-	}
-
-	public void setReleaseParentId(String releaseParentId) {
-		this.releaseParentId = releaseParentId;
-	}
-
-	public String getReleaseParentName() {
-		return releaseParentName;
-	}
-
-	public void setReleaseParentName(String releaseParentName) {
-		this.releaseParentName = releaseParentName;
-	}
-
-	public String getReleaseStatus() {
-		return releaseStatus;
-	}
-
-	public void setReleaseStatus(String releaseStatus) {
-		this.releaseStatus = releaseStatus;
-	}
+	
 
 }

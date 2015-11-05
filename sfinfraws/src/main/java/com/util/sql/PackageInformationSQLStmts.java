@@ -16,6 +16,13 @@ public class PackageInformationSQLStmts {
 				+ " where id= '" + id + "'";
 		return sql;
 	}
+	public static String getPkgInfo(String id) {
+		String sql = "SELECT Id, Name, ASAClient__Description__c, ASAClient__Release__c, "
+				+ "ASAClient__Release__r.Name, ASAClient__ReadyForDeployment__c,ASAClient__Package_Retrieved_Time__c"
+				+ " FROM ASAClient__PackageInformation__c"
+				+ " where id= '" + id + "'";
+		return sql;
+	}
 	
 	public static String getAllPkgInfoQuery() {
 		String sql = "SELECT Id, Name, ASAClient__Description__c, ASAClient__Release__c, ASAClient__Release__r.Name, ASAClient__ReadyForDeployment__c,ASAClient__Package_Retrieved_Time__c"

@@ -28,7 +28,6 @@ public class SFClientMetalogInformationRequestsImpl implements NotificationPort 
 		String eUrl = enterpriseUrl;
 		String pUrl = partnerUrl;
 		String metadataLogId = "";
-	
 
 		// TODO Auto-generated method stub
 		System.out.println("Hello Retrieve");
@@ -51,8 +50,8 @@ public class SFClientMetalogInformationRequestsImpl implements NotificationPort 
 		String tOrgURL = null;
 		String tOrgToken = null;
 		String tOrgRefreshToken = null;
-		String status="";
-		String pkgId="";
+		String status = "";
+		String pkgId = "";
 		String metadataLogAction = "";
 
 		int arrSize = notification.size();
@@ -84,24 +83,38 @@ public class SFClientMetalogInformationRequestsImpl implements NotificationPort 
 					&& metadataLogAction.equals(Constants.SUBMIT_FOR_APPROVAL)) {
 
 				System.out.println("Commit");
-				sOrgId=sobject.getASAClientOrganizationIdC().getValue();
-				sOrgURL=sobject.getASAClientSourceOrganizationURLC().getValue();
-				sOrgToken=sobject.getASAClientSourceOrgTokenC().getValue();
-				sOrgRefreshToken=sobject.getASAClientSourceOrgRefreshTokenC().getValue();
-				
-				tOrgId="";
-				tOrgURL="";
-				tOrgToken=sobject.getASAClientTargetOrgTokenC().getValue();
-				tOrgRefreshToken=sobject.getASAClientTargetOrgRefreshTokenC().getValue();
-				
-				
-				status = sobject.getASAClientStatusC().getValue();
-				pkgId=sobject.getASAClientIDC().getValue();
-				System.out.println("status: " + status + " ~"
-						+ "packageId: " + pkgId);
+				sOrgId = sobject.getASAClientOrganizationIdC().getValue();
+				System.out.println("Commit1");
+				sOrgURL = sobject.getASAClientSourceOrganizationURLC()
+						.getValue();
+				System.out.println("Commit2");
+				sOrgToken = sobject.getASAClientSourceOrgTokenC().getValue();
+				System.out.println("Commit3");
+				sOrgRefreshToken = sobject.getASAClientSourceOrgRefreshTokenC()
+						.getValue();
+				System.out.println("Commit4");
+				System.out.println("sOrgId: " + sOrgId + " ~" + "sOrgURL: "
+						+ sOrgURL + " ~" + "sOrgToken: " + sOrgToken + " ~"
+						+ "sOrgRefreshToken: " + sOrgRefreshToken);
 
-				deploymentService.submitForApproval(bOrgId,bOrgURL,bOrgToken,bOrgRefreshToken,sOrgId,
-						sOrgToken, sOrgURL,sOrgRefreshToken,tOrgId,tOrgURL,tOrgToken,tOrgRefreshToken,status,pkgId,metadataLogId);
+				tOrgId = "";
+				tOrgURL = "";
+				tOrgToken = sobject.getASAClientTargetOrgTokenC().getValue();
+				tOrgRefreshToken = sobject.getASAClientTargetOrgRefreshTokenC()
+						.getValue();
+
+				status = sobject.getASAClientStatusC().getValue();
+				pkgId = sobject.getASAClientIDC().getValue();
+				System.out.println("status: " + status + " ~" + "packageId: "
+						+ pkgId);
+
+				
+				
+				
+				deploymentService.submitForApproval(bOrgId, bOrgToken, bOrgURL,
+						bOrgRefreshToken, sOrgId, sOrgToken, sOrgURL,
+						sOrgRefreshToken, status, pkgId, metadataLogId);
+				
 				return true;
 
 			}

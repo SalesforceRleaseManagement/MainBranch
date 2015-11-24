@@ -34,8 +34,7 @@ public class SubmitForApprovalTask implements Runnable {
 
 	public SubmitForApprovalTask(String bOrgId,
 			String bOrgToken, String bOrgURL, String bOrgRefreshToken,String sOrgId,
-			String sOrgToken, String sOrgURL, String sOrgRefreshToken,String tOrgId,
-			String tOrgToken, String tOrgURL, String tOrgRefreshToken,
+			String sOrgToken, String sOrgURL, String sOrgRefreshToken,
 			String status, String pkgId, String metadataLogId) {
 		this.metadataLogId = metadataLogId;
 		this.bOrgId=bOrgId;
@@ -46,10 +45,7 @@ public class SubmitForApprovalTask implements Runnable {
 		this.sOrgToken = sOrgToken;
 		this.sOrgURL = sOrgURL;
 		this.sOrgRefreshToken = sOrgRefreshToken;
-		this.tOrgId=tOrgId;
-		this.tOrgURL=tOrgURL;
-		this.tOrgToken=tOrgToken;
-		this.tOrgRefreshToken=tOrgRefreshToken;
+		
 		this.status=status;
 		this.pkgId=pkgId;
 		
@@ -97,11 +93,10 @@ public class SubmitForApprovalTask implements Runnable {
 			Org bOrg = new Org(getbOrgId(), getbOrgToken(), getbOrgURL(),
 					getbOrgRefreshToken(), Constants.CustomBaseOrgID);
 			Org sOrg = new Org(getsOrgId(), getsOrgToken(), getsOrgURL(),
-					getsOrgRefreshToken(), Constants.CustomOrgTypeID);
-			Org tOrg = new Org(gettOrgId(), gettOrgToken(), gettOrgURL(),
-					gettOrgRefreshToken(), Constants.CustomOrgTypeID);
+					getsOrgRefreshToken(), Constants.BaseOrgID);
+			
 			SubmitForApprovalService subForAppService = new SubmitForApprovalService(bOrg,
-					sOrg, tOrg,getStatus(),getPkgId(),getMetadataLogId());
+					sOrg,getStatus(),getPkgId(),getMetadataLogId());
 			subForAppService.initiate();
 		} catch (Exception e) {
 			errorFlag = true;

@@ -12,6 +12,7 @@ public class DeployTask implements Runnable {
 	String serverURL;
 	String refreshToken;
 	String metadataLogId;
+	boolean isValidate;
 
 	public DeployTask(String orgId, String token, String serverURL, String refreshToken,
 			String metadataLogId) {
@@ -22,6 +23,25 @@ public class DeployTask implements Runnable {
 		this.serverURL = serverURL;
 	}
 
+	public DeployTask(String orgId, String token, String serverURL, String refreshToken,
+			String metadataLogId, boolean isValidate) {
+		this.metadataLogId = metadataLogId;
+		this.orgId = orgId;
+		this.token = token;
+		this.refreshToken = refreshToken;
+		this.serverURL = serverURL;
+		this.isValidate = isValidate;
+	}
+	
+	
+	public boolean isValidate() {
+		return isValidate;
+	}
+
+	public void setValidate(boolean isValidate) {
+		this.isValidate = isValidate;
+	}
+
 	@Override
 	public void run() {
 		String errors=null;
@@ -29,7 +49,7 @@ public class DeployTask implements Runnable {
 		try {
 			FDDeployCompService deployService = new FDDeployCompService();
 			deployService.deploy(getOrgId(), getToken(), getServerURL(), getRefreshToken(),
-					getMetadataLogId());
+					getMetadataLogId(), isValidate() );
 		} catch (Exception e) {
 			errorFlag = true;
 			StringWriter lerrors = new StringWriter();

@@ -28,7 +28,7 @@ public class FDDeployCompService {
 	}
 
 	public void deploy(String bOrgId, String bOrgToken, String bOrgURL,
-			String refreshToken, String metadataLogId) {
+			String refreshToken, String metadataLogId, boolean isValidate) {
 		MetadataLogDO metadataLogDO = null;
 		SFoAuthHandle sfSourceHandle = null;
 		SFoAuthHandle sfTargetHandle = null;
@@ -37,7 +37,8 @@ public class FDDeployCompService {
 		// does some sanity checks on input variables
 		// updates the refreshed tokens in Environment
 		PreProcessingTask preProcessingTask = new PreProcessingTask(bOrgId,
-				bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID,metadataLogId);
+				bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID,
+				metadataLogId);
 		preProcessingTask.doPreProcess();
 
 		// get refreshed base token
@@ -48,7 +49,8 @@ public class FDDeployCompService {
 			// Get Meta data Log details
 			metadataLogDO = RDAppService.findMetadataLog(metadataLogId,
 					FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-							bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+							bOrgToken, bOrgURL, refreshToken,
+							Constants.BaseOrgID));
 			// nullify connection
 			FDGetSFoAuthHandleService.setSfHandleToNUll();
 
@@ -60,72 +62,74 @@ public class FDDeployCompService {
 			// nullify connection
 			FDGetSFoAuthHandleService.setSfHandleToNUll();
 
-			if (metadataLogDO.getAction() != null
-					&& (metadataLogDO.getAction().equals("Deploy"))) {
+			if ((metadataLogDO.getAction() != null)
+					&& ((metadataLogDO.getAction().equals("Deploy")) || (metadataLogDO
+							.getAction().equals("Validate")))) {
 				if (metadataLogDO.getStatus() != null
 						&& (metadataLogDO.getStatus()
 								.equals(Constants.PROCESSING_STATUS))) {
-					System.out.println("Deploy------");
+					System.out.println("Action"+metadataLogDO.getAction());
 					DeployMetadataDAO deployMetadataDAO = new DeployMetadataDAO();
 
 					// find to be deployed object list
 					List<Object> deployList = deployMetadataDAO.findById(
 							metadataLogDO.getLogName(),
 							FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-									bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+									bOrgToken, bOrgURL, refreshToken,
+									Constants.BaseOrgID));
 					FDGetSFoAuthHandleService.setSfHandleToNUll();
 
 					// get source salesforce handle
 					sfSourceHandle = FDGetSFoAuthHandleService
 							.getSFoAuthHandle(((MetaBean) deployList.get(0))
 									.getSourceOrg(), bOrgId, bOrgToken,
-									bOrgURL, refreshToken, Constants.CustomOrgID);
-				
+									bOrgURL, refreshToken,
+									Constants.CustomOrgID);
 
 					// get target salesforce handle
 					sfTargetHandle = FDGetSFoAuthHandleService
 							.getSFoAuthHandle(((MetaBean) deployList.get(0))
 									.getTargetOrg(), bOrgId, bOrgToken,
-									bOrgURL, refreshToken, Constants.CustomOrgID);
-							
-							
-							/*for (Iterator iterator = deployList.iterator(); iterator
-									.hasNext();) {
-								MetaBean object = (MetaBean) iterator.next();
-								String templateType=object.getType();
-								
-								if(templateType.equals("EmailTemplate"))
-								{
-									templateType="Email";
-									String emailSQL = "Select Id, Name,Type"
-											+ " FROM Folder where Type = '"+templateType+"'";
-							
-									EnterpriseConnection conn = sfSourceHandle.getEnterpriseConnection();
-									System.out.println(conn.toString());
-									QueryResult queryResults = conn.query(emailSQL);
-									System.out.println(queryResults.getSize());
-									if (queryResults.getSize() > 0) {
-										for (int i = 0; i < queryResults.getRecords().length; i++) { 
-											// cast the SObject to a strongly-typed Contact
-											com.sforce.soap.enterprise.sobject.Folder	retObj = (com.sforce.soap.enterprise.sobject.Folder) queryResults
-													.getRecords()[i];
-											String name=retObj.getName();
-											String type=retObj.getType();
-											System.out.println("folder name"+name);
-											System.out.println("Type name"+type);
-										
-											String accessType=retObj.getAccessType();
-											System.out.println("Access Type"+accessType);
-											boolean  isReadonly=true;
-											CustomObjectTest cot=new CustomObjectTest();
-											cot.insert(name,type,accessType,sfTargetHandle);
-								}
-								
-							}
-						
-								}
-						
-							}*/
+									bOrgURL, refreshToken,
+									Constants.CustomOrgID);
+
+					/*
+					 * for (Iterator iterator = deployList.iterator(); iterator
+					 * .hasNext();) { MetaBean object = (MetaBean)
+					 * iterator.next(); String templateType=object.getType();
+					 * 
+					 * if(templateType.equals("EmailTemplate")) {
+					 * templateType="Email"; String emailSQL =
+					 * "Select Id, Name,Type" +
+					 * " FROM Folder where Type = '"+templateType+"'";
+					 * 
+					 * EnterpriseConnection conn =
+					 * sfSourceHandle.getEnterpriseConnection();
+					 * System.out.println(conn.toString()); QueryResult
+					 * queryResults = conn.query(emailSQL);
+					 * System.out.println(queryResults.getSize()); if
+					 * (queryResults.getSize() > 0) { for (int i = 0; i <
+					 * queryResults.getRecords().length; i++) { // cast the
+					 * SObject to a strongly-typed Contact
+					 * com.sforce.soap.enterprise.sobject.Folder retObj =
+					 * (com.sforce.soap.enterprise.sobject.Folder) queryResults
+					 * .getRecords()[i]; String name=retObj.getName(); String
+					 * type=retObj.getType();
+					 * System.out.println("folder name"+name);
+					 * System.out.println("Type name"+type);
+					 * 
+					 * String accessType=retObj.getAccessType();
+					 * System.out.println("Access Type"+accessType); boolean
+					 * isReadonly=true; CustomObjectTest cot=new
+					 * CustomObjectTest();
+					 * cot.insert(name,type,accessType,sfTargetHandle); }
+					 * 
+					 * }
+					 * 
+					 * }
+					 * 
+					 * }
+					 */
 
 					// gets the map by order
 					LinkedHashMap<String, List<MetaBean>> deployMap = (new DeployList())
@@ -136,40 +140,42 @@ public class FDDeployCompService {
 					while (entries.hasNext()) {
 						Entry<String, List<MetaBean>> thisEntry = (Entry<String, List<MetaBean>>) entries
 								.next();
-						Double orderKey=0.0;
-						String currPackg="";
-						//Double orderKey = (Double) thisEntry.getKey();
+						Double orderKey = 0.0;
+						String currPackg = "";
+						// Double orderKey = (Double) thisEntry.getKey();
 						String orderKeyStr = (String) thisEntry.getKey();
-						StringTokenizer st = new StringTokenizer(orderKeyStr, "~");
-						if(st.hasMoreTokens()){
+						StringTokenizer st = new StringTokenizer(orderKeyStr,
+								"~");
+						if (st.hasMoreTokens()) {
 							String s1 = st.nextToken();
-							System.out.println("OrderKey : "+s1);
-							orderKey= new Double(s1);
+							System.out.println("OrderKey : " + s1);
+							orderKey = new Double(s1);
 						}
-						if(st.hasMoreTokens()){
+						if (st.hasMoreTokens()) {
 							String s1 = st.nextToken();
-							System.out.println("current Package Name: "+s1);
-							packageName= s1;
+							System.out.println("current Package Name: " + s1);
+							packageName = s1;
 						}
-						
+
 						System.out.println("cmpStr: " + orderKey);
 						List<MetaBean> metabeanList = (List<MetaBean>) thisEntry
 								.getValue();
-						//packageName = metabeanList.get(0).getPackageName();
+						// packageName = metabeanList.get(0).getPackageName();
 						String msg = "";
 						try {
 							FDSFXMLPackageCompService xmlService = new FDSFXMLPackageCompService();
 							xmlService.createPackageXML(metabeanList);
+							deployObjToTargetOrg(sfSourceHandle,
+									sfTargetHandle, packageName, isValidate);
 
-							deployAllToTarget(sfSourceHandle, sfTargetHandle,
-									packageName);
 							Thread.sleep(Constants.waitFor1Sec);
 							msg = Constants.DEPLOY_SUCESS_MESSAGE;
 						} catch (Exception e) {
 							msg = e.getMessage();
 						} finally {
-							//String packgNames = metadataLogDO.getNoOfPackgsByOrderMap().get(orderKey);
-							System.out.println("package Names: "+packageName);
+							// String packgNames =
+							// metadataLogDO.getNoOfPackgsByOrderMap().get(orderKey);
+							System.out.println("package Names: " + packageName);
 							RDAppService.updateDeploymentDetails(metadataLogId,
 									msg + " for package: " + packageName,
 									metadataLogDO.getSourceOrgId(),
@@ -192,7 +198,8 @@ public class FDDeployCompService {
 					RDAppService.updateMetadataLogStatus(metadataLogDO,
 							Constants.COMPLETED_STATUS,
 							FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-									bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+									bOrgToken, bOrgURL, refreshToken,
+									Constants.BaseOrgID));
 
 					// nullify connection
 					FDGetSFoAuthHandleService.setSfHandleToNUll();
@@ -216,7 +223,8 @@ public class FDDeployCompService {
 				RDAppService.updateDeploymentDetails(metadataLogId, e
 						.getMessage(), metadataLogDO.getSourceOrgId(),
 						FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-								bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+								bOrgToken, bOrgURL, refreshToken,
+								Constants.BaseOrgID));
 				// refresh connection
 				FDGetSFoAuthHandleService.setSfHandleToNUll();
 			} else {
@@ -239,7 +247,8 @@ public class FDDeployCompService {
 				RDAppService.updateDeploymentDetails(metadataLogId, e
 						.getMessage(), metadataLogDO.getSourceOrgId(),
 						FDGetSFoAuthHandleService.getSFoAuthHandle(bOrgId,
-								bOrgToken, bOrgURL, refreshToken, Constants.BaseOrgID));
+								bOrgToken, bOrgURL, refreshToken,
+								Constants.BaseOrgID));
 				// refresh connection
 				FDGetSFoAuthHandleService.setSfHandleToNUll();
 			} else {
@@ -248,13 +257,8 @@ public class FDDeployCompService {
 		}
 	}
 
-	private void deployAllToTarget(SFoAuthHandle sfSourceHandle,
-			SFoAuthHandle sfTargetHandle, String packageName) {
-		deployObjToTargetOrg(sfSourceHandle, sfTargetHandle, packageName);
-	}
-
 	private void deployObjToTargetOrg(SFoAuthHandle sfSourceHandle,
-			SFoAuthHandle sfTargetHandle, String packageName)
+			SFoAuthHandle sfTargetHandle, String packageName, boolean isValidate)
 			throws SFException {
 
 		FileBasedRetrieve retrieveObjectsFromSource = new FileBasedRetrieve();
@@ -266,7 +270,8 @@ public class FDDeployCompService {
 		}
 
 		try {
-			(new FileBasedDeploy()).deploy(sfTargetHandle, packageName);
+			(new FileBasedDeploy()).deploy(sfTargetHandle, packageName,
+					isValidate);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			// System.out.println(e.toString());

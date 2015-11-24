@@ -80,16 +80,14 @@ public class CreatePackageComp {
 			pkgCompDO.setPkgParentId(pid);
 			pkgCompDO.setParentPackageCompID(pkgCompInfoDO.getId());
 			PackageComponentDAO pkgCompDAO = new PackageComponentDAO();
-			pkgCompDAO.insert(pkgCompDO,
-					FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg()));
+			pkgCompDAO.insert(pkgCompDO, sfHandle);
 			try {
 				String description = "Package Component "
 						+ pkgCompDO.getObjName()
 						+ "is created for  package ID "
 						+ pkgCompDO.getPkgParentId()
 						+ "in  Base Org  :"
-						+ FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg())
-								.getEnterpriseConnection().getUserInfo()
+						+ sfHandle.getEnterpriseConnection().getUserInfo()
 								.getOrganizationId() + "";
 			} catch (Exception e) {
 

@@ -162,13 +162,13 @@ public class RefreshTokens {
 			
 			customAuthToken = FDGetSFoAuthHandleService.getSFAuthToken(
 					envDO.getOrgId(), envDO.getToken(), envDO.getServerURL(),
-					envDO.getRefreshtoken(), Constants.CustomClientOrgID);
+					envDO.getRefreshtoken(), Constants.CustomBaseOrgID);
 			System.out.println(customAuthToken);
 			
 		
 			List envLogList = envDAO.findById(envDO.getOrgId(),
 					FDGetSFoAuthHandleService.getSFoAuthHandle(
-							bOrgId, bOrgToken,bOrgURL,refreshToken,Constants.BaseOrgID));
+							bOrgId, bOrgToken,bOrgURL,refreshToken,Constants.CustomBaseOrgID));
 
 			for (Iterator iterator = envLogList.iterator(); iterator.hasNext();) {
 				envDO = (EnvironmentInformationDO) iterator.next();

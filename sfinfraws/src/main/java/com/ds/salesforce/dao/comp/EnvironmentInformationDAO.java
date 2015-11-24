@@ -167,7 +167,6 @@ public class EnvironmentInformationDAO implements ISFBaseDAO {
 					.getTokenCodeNonEncrypted());
 			newEnvObj.setASAClient__RefreshTokenCode__c(lObj.getRefreshtoken());
 			newEnvObj.setASAClient__Server_URL__c(lObj.getServerURL());
-			newEnvObj.setASAClient__Auth_Type__c(lObj.getAuthType());
 			com.sforce.soap.enterprise.sobject.ASAClient__EnviromentInformation__c[] mobj = new com.sforce.soap.enterprise.sobject.ASAClient__EnviromentInformation__c[1];
 			mobj[0] = newEnvObj;
 			commit(mobj, sfHandle);

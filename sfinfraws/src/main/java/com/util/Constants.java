@@ -75,10 +75,13 @@ public class Constants {
 	public static String CustomOrgClientSecret = "7048969593420516911";
 	public static String CustomBaseOrgClientID = "3MVG9fMtCkV6eLhckipcGtsdEsZqXGXSs976uKfivATtaFl6rhaqwmMvzgd26NEEvc3wpiPBjxaMR2s3ITjsa";
 	public static String CustomBaseOrgClientSecret = "4904334507055360250";
+	public static String CustomNonOrgClientID = "'3MVG9fMtCkV6eLhckipcGtsdEsT_8gl4HnWkfcmcXxX6buP7x9O4StuXvKu6ET9hySt_35GbOOob2kfjtaMSB";
+	public static String CustomNonOrgClientSecret = "4246984817416806707";
 	public static String BaseOrgID = "0";
 	public static String CustomOrgID = "1";
 	public static String CustomBaseOrgID = "2";
 	public static String CustomClientOrgID="3";
+	
 	public static String BaseOrgTypeID = "0";
 	public static String CustomOrgTypeID = "1";
 	public static String CustomBaseOrgTypeID = "2";
@@ -95,6 +98,7 @@ public class Constants {
 	public static final String ACTION_RETRIEVE = "Retrieve";
 	public static final String ACTION_UPDATEPACKAGES = "UpdatePackages";
 	public static final String SUBMIT_FOR_APPROVAL = "Commit";
+	public static final String TEST_AUTOMATION_ACTION = "ExecuteScript";
 	public static final String jspURL = "secur/frontdoor.jsp";
 
 	public static String SALESFORCE_CLIENT_PKG = "SFClientPkg";
@@ -109,4 +113,7 @@ public class Constants {
 	
 	public static String CLIENT = "client";
 	public static String SERVER = "server";
+	public static String SFClientSelfAuthType = "Self";
+	public static String SFClientServerAuthType = "Server";
+
 }

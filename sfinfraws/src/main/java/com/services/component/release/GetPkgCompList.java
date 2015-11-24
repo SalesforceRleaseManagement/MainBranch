@@ -68,7 +68,7 @@ public class GetPkgCompList {
 						.findByPackageId(pkgid,
 								FDGetSFoAuthHandleService
 										.getSFoAuthHandle(envDO,
-												Constants.CustomOrgID));
+												Constants.CustomBaseOrgID));
 
 				return packageCompList;
 			

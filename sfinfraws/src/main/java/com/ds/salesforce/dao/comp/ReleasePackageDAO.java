@@ -176,7 +176,55 @@ public class ReleasePackageDAO implements ISFBaseDAO {
 		}
 		return list;
 	}
+	public List<Object> findByPkgIDAndRID1(String pid, String rid,
+			SFoAuthHandle sfHandle) {
+		// TODO Auto-generated method stub
+		ReleasePackageDO retObj = null;
+		retObj = null;
+		List list = new ArrayList();
+		try {
+			EnterpriseConnection conn = sfHandle.getEnterpriseConnection();
+			System.out.println(" sql : "
+					+ ReleasePackageSQLStmts.getfindByPkgIDAndRID(pid, rid)
+					+ "");
+			QueryResult queryResults = conn.query(ReleasePackageSQLStmts
+					.getfindByPkgIDAndRID(pid, rid));
 
+			if (queryResults.getSize() > 0) {
+				for (int i = 0; i < queryResults.getRecords().length; i++) {
+					// cast the SObject to a strongly-typed Contact
+					com.sforce.soap.enterprise.sobject.ASA__ReleasePackage__c locObj = (com.sforce.soap.enterprise.sobject.ASA__ReleasePackage__c) queryResults
+							.getRecords()[i];
+
+					System.out.println(" - Id: " + locObj.getId());
+					System.out.println(" - Name: " + locObj.getName());
+					System.out
+							.println(" - Order: " + locObj.getASA__Order__c());
+					System.out.println(" - package: "
+							+ locObj.getASA__Package__c());
+					System.out.println(" - release: "
+							+ locObj.getASA__Release__c());
+
+					retObj = new ReleasePackageDO(locObj.getId(),
+							locObj.getName(), locObj.getASA__Order__c(),
+							locObj.getASA__Package__c(),
+							locObj.getASA__Release__c());
+					list.add(retObj);
+				}
+			} else {
+				System.out.println(" There are no records size is - : "
+						+ queryResults.getSize());
+			}
+		} catch (SFException e) {
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Query_Error);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Query_Error);
+		}
+		return list;
+	}
 	@Override
 	public List<Object> listAll(SFoAuthHandle sfHandle) {
 		// TODO Auto-generated method stub

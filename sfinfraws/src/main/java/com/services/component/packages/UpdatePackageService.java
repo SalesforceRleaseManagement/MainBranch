@@ -78,7 +78,7 @@ public class UpdatePackageService {
 					// This is just dummy as we are setting this field as null in DAO class
 					pkgInfoDO.setCalendar(calendar); 
 					try {
-						pkgInfoDAO.updatePackageRetrievedTime(pkgInfoDO,
+						pkgInfoDAO.clearPackageRetrievedTime(pkgInfoDO,
 								FDGetSFoAuthHandleService.getSFoAuthHandle(
 										envDO, Constants.CustomOrgID));
 

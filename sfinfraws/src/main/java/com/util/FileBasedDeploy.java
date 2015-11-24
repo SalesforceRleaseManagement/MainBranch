@@ -41,11 +41,14 @@ public class FileBasedDeploy {
 	public FileBasedDeploy() {
 	}
 
-	public void deploy(SFoAuthHandle sfHandle, String packageName) throws SFException {
+	public void deploy(SFoAuthHandle sfHandle, String packageName, boolean isValidate) throws SFException {
 		byte zipBytes[] = readZipFile();
 		DeployOptions deployOptions = new DeployOptions();
 		deployOptions.setPerformRetrieve(false);
 		deployOptions.setRollbackOnError(true);
+		if(isValidate){
+			deployOptions.setCheckOnly(true);	
+		}
 		MetadataConnection conn = null;
 		AsyncResult asyncResult = null;
 		try {

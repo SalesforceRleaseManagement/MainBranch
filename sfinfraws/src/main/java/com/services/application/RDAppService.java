@@ -9,11 +9,14 @@ import com.domain.EnvironmentInformationDO;
 import com.domain.ErrorLogBean;
 import com.domain.MetadataLogDO;
 import com.domain.MetadataLogInformationDO;
+import com.domain.TestMetadataLogDO;
 import com.ds.salesforce.dao.comp.DeployDetailsDAO;
 import com.ds.salesforce.dao.comp.DeployDetailsInformationDAO;
 import com.ds.salesforce.dao.comp.EnvironmentDAO;
+import com.ds.salesforce.dao.comp.EnvironmentInformationDAO;
 import com.ds.salesforce.dao.comp.MetadataLogDAO;
 import com.ds.salesforce.dao.comp.MetadataLogInformationDAO;
+import com.ds.salesforce.dao.comp.TestMetadataLogDAO;
 import com.exception.SFException;
 import com.services.component.FDGetSFoAuthHandleService;
 import com.util.Constants;
@@ -87,6 +90,30 @@ public class RDAppService {
 		 */
 		return metadataLogInformationDO;
 	}
+	public static TestMetadataLogDO findTestMetadataLog(
+			String metadataLogId, SFoAuthHandle sfHandle) {
+		TestMetadataLogDO testMetadataLogDO = null;
+		TestMetadataLogDAO metadataLogDAO = new TestMetadataLogDAO();
+		try {
+			// System.out.println("AOuth Token : "+
+			// sfHandle.getEnterpriseConnection().getUserInfo().getProfileId());
+			List metadataLogList = metadataLogDAO.findById(metadataLogId,
+					sfHandle);
+
+			for (Iterator iterator = metadataLogList.iterator(); iterator
+					.hasNext();) {
+				testMetadataLogDO = (TestMetadataLogDO) iterator
+						.next();
+			}
+		} catch (SFException e) {
+			throw e;
+		} /*
+		 * catch (ConnectionException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); try { throw e; } catch (ConnectionException e1)
+		 * { // TODO Auto-generated catch block e1.printStackTrace(); } }
+		 */
+		return testMetadataLogDO;
+	}
 
 	public static EnvironmentDO getEnv(String orgId, SFoAuthHandle sfHandle) {
 		EnvironmentDO envDO = null;
@@ -103,7 +130,7 @@ public class RDAppService {
 	}
 	public static EnvironmentInformationDO getEnv1(String orgId, SFoAuthHandle sfHandle) {
 		EnvironmentInformationDO envDO = null;
-		EnvironmentDAO envDAO = new EnvironmentDAO();
+		EnvironmentInformationDAO envDAO = new EnvironmentInformationDAO();
 		try {
 			List envList = envDAO.findById(orgId, sfHandle);
 			for (Iterator iterator = envList.iterator(); iterator.hasNext();) {
@@ -127,6 +154,13 @@ public class RDAppService {
 		MetadataLogInformationDAO metadataLogDAO = new MetadataLogInformationDAO();
 		metadataLogInformationDO.setStatus(status);
 		metadataLogDAO.update(metadataLogInformationDO, sfHandle);
+	}
+	public static void updateTestMetadataLogStatus(
+			TestMetadataLogDO testMetadataLogDO, String status,
+			SFoAuthHandle sfHandle) {
+		TestMetadataLogDAO metadataLogDAO = new TestMetadataLogDAO();
+		testMetadataLogDO.setStatus(status);
+		metadataLogDAO.update(testMetadataLogDO, sfHandle);
 	}
 
 	public static void updateDeploymentDetails(String metadataLogId,

@@ -42,8 +42,12 @@ public class CreatePackage {
 		}
 		else
 		{*/
-			 pid = PkgDAO.insertAndGetId(pkgDO,
-					FDGetSFoAuthHandleService.getSFoAuthHandle(getOrg()));	
+		try{
+			 pid = PkgDAO.insertAndGetId(pkgDO,sfHandle);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 			
 		/*}*/
 		

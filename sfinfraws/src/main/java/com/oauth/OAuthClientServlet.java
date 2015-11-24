@@ -1,21 +1,14 @@
 package com.oauth;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.StringTokenizer;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -30,15 +23,13 @@ import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.domain.EnvironmentDO;
 import com.domain.EnvironmentInformationDO;
-import com.ds.salesforce.dao.comp.EnvironmentDAO;
 import com.ds.salesforce.dao.comp.EnvironmentInformationDAO;
-import com.exception.SFErrorCodes;
-import com.exception.SFException;
 import com.services.component.FDGetSFoAuthHandleService;
 import com.util.Constants;
 import com.util.SFoAuthHandle;
+import com.util.oauth.AuthAccessDO;
+import com.util.oauth.AuthUserInfoDO;
 
 /**
  * Servlet parameters
@@ -46,19 +37,19 @@ import com.util.SFoAuthHandle;
 
 @WebServlet(name = "OAuthClientServlet", urlPatterns = { "/OAuthClientServlet/*",
 		"/OAuthClientServlet" }, initParams = {
-// clientId is 'Consumer Key' in the Remote Access UI
-		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsZqXGXSs976uKfivATtaFl6rhaqwmMvzgd26NEEvc3wpiPBjxaMR2s3ITjsa"),
-		// clientSecret is 'Consumer Secret' in the Remote Access UI
-		@WebInitParam(name = "clientSecret", value = "4904334507055360250"),
-		// This must be identical to 'Callback URL' in the Remote Access UI
-		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/OAuthClientServlet/callback"),
-		//this is the Environment Which is getting Back
-		@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
+				// clientId is 'Consumer Key' in the Remote Access UI
+				@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsZqXGXSs976uKfivATtaFl6rhaqwmMvzgd26NEEvc3wpiPBjxaMR2s3ITjsa"),
+				// clientSecret is 'Consumer Secret' in the Remote Access UI
+				@WebInitParam(name = "clientSecret", value = "4904334507055360250"),
+				// This must be identical to 'Callback URL' in the Remote Access
+				// UI
+				@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/OAuthClientServlet/callback"),
+				// this is the Environment Which is getting Back
+				@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
 public class OAuthClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(OAuthClientServlet.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OAuthClientServlet.class);
 
 	private String clientId = null;
 	private String clientSecret = null;
@@ -70,6 +61,12 @@ public class OAuthClientServlet extends HttpServlet {
 	private String homeURL = null;
 	private String envId = null;
 	private String baseToken = null;
+	private String sfClientAuthType;
+	private EnvironmentInformationDO baseEnvDO;
+	private AuthAccessDO authAccessDO;
+	private AuthUserInfoDO authUserInfoDO;
+	private EnvironmentInformationDO envTargetDO;
+	EnvironmentInformationDO envBaseDO;
 
 	public void init() throws ServletException {
 		clientId = this.getInitParameter("clientId");
@@ -79,115 +76,136 @@ public class OAuthClientServlet extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		String accessToken = null;
-		String refreshToken = null;
-		String instanceUrl = null;
-
-		Enumeration<String> en = request.getParameterNames();
-
-		while (en.hasMoreElements()) {
-			Object objOri = en.nextElement();
-			String param = (String) objOri;
-			String value = request.getParameter(param);
-			System.out.println("Parameter Name is '" + param
-					+ "' and Parameter Value is '" + value + "'");
-		}
-		System.out.println(" State value: " + request.getParameter("state"));
-		processStateParam(request.getParameter("state"));
-		tokenUrl = getEnvironment() + "/services/oauth2/token";
-		System.out.println("token URL : " + tokenUrl);
-		String code = request.getParameter("code");
-		authorizationCode = code;
-		System.out.println("Auth successful, got Authorization code: {} "
-				+ code);
-		HttpClient httpclient = new HttpClient();
-		PostMethod post = new PostMethod(tokenUrl);
-		post.addParameter("code", code);
-		post.addParameter("grant_type", "authorization_code");
-		post.addParameter("client_id", clientId);
-		post.addParameter("client_secret", clientSecret);
-		post.addParameter("redirect_uri", redirectUri);
+	private PostMethod getPostRequest(HttpServletRequest request) {
 		try {
+			tokenUrl = getEnvironment() + "/services/oauth2/token";
+			System.out.println("token URL : " + tokenUrl);
+			String code = request.getParameter("code");
+			authorizationCode = code;
+			System.out.println("Auth successful, got Authorization code: {} " + code);
+
+			PostMethod post = new PostMethod(tokenUrl);
+			post.addParameter("code", code);
+			post.addParameter("grant_type", "authorization_code");
+			post.addParameter("client_id", clientId);
+			post.addParameter("client_secret", clientSecret);
+			post.addParameter("redirect_uri", redirectUri);
+			return post;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void processPostRequest(PostMethod post) {
+		try {
+			HttpClient httpclient = new HttpClient();
 			httpclient.executeMethod(post);
-			JSONObject authResponse = new JSONObject(new JSONTokener(
-					new InputStreamReader(post.getResponseBodyAsStream())));
-			accessToken = authResponse.getString("access_token");
-			instanceUrl = authResponse.getString("instance_url");
-			refreshToken = authResponse.getString("refresh_token");
+			JSONObject authResponse = new JSONObject(
+					new JSONTokener(new InputStreamReader(post.getResponseBodyAsStream())));
+			String accessToken = authResponse.getString("access_token");
+			String instanceUrl = authResponse.getString("instance_url");
+			String refreshToken = authResponse.getString("refresh_token");
+			setAuthAccessDO(accessToken, refreshToken, instanceUrl);
 			System.out.println("refreshToken....." + refreshToken);
-			idURL = authResponse.getString("id");
-			System.out.println("idURL---------" + idURL);
+			setIdURL(authResponse.getString("id"));
+			System.out.println("idURL---------" + getIdURL());
 			LOG.info("Auth Response: {} ", authResponse.toString(2));
 		} catch (JSONException e) {
-			LOG.error("Error while getting JSONObject from AuthResponse: {} ",
-					e.getMessage());
-			throw new ServletException(
-					"Error while getting JSONObject from AuthResponse: {} ", e);
+			LOG.error("Error while getting JSONObject from AuthResponse: {} ", e.getMessage());
 		} catch (Exception e) {
 			LOG.error("Error while Oauth with Salesforce: {} ", e.getMessage());
-			throw new ServletException("Error while Oauth with Salesforce:  ",
-					e);
 		} finally {
 			post.releaseConnection();
 		}
+	}
 
-		// Set a session attribute so that other servlets can get the access
-		// token
-		request.getSession().setAttribute(Constants.ACCESS_TOKEN, accessToken);
-		request.getSession()
-				.setAttribute(Constants.REFRESH_TOKEN, refreshToken);
+	private void setAuthAccessDO(String accessToken, String refreshToken, String instanceUrl) {
+		AuthAccessDO authAccessDO = new AuthAccessDO(accessToken, refreshToken, instanceUrl);
+		setAuthAccessDO(authAccessDO);
+	}
 
-		request.getSession().setAttribute(Constants.INSTANCE_URL, instanceUrl);
-		System.out.println("URL --"
-				+ (String) request.getSession().getAttribute(
-						Constants.INSTANCE_URL));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		// We also get the instance URL from the OAuth response, so set it
-		// in the session too
+		System.out.println(" State value: " + request.getParameter("state"));
+		processStateParam(request.getParameter("state"));
 
-		request.getSession().setAttribute("AuthorizationCode",
-				authorizationCode);
-		request.getSession().setAttribute("idURL", idURL);
+		// prepare and get post request
+		PostMethod post = getPostRequest(request);
+		// process post request
+		processPostRequest(post);
 
-		getIdDetails(request, response);
+		/*
+		 * // Set a session attribute so that other servlets can get the access
+		 * // token request.getSession().setAttribute(Constants.ACCESS_TOKEN,
+		 * accessToken); request.getSession()
+		 * .setAttribute(Constants.REFRESH_TOKEN, refreshToken);
+		 * 
+		 * request.getSession().setAttribute(Constants.INSTANCE_URL,
+		 * instanceUrl);
+		 * 
+		 * System.out.println("URL --" + (String)
+		 * request.getSession().getAttribute( Constants.INSTANCE_URL));
+		 * 
+		 * // We also get the instance URL from the OAuth response, so set it //
+		 * in the session too
+		 * 
+		 * request.getSession().setAttribute("AuthorizationCode",
+		 * authorizationCode); request.getSession().setAttribute("idURL",
+		 * idURL);
+		 */
+		getUserDetails(request, response);
+		updateEnvs(request, response);
 		System.out.println("Final Context Path: " + request.getContextPath());
+		EnvironmentInformationDO envDO = null;
+		String str1 = "";
 
-		EnvironmentInformationDO envBaseDO = getSFHandleParamsFromStateParam(request
-				.getParameter("state"));
+		if (getSfClientAuthType().equals(Constants.SFClientSelfAuthType)) {
+			envDO = getEnvTargetDO();
+			SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService.getSFoAuthHandle(envDO, Constants.CustomBaseOrgID);
+			String ParentsessionId = sfBaseHandle.getEnterpriseConnection().getSessionHeader().getSessionId();
+			String homeURL = envDO.getServerURL();
 
-		// connecting To Base and Getting Session ID Through SOAP API
-		SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService
-				.getSFoAuthHandle(envBaseDO, Constants.CustomBaseOrgID);
-		String ParentsessionId = sfBaseHandle.getEnterpriseConnection()
-				.getSessionHeader().getSessionId();
-		String homeURL = envBaseDO.getServerURL();
+			str1 = homeURL + "/" + Constants.jspURL + "?sid=" + ParentsessionId + "&retURL=/" + getEnvId();
+		} else if (getSfClientAuthType().equals(Constants.SFClientServerAuthType)) {
+			System.out.println("Server");
+			//envDO = getEnvTargetDO();
+			EnvironmentInformationDO envBaseDO = processStateParam1(request.getParameter("state"));
 
-		String str1 = homeURL + "/" + Constants.jspURL + "?sid="
-				+ ParentsessionId + "&retURL=/" + getEnvId();
+			// connecting To Base and Getting Session ID Through SOAP API
+			SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService.getSFoAuthHandle(envBaseDO,
+					Constants.CustomBaseOrgID);
+
+			// connecting To Base and Getting Session ID Through SOAP API
+			SFoAuthHandle sfBaseHandle1 = FDGetSFoAuthHandleService.getSFoAuthHandle(envBaseDO,
+					Constants.CustomBaseOrgID);
+			String ParentsessionId = sfBaseHandle1.getEnterpriseConnection().getSessionHeader().getSessionId();
+			String homeURL = envBaseDO.getServerURL();
+
+			str1 = homeURL + "/" + Constants.jspURL + "?sid=" + ParentsessionId + "&retURL=/" + getEnvId();
+		}
 
 		response.sendRedirect(str1);
 	}
 
-	public void getIdDetails(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public void getUserDetails(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
 		String id = (String) session.getAttribute("id");
 		String accessToken = (String) session.getAttribute("ACCESS_TOKEN");
-		String instanceURL = (String) request.getSession().getAttribute(
-				Constants.INSTANCE_URL);
+		String instanceURL = (String) request.getSession().getAttribute(Constants.INSTANCE_URL);
 		HttpClient httpclient = new HttpClient();
 		GetMethod get = new GetMethod(idURL);
 		// set the token in the header
 
-		get.setRequestHeader("Authorization", "OAuth " + accessToken);
+		get.setRequestHeader("Authorization", "OAuth " + getAuthAccessDO().getAccessToken());
 
 		// set the SOQL as a query param
 		NameValuePair[] params = new NameValuePair[1];
 
-		params[0] = new NameValuePair("oauth_token", accessToken);
+		params[0] = new NameValuePair("oauth_token", getAuthAccessDO().getAccessToken());
 		get.setQueryString(params);
 		// System.out.println("Accessing ID URL---" + get.getURI().toString());
 		try {
@@ -198,71 +216,85 @@ public class OAuthClientServlet extends HttpServlet {
 				// results
 				try {
 					JSONObject jsonResponse = new JSONObject(
-							new JSONTokener(new InputStreamReader(
-									get.getResponseBodyAsStream())));
-					System.out.println("Auth Response: {} "
-							+ jsonResponse.toString(2));
+							new JSONTokener(new InputStreamReader(get.getResponseBodyAsStream())));
+					System.out.println("Auth Response: {} " + jsonResponse.toString(2));
 
-					String userName = new String(
-							(String) jsonResponse.get("username"));
-					String orgId = new String(
-							(String) jsonResponse.get("organization_id"));
-					String userId = new String(
-							(String) jsonResponse.get("user_id"));
+					String userName = new String((String) jsonResponse.get("username"));
+					String orgId = new String((String) jsonResponse.get("organization_id"));
+					String userId = new String((String) jsonResponse.get("user_id"));
 
-					String baseConnString = request.getParameter("state");
-					System.out.println("baseConnection : " + baseConnString);
-					System.out.println("Current Connection : " + orgId + "~"
-							+ accessToken + "~" + instanceURL);
+					AuthUserInfoDO authUserInfoDO = new AuthUserInfoDO(userName, userId, orgId);
+					setAuthUserInfoDO(authUserInfoDO);
 
-					EnvironmentInformationDO envBaseDO = getSFHandleParamsFromStateParam(request
-							.getParameter("state"));
-
-					SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService
-							.getSFoAuthHandle(envBaseDO, Constants.CustomBaseOrgID);
-
-					String envId = getEnvId();
-					String homeURL = getHomeURL();
-
-					if (sfBaseHandle != null) {
-
-						EnvironmentInformationDO envDO = new EnvironmentInformationDO(envId, orgId
-								+ "_" + userId, userName, orgId,
-								(String) session.getAttribute("ACCESS_TOKEN"),
-								(String) session
-										.getAttribute(Constants.INSTANCE_URL),
-								(String) session.getAttribute("REFRESH_TOKEN"),"");
-						System.out.println("------"
-								+ (String) request.getSession().getAttribute(
-										Constants.INSTANCE_URL));
-						System.out.println("session Id: "
-								+ sfBaseHandle.getEnterpriseConnection()
-										.getSessionHeader().getSessionId());
-
-						System.out.println("Home_URL: " + homeURL);
-						session.setAttribute("Home_URL", homeURL);
-						session.setAttribute("Env_Id", envId);
-						saveTokens(envDO, sfBaseHandle);
-						FDGetSFoAuthHandleService.setSfHandleToNUll();
-						if (sfBaseHandle != null) {
-							sfBaseHandle.nullify();
-						}
-						sfBaseHandle = null;
-					} else {
-						System.out.println("Base Env is not working");
-					}
 				} catch (JSONException e) {
 					e.printStackTrace();
-					LOG.error(
-							"Error while getting JSONObject from the records {} ",
-							e.getMessage());
-					throw new ServletException(
-							"Error while getting JSONObject from the records: ",
-							e);
+					LOG.error("Error while getting JSONObject from the records {} ", e.getMessage());
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void updateEnvs(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
+		try {
+
+			// getTargetEnvDO
+			EnvironmentInformationDO envTargetDO = new EnvironmentInformationDO(getEnvId(),
+					getAuthUserInfoDO().getOrgId() + "_" + getAuthUserInfoDO().getUserId(),
+					getAuthUserInfoDO().getUserName(), getAuthUserInfoDO().getOrgId(),
+					getAuthAccessDO().getAccessToken(), getAuthAccessDO().getInstanceUrl(),
+					getAuthAccessDO().getRefreshToken(), "");
+
+			setEnvTargetDO(envTargetDO);
+
+			// if the base connection exists
+			if (getSfClientAuthType().equals(Constants.SFClientSelfAuthType)) {
+
+				System.out.println("Environment ID...." + getEnvId());
+				System.out.println(
+						"OrgIDplusUserId...." + getAuthUserInfoDO().getOrgId() + "_" + getAuthUserInfoDO().getUserId());
+				System.out.println("Username..... " + getAuthUserInfoDO().getUserName());
+				System.out.println("Org ID......" + getAuthUserInfoDO().getOrgId());
+				System.out.println("Acess Token....... " + getAuthAccessDO().getAccessToken());
+				System.out.println("Instance URL...... " + getAuthAccessDO().getInstanceUrl());
+				System.out.println("RefreshToken...... " + getAuthAccessDO().getRefreshToken());
+				// prepare the base connection
+				System.out.println("self.....");
+				SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService.getSFoAuthHandle(envTargetDO,
+						Constants.CustomBaseOrgID);
+				System.out.println(sfBaseHandle.toString());
+				// update the environment table
+				updateEnvInformation(sfBaseHandle, request, envTargetDO);
+			} else if (getSfClientAuthType().equals(Constants.SFClientServerAuthType)) {
+				// prepare the base connection
+				EnvironmentInformationDO envBaseDO = getBaseEnvDO();
+				SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService.getSFoAuthHandle(envBaseDO,
+						Constants.CustomBaseOrgID);
+				// update the environment table
+				updateEnvInformation(sfBaseHandle, request, envTargetDO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error("Error while getting JSONObject from the records {} ", e.getMessage());
+			throw new ServletException("Error while getting JSONObject from the records: ", e);
+		}
+
+	}
+
+	public void updateEnvInformation(SFoAuthHandle sfBaseHandle, HttpServletRequest request,
+			EnvironmentInformationDO envDO) {
+		if (sfBaseHandle != null) {
+
+			System.out
+					.println("session Id: " + sfBaseHandle.getEnterpriseConnection().getSessionHeader().getSessionId());
+			saveTokens(envDO, sfBaseHandle);
+
+		} else {
+			System.out.println("Base Env is not working");
 		}
 	}
 
@@ -271,8 +303,7 @@ public class OAuthClientServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		String accessToken = (String) session.getAttribute("ACCESS_TOKEN");
-		String instanceURL = (String) request.getSession().getAttribute(
-				Constants.INSTANCE_URL);
+		String instanceURL = (String) request.getSession().getAttribute(Constants.INSTANCE_URL);
 		HttpClient httpclient = new HttpClient();
 		System.out.println("rediurecting URL: " + url);
 		GetMethod get = new GetMethod(url);
@@ -304,8 +335,7 @@ public class OAuthClientServlet extends HttpServlet {
 		tokenUrl = getEnvironment() + "/services/oauth2/token";
 		String code = request.getParameter("code");
 		authorizationCode = code;
-		System.out.println("Auth successful, got Authorization code: {} "
-				+ code);
+		System.out.println("Auth successful, got Authorization code: {} " + code);
 		HttpClient httpclient = new HttpClient();
 		PostMethod post = new PostMethod(tokenUrl);
 		post.addParameter("code", code);
@@ -322,60 +352,115 @@ public class OAuthClientServlet extends HttpServlet {
 
 	/**
 	 * 
-	 * @param Passing state Parameter which consists of BaseOrg Details
+	 * @param Passing
+	 *            state Parameter which consists of BaseOrg Details
 	 */
 	public void processStateParam(String stateParam) {
-		//String state = "L|a0Wj0000003lq2PEAQ|00Dj0000001tsUfEAI|https://na16.salesforce.com|00Dj0000001tsUf!AR8AQKissf9QT5fSIjY4m7HItzF7TJCT73YOATort7iNtA_K_jMmp_xavqKHSwVqfcbauqnmh5fsTTCWM4MKPbe.KEbB4b_a";
+		// String state =
+		// "self|L|a0Wj0000003lq2PEAQ|00Dj0000001tsUfEAI|https://na16.salesforce.com|00Dj0000001tsUf!AR8AQKissf9QT5fSIjY4m7HItzF7TJCT73YOATort7iNtA_K_jMmp_xavqKHSwVqfcbauqnmh5fsTTCWM4MKPbe.KEbB4b_a";
+		EnvironmentInformationDO envDO = null;
 		String delim = "|";
 		StringTokenizer st = new StringTokenizer(stateParam, delim);
-		if (st.hasMoreTokens()) {
-			String env = st.nextToken();
-			if (env.equals("L")) {
-				setEnvironment(Constants.LoginEnv);
-			} else if (env.equals("T")) {
-				setEnvironment(Constants.TestEnv);
+		boolean isclientAuthServerFlag = false;
+		try {
+			if (st.hasMoreTokens()) {
+				String envAuthType = st.nextToken();
+				if (envAuthType.equals(Constants.SFClientSelfAuthType)) {
+					setSfClientAuthType(envAuthType);
+					String env = st.nextToken();
+					if (env.equals("L")) {
+						setEnvironment(Constants.LoginEnv);
+					} else if (env.equals("T")) {
+						setEnvironment(Constants.TestEnv);
+					}
+					String envId = st.nextToken();
+					setEnvId(envId);
+					isclientAuthServerFlag = true;
+				} else if (envAuthType.equals(Constants.SFClientServerAuthType)) {
+					setSfClientAuthType(envAuthType);
+					String env = st.nextToken();
+					if (env.equals("L")) {
+						setEnvironment(Constants.LoginEnv);
+					} else if (env.equals("T")) {
+						setEnvironment(Constants.TestEnv);
+					}
+					String envId = st.nextToken();
+					setEnvId(envId);
+					isclientAuthServerFlag = false;
+				} else {
+					isclientAuthServerFlag = false;
+				}
 			}
-			String envId = st.nextToken();
-			setEnvId(envId);
+		} catch (Exception e) {
+			isclientAuthServerFlag = false;
+			e.printStackTrace();
+		}
+		if (!isclientAuthServerFlag) {
 			String orgId = st.nextToken();
 			String instanceURL = st.nextToken();
+			String serverURL = instanceURL;
 			String token = st.nextToken();
 			setBaseToken(token);
 			String refreshToken = st.nextToken();
 			setHomeURL(instanceURL);
-			System.out.println(env + "~" + envId + "~" + orgId + "~"
-					+ instanceURL + "~" + token + "~" + refreshToken);
+
+			envDO = new EnvironmentInformationDO(orgId, token, serverURL, "", refreshToken, "");
+			setBaseEnvDO(envDO);
+			System.out.println("sssss" + envDO.toString());
 		}
 	}
 
-	public EnvironmentInformationDO getSFHandleParamsFromStateParam(String stateParam) {
+	public EnvironmentInformationDO processStateParam1(String stateParam) {
+		// String state =
+		// "self|L|a0Wj0000003lq2PEAQ|00Dj0000001tsUfEAI|https://na16.salesforce.com|00Dj0000001tsUf!AR8AQKissf9QT5fSIjY4m7HItzF7TJCT73YOATort7iNtA_K_jMmp_xavqKHSwVqfcbauqnmh5fsTTCWM4MKPbe.KEbB4b_a";
 		EnvironmentInformationDO envDO = null;
 		String delim = "|";
 		StringTokenizer st = new StringTokenizer(stateParam, delim);
-		if (st.hasMoreTokens()) {
-			String env = st.nextToken();
-			if (env.equals("L")) {
-				setEnvironment(Constants.LoginEnv);
-			} else if (env.equals("T")) {
-				setEnvironment(Constants.TestEnv);
+		boolean isclientAuthServerFlag = false;
+		try {
+			if (st.hasMoreTokens()) {
+				String envAuthType = st.nextToken();
+				if (envAuthType.equals(Constants.SFClientSelfAuthType)) {
+					setSfClientAuthType(envAuthType);
+					String env = st.nextToken();
+					if (env.equals("L")) {
+						setEnvironment(Constants.LoginEnv);
+					} else if (env.equals("T")) {
+						setEnvironment(Constants.TestEnv);
+					}
+					String envId = st.nextToken();
+					setEnvId(envId);
+					isclientAuthServerFlag = true;
+				} else if (envAuthType.equals(Constants.SFClientServerAuthType)) {
+					setSfClientAuthType(envAuthType);
+					String env = st.nextToken();
+					if (env.equals("L")) {
+						setEnvironment(Constants.LoginEnv);
+					} else if (env.equals("T")) {
+						setEnvironment(Constants.TestEnv);
+					}
+					String envId = st.nextToken();
+					setEnvId(envId);
+					isclientAuthServerFlag = false;
+				} else {
+					isclientAuthServerFlag = false;
+				}
 			}
-			String envId = st.nextToken();
-			setEnvId(envId);
+		} catch (Exception e) {
+			isclientAuthServerFlag = false;
+			e.printStackTrace();
+		}
+		if (!isclientAuthServerFlag) {
 			String orgId = st.nextToken();
-			String serverURL = st.nextToken();
+			String instanceURL = st.nextToken();
+			String serverURL = instanceURL;
 			String token = st.nextToken();
+			setBaseToken(token);
 			String refreshToken = st.nextToken();
-			try {
-				envDO = new EnvironmentInformationDO(orgId, token, serverURL, "",
-						refreshToken,"");
-			} catch (Exception e) {
-				System.out
-						.println("setting to get connetion from invalid connection paramsin oauth...."
-								+ e.getMessage());
-				throw new SFException("Not a valid connection paramters",
-						SFErrorCodes.SF_Not_Valid_Conn_Parameters);
-			}
-			setHomeURL(serverURL);
+			setHomeURL(instanceURL);
+
+			envDO = new EnvironmentInformationDO(orgId, token, serverURL, "", refreshToken, "");
+
 		}
 		return envDO;
 	}
@@ -410,6 +495,62 @@ public class OAuthClientServlet extends HttpServlet {
 
 	public void setBaseToken(String baseToken) {
 		this.baseToken = baseToken;
+	}
+
+	public String getSfClientAuthType() {
+		return sfClientAuthType;
+	}
+
+	public void setSfClientAuthType(String sfClientAuthType) {
+		this.sfClientAuthType = sfClientAuthType;
+	}
+
+	public EnvironmentInformationDO getBaseEnvDO() {
+		return baseEnvDO;
+	}
+
+	public void setBaseEnvDO(EnvironmentInformationDO baseEnvDO) {
+		this.baseEnvDO = baseEnvDO;
+	}
+
+	public AuthAccessDO getAuthAccessDO() {
+		return authAccessDO;
+	}
+
+	public void setAuthAccessDO(AuthAccessDO authAccessDO) {
+		this.authAccessDO = authAccessDO;
+	}
+
+	public String getIdURL() {
+		return idURL;
+	}
+
+	public void setIdURL(String idURL) {
+		this.idURL = idURL;
+	}
+
+	public AuthUserInfoDO getAuthUserInfoDO() {
+		return authUserInfoDO;
+	}
+
+	public void setAuthUserInfoDO(AuthUserInfoDO authUserInfoDO) {
+		this.authUserInfoDO = authUserInfoDO;
+	}
+
+	public EnvironmentInformationDO getEnvTargetDO() {
+		return envTargetDO;
+	}
+
+	public void setEnvTargetDO(EnvironmentInformationDO envTargetDO) {
+		this.envTargetDO = envTargetDO;
+	}
+
+	public EnvironmentInformationDO getEnvBaseDO() {
+		return envBaseDO;
+	}
+
+	public void setEnvBaseDO(EnvironmentInformationDO envBaseDO) {
+		this.envBaseDO = envBaseDO;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.services.component.release;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -128,12 +130,14 @@ public class ReleaseEnvService {
 													.getReadyForDeployment()
 													.booleanValue()) {
 										PackageInformationDAO pkgInfoDAO = new PackageInformationDAO();
-										Calendar calendar = Calendar
-												.getInstance();
-										calendar.setTime(new Date());
-										pkgInfoDO.setCalendar(calendar);
+
+										// get current date time with Calendar()
+										Calendar cal = Calendar.getInstance();
+										Date date = cal.getTime();
+										pkgInfoDO.setCalendar(cal);
+
 										System.out.println(pkgInfoDO
-												.getCalendar().getTime());
+												.getCalendar());
 
 										pkgInfoDAO
 												.updatePackageRetrievedTime(
@@ -170,9 +174,7 @@ public class ReleaseEnvService {
 														.getUserInfo()
 														.getOrganizationId()
 												+ "";
-										System.out.println("Time"
-												+ pkgInfoDO.getCalendar()
-														.getTimeInMillis());
+
 										linkedlist.add(new GetPackageProcess(
 												Pkgdescription));
 										List<Object> pkgCompList = (new GetPkgCompList(

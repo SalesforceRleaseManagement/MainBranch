@@ -322,6 +322,7 @@ public class PackageInformationDAO implements ISFBaseDAO {
 			newEnvObj.setASAClient__Description__c(lObj.getDescription());
 			newEnvObj.setASAClient__Release__c(lObj.getReleaseInformationId());
 			newEnvObj.setASAClient__ReadyForDeployment__c(lObj.getReadyForDeployment());
+			newEnvObj.setASAClient__Package_Retrieved_Time__c(lObj.getCalendar());
 			// Set the value of Package_Retrieved_Time__c to null
 			//newEnvObj.setFieldsToNull(new String[] {"ASAClient__Package_Retrieved_Time__c"});
 			com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[] mobj = new com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[1];
@@ -336,7 +337,28 @@ public class PackageInformationDAO implements ISFBaseDAO {
 		}
 		return true;
 	}
-	
+	public boolean clearPackageRetrievedTime(Object obj, SFoAuthHandle sfHandle) {
+		com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c newEnvObj = new com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c();
+		PackageInformationDO lObj = (PackageInformationDO) obj;
+		try {
+			newEnvObj.setId(lObj.getId());
+			newEnvObj.setName(lObj.getName());
+			newEnvObj.setASAClient__Description__c(lObj.getDescription());
+			newEnvObj.setASAClient__Release__c(lObj.getReleaseInformationId());
+			newEnvObj.setASAClient__ReadyForDeployment__c(lObj.getReadyForDeployment());
+			newEnvObj.setFieldsToNull(new String[] {"ASAClient__Package_Retrieved_Time__c"});
+			com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[] mobj = new com.sforce.soap.enterprise.sobject.ASAClient__PackageInformation__c[1];
+			mobj[0] = newEnvObj;
+			commit(mobj, sfHandle);
+		} catch (SFException e) {
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Update_Error);
+		} catch (Exception e) {
+			throw new SFException(e.toString(),
+					SFErrorCodes.SFEnvironment_Update_Error);
+		}
+		return true;
+	}
 	@Override
 	public boolean delete(Object obj, SFoAuthHandle sfHandle) {
 		// TODO Auto-generated method stub

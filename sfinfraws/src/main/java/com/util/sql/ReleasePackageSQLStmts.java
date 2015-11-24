@@ -21,6 +21,7 @@ public class ReleasePackageSQLStmts {
 				+ " where ASA__Package__c= '" + pid + "' and ASA__Release__c='" +rid+"'";
 		return sql;
 	}
+	
 	public static String getFindByReleaseId(String rid) {
 		String sql = "SELECT Id, Name, ASA__Package__c, ASA__Order__c, ASA__Release__c"
 				+ " FROM ASA__ReleasePackage__c"

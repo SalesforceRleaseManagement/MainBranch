@@ -41,6 +41,15 @@ public class SFoAuthHandle {
 	String serverURL = null;
 	String refreshtoken = null;
 	String orgType = null;
+	String aa=null;
+
+	public String getAa() {
+		return aa;
+	}
+
+	public void setAa(String aa) {
+		this.aa = aa;
+	}
 
 	public SFoAuthHandle(String orgId, String token, String serverURL,
 			String refreshtoken, String orgType) throws SFException {
@@ -58,6 +67,14 @@ public class SFoAuthHandle {
 		this.orgId = orgId;
 		this.oAuthToken = token;
 		this.serverURL = serverURL;
+	}
+	public SFoAuthHandle(String userId, String passwd,String serverURL,String aa)
+			throws SFException {
+		nullify();
+		this.userId = userId;
+		this.passwd = passwd;
+		this.serverURL=serverURL;
+		this.aa=aa;
 	}
 
 	public SFoAuthHandle getValidConnection() throws SFException {
@@ -80,6 +97,7 @@ public class SFoAuthHandle {
 				setAccessToken(getServerURL(), Constants.CustomBaseOrgClientID,
 						Constants.CustomBaseOrgClientSecret, getRefreshtoken());
 			}
+		
 			sFoAuthHandle = new SFoAuthHandle(getOrgId(), getoAuthToken(),
 					getServerURL());
 			if (sFoAuthHandle.getEnterpriseConnection() != null) {

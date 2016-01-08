@@ -11,16 +11,15 @@ public class FDExecuteScriptCompService {
 		super();
 	}
 
-	public static void main(String[] args) {
-		String userId = "skrishna@developertest.com";
-		String passwd = "infrascape3srAF8wqAps26TIYMXayRMYTl";
-		String serverURL = "https://na34.salesforce.com";
+	/*
+	 * public static void main(String[] args) {
+	 * 
+	 * executeScript(Constants.userId, Constants.passwd, Constants.serverURL,
+	 * "a0161000002rayc"); }
+	 */
 
-		executeScript(userId, passwd, serverURL, "a0161000002ELwT");
-	}
-
-	public static void executeScript(String userId, String passwd,
-			String serverURL, String metadataLogId) {
+	public void executeScript(String userId, String passwd, String serverURL,
+			String metadataLogId) {
 
 		TestMetadataLogDO testMetadataLogDO = null;
 
@@ -29,18 +28,14 @@ public class FDExecuteScriptCompService {
 
 		try {
 
-		/*	RegistrationTest r = new RegistrationTest();
-
-			r.testRegister();*/
-
 			// Get Meta data Log details
 			testMetadataLogDO = RDAppService.findTestMetadataLog(metadataLogId,
 					sfHandle);
 
-			// updating metadataLog to processing state
+			String message = "successfully testcase Processed";
+			// updating metadataLog to Completing state
 			RDAppService.updateTestMetadataLogStatus(testMetadataLogDO,
-					Constants.COMPLETED_STATUS, sfHandle);
-	
+					Constants.COMPLETED_STATUS, message, sfHandle);
 
 		} catch (Exception e) {
 			e.printStackTrace();

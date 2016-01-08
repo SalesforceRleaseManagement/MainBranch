@@ -23,11 +23,10 @@ public class SFTestAutomationRequestImpl implements NotificationPort {
 			List<MetadataLogCNotification> notification) {
 
 		String metadataLogId = "";
-		String userId="skrishna@developertest.com";
-		String passwd="infrascape3srAF8wqAps26TIYMXayRMYTl";
-		String serverURL="https://na34.salesforce.com";
 		String metadataLogAction = "";
-
+		String testcasename = "";
+		String testinformation= "";
+		String executionresults= "";
 
 		// TODO Auto-generated method stub
 		System.out.println("Hello TestAutomation");
@@ -43,21 +42,30 @@ public class SFTestAutomationRequestImpl implements NotificationPort {
 		for (int i = 0; i < arrSize; i++) {
 			sobject = (MetadataLogC) notification.get(i).getSObject();
 			metadataLogId = sobject.getId();
-			metadataLogAction=sobject.getActionC().getValue();
+			metadataLogAction = sobject.getActionC().getValue();
+			testcasename = sobject.getNameC().getValue();
+			testinformation=sobject.getTestInformationC().getValue();
+			//executionresults=sobject.getExecutionResultsC().getValue();
+			
 			System.out.println("Id: " + sobject.getId());
-			System.out.println("Test Automation :"+ metadataLogId);
-			System.out.println("metadataLogAction :"+metadataLogAction);
+			System.out.println("MetadataLog ID :" + metadataLogId);
+			System.out.println("metadataLogAction :" + metadataLogAction);
+			System.out.println("testcasename :" + testcasename);
+			System.out.println("TestInformation :" + testinformation);
+			//System.out.println("ExecutionResults :" + executionresults);
 
 		}
-		
+
 		try {
 			ForceDepService deploymentService = new ForceDepService();
 
 			if ((metadataLogId != null && !metadataLogId.isEmpty())
-					&& metadataLogAction.equals(Constants.TEST_AUTOMATION_ACTION)) {
-			deploymentService.executeScript(userId, passwd,serverURL, metadataLogId);
+					&& metadataLogAction
+							.equals(Constants.TEST_AUTOMATION_ACTION)) {
+				deploymentService.executeScript(Constants.userId,
+						Constants.passwd, Constants.serverURL, metadataLogId,testcasename);
 				return true;
-			} 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

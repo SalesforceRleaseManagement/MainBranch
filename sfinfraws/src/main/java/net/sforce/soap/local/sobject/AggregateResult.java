@@ -34,7 +34,7 @@ import org.w3c.dom.Element;
     "any"
 })
 public class AggregateResult
-     extends com.sforce.soap.enterprise.sobject.SObject
+    extends com.sforce.soap.enterprise.sobject.SObject
 {
 
     @XmlAnyElement(lax = true)

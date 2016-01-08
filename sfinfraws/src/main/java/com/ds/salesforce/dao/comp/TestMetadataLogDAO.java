@@ -58,6 +58,8 @@ public class TestMetadataLogDAO implements ISFBaseDAO {
 			if (metadataLogDOobj instanceof TestMetadataLogDO) {
 				metadataLog__c.setId(metadataLogDOobj.getId());
 				metadataLog__c.setStatus__c(metadataLogDOobj.getStatus());
+				metadataLog__c.setMessage__c(metadataLogDOobj.getMessage());
+				
 			}
 
 			SaveResult[] saveResults = sfHandle
@@ -111,7 +113,7 @@ public class TestMetadataLogDAO implements ISFBaseDAO {
 							metadataLog__c.getScript__c(),
 							metadataLog__c.getAction__c(),
 							metadataLog__c.getStatus__c(),
-							metadataLog__c.getID__c());
+							metadataLog__c.getID__c(),"");
 
 					System.out.println(" - Action: "
 							+ metadataLog__c.getAction__c());

@@ -156,10 +156,11 @@ public class RDAppService {
 		metadataLogDAO.update(metadataLogInformationDO, sfHandle);
 	}
 	public static void updateTestMetadataLogStatus(
-			TestMetadataLogDO testMetadataLogDO, String status,
+			TestMetadataLogDO testMetadataLogDO, String status,String message,
 			SFoAuthHandle sfHandle) {
 		TestMetadataLogDAO metadataLogDAO = new TestMetadataLogDAO();
 		testMetadataLogDO.setStatus(status);
+		testMetadataLogDO.setMessage(message);
 		metadataLogDAO.update(testMetadataLogDO, sfHandle);
 	}
 

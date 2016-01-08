@@ -27,9 +27,12 @@ public class ObjectFactory {
     private final static QName _MetadataLogCStatusC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Status__c");
     private final static QName _MetadataLogCScriptC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Script__c");
     private final static QName _MetadataLogCIDC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ID__c");
+    private final static QName _MetadataLogCExecutionResultsC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Execution_Results__c");
     private final static QName _MetadataLogCNameC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Name__c");
     private final static QName _MetadataLogCActionC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Action__c");
     private final static QName _MetadataLogCRecordIdC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "RecordId__c");
+    private final static QName _MetadataLogCMessageC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Message__c");
+    private final static QName _MetadataLogCTestInformationC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "Test_Information__c");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sforce.soap.enterprise.sobject
@@ -43,7 +46,7 @@ public class ObjectFactory {
      * 
      */
     public com.sforce.soap.enterprise.sobject.SObject createSObject() {
-        return new com.sforce.soap.enterprise.sobject.SObject();
+         return new com.sforce.soap.enterprise.sobject.SObject();
     }
 
     /**
@@ -93,6 +96,15 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "Execution_Results__c", scope = MetadataLogC.class)
+    public JAXBElement<String> createMetadataLogCExecutionResultsC(String value) {
+        return new JAXBElement<String>(_MetadataLogCExecutionResultsC_QNAME, String.class, MetadataLogC.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "Name__c", scope = MetadataLogC.class)
     public JAXBElement<String> createMetadataLogCNameC(String value) {
         return new JAXBElement<String>(_MetadataLogCNameC_QNAME, String.class, MetadataLogC.class, value);
@@ -114,6 +126,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "RecordId__c", scope = MetadataLogC.class)
     public JAXBElement<String> createMetadataLogCRecordIdC(String value) {
         return new JAXBElement<String>(_MetadataLogCRecordIdC_QNAME, String.class, MetadataLogC.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "Message__c", scope = MetadataLogC.class)
+    public JAXBElement<String> createMetadataLogCMessageC(String value) {
+        return new JAXBElement<String>(_MetadataLogCMessageC_QNAME, String.class, MetadataLogC.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "Test_Information__c", scope = MetadataLogC.class)
+    public JAXBElement<String> createMetadataLogCTestInformationC(String value) {
+        return new JAXBElement<String>(_MetadataLogCTestInformationC_QNAME, String.class, MetadataLogC.class, value);
     }
 
 }

@@ -3,9 +3,13 @@ package com.tasks;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import com.services.component.FDDeployCompService;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.PostMethod;
+
+import com.exception.SFErrorCodes;
+import com.exception.SFException;
 import com.services.component.FDExecuteScriptCompService;
-import com.services.component.FDRetrieveClientCompService;
 
 public class ExecuteScript implements Runnable {
 
@@ -17,25 +21,27 @@ public class ExecuteScript implements Runnable {
 	String orgType;
 	String userId;
 	String passwd;
-
-	
+	String testcasename;
 
 	public ExecuteScript(String orgId, String token, String serverURL,
-			String refreshToken, String orgType, String metadataLogId) {
+			String refreshToken, String orgType, String metadataLogId,String testcasename) {
 		this.metadataLogId = metadataLogId;
 		this.orgId = orgId;
 		this.token = token;
 		this.refreshToken = refreshToken;
 		this.serverURL = serverURL;
 		this.orgType = orgType;
+		this.testcasename=testcasename;
 	}
 
-	public ExecuteScript(String userId, String passwd,String serverURL, String metadataLogId) {
-		
-		this.userId=userId;
-		this.passwd=passwd;
-		this.metadataLogId=metadataLogId;
-		this.serverURL=serverURL;
+	public ExecuteScript(String userId, String passwd, String serverURL,
+			String metadataLogId,String testcasename) {
+
+		this.userId = userId;
+		this.passwd = passwd;
+		this.metadataLogId = metadataLogId;
+		this.serverURL = serverURL;
+		this.testcasename=testcasename;
 
 	}
 
@@ -45,7 +51,34 @@ public class ExecuteScript implements Runnable {
 		boolean errorFlag = false;
 		try {
 			FDExecuteScriptCompService executeScriptCompService = new FDExecuteScriptCompService();
-			executeScriptCompService.executeScript(getUserId(),getPasswd(),getServerURL(),getMetadataLogId());
+			
+			//String idURL = "http://52.24.127.217:8080/job/TestFramework/buildWithParameters?token=testcasename&testparam=TestJunit";
+			
+			String idURL = "http://52.34.213.161:8080/job/TestFramework/buildWithParameters";
+
+			System.out.println(getMetadataLogId());
+			HttpClient httpclient = new HttpClient();
+			String testparam = getTestcasename()+"~"+getMetadataLogId()+"~"+getUserId()+"~"+getPasswd()+"~"+getServerURL();
+
+			PostMethod get = new PostMethod(idURL);
+			// set the token in the header
+			//get.setRequestHeader("Authorization", "OAuth " + accessToken);
+
+			// set the SOQL as a query param
+			NameValuePair[] params = new NameValuePair[2];
+
+			params[0] = new NameValuePair("token", "testcasename");
+			params[1] = new NameValuePair("testparam", testparam);
+			get.setQueryString(params);
+			System.out.println("Accessing ID URL---" + get.getURI().toString());
+			try {
+				httpclient.executeMethod(get);
+				System.out.println(" status - " + get.getStatusCode());
+			} catch (Exception e) {
+				throw new SFException(e.getMessage(), SFErrorCodes.SF_HTTP_Error);
+			}
+		/*	executeScriptCompService.executeScript(getUserId(), getPasswd(),
+					getServerURL(), getMetadataLogId());*/
 		} catch (Exception e) {
 			errorFlag = true;
 			StringWriter lerrors = new StringWriter();
@@ -53,14 +86,11 @@ public class ExecuteScript implements Runnable {
 			errors = lerrors.toString();
 		} finally {
 			if (errorFlag) {
-				System.out
-						.println("Execute Operation Complete for requestId: "
-								+ getMetadataLogId() + "\nWith Errors: "
-								+ errors);
+				System.out.println("Execute Operation Complete for requestId: "
+						+ getMetadataLogId() + "\nWith Errors: " + errors);
 			} else {
-				System.out
-						.println("Execute Operation Complete for requestId: "
-								+ getMetadataLogId());
+				System.out.println("Execute Operation Complete for requestId: "
+						+ getMetadataLogId());
 			}
 		}
 	}
@@ -112,6 +142,7 @@ public class ExecuteScript implements Runnable {
 	public void setOrgType(String orgType) {
 		this.orgType = orgType;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -127,4 +158,14 @@ public class ExecuteScript implements Runnable {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
+
+	public String getTestcasename() {
+		return testcasename;
+	}
+
+	public void setTestcasename(String testcasename) {
+		this.testcasename = testcasename;
+	}
+	
+	
 }

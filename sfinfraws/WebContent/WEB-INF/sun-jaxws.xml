@@ -15,8 +15,7 @@
 		url-pattern="/retrieveclient" />
 	<endpoint name="SFSoapUpdatePackagesImpl" implementation="com.webservices.SFSoapUpdatePackagesImpl"
 		url-pattern="/updatePackage" />
-		
-		<endpoint name="SFTestAutomationRequestImpl" implementation="com.webservices.SFTestAutomationRequestImpl"
+	<endpoint name="SFTestAutomationRequestImpl" implementation="com.webservices.SFTestAutomationRequestImpl"
 		url-pattern="/testingautomation" />
 		
 		

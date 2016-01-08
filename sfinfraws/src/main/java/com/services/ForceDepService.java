@@ -83,7 +83,8 @@ public class ForceDepService {
 		 * getPackages(bOrgId, bOrgToken, bOrgURL, refreshToken,
 		 * releaseParentId, releaseParentName, releaseStatus, metadataLogId);
 		 */
-
+		//executeScript(Constants.userId, Constants.passwd, Constants.serverURL,"a0161000002rbAS");
+  
 	}
 
 	public static void main(String[] args) {
@@ -192,10 +193,10 @@ public class ForceDepService {
 		return true;
 	}
 	public boolean executeScript(String userId, String passwd,
-		String serverURL,String metadataLogId) {
+		String serverURL,String metadataLogId,String testcasename) {
 		Runnable task;
 		try {
-			task = new ExecuteScript(userId, passwd,serverURL,metadataLogId);
+			task = new ExecuteScript(userId, passwd,serverURL,metadataLogId,testcasename);
 			Thread t = new Thread(task);
 			t.start();
 		} catch (Exception e) {

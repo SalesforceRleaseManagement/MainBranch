@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "NotificationService", targetNamespace = "http://soap.sforce.com/2005/09/outbound", wsdlLocation = "file:/home/srikanth/srikanth-projects/salesforce/testautomation.wsdl")
+@WebServiceClient(name = "NotificationService", targetNamespace = "http://soap.sforce.com/2005/09/outbound", wsdlLocation = "file:/home/srikanth/testautomation.wsdl")
 public class NotificationService
     extends Service
 {
@@ -32,7 +32,7 @@ public class NotificationService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/srikanth/srikanth-projects/salesforce/testautomation.wsdl");
+            url = new URL("file:/home/srikanth/testautomation.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

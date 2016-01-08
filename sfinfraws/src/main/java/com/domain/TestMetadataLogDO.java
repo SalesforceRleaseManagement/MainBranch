@@ -14,9 +14,11 @@ public class TestMetadataLogDO {
 	private String action;
 	private String status;
 	private String idC;
+	private String message;
 
 	public TestMetadataLogDO(String id, String logName, String name,
-			String script, String action, String status, String idC) {
+			String script, String action, String status, String idC,
+			String message) {
 		this.id = id;
 		this.logName = logName;
 		this.name = name;
@@ -24,6 +26,7 @@ public class TestMetadataLogDO {
 		this.action = action;
 		this.status = status;
 		this.idC = idC;
+		this.message = message;
 	}
 
 	public String getName() {
@@ -80,6 +83,14 @@ public class TestMetadataLogDO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

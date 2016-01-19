@@ -44,14 +44,14 @@ public class ForceDepService {
 		 */
 
 		
-	 /*    String bOrgId = "00D610000006tjPEAQ"; 
+	    /*  String bOrgId = "00D610000006tjPEAQ"; 
 		 String bOrgToken ="00D610000006tjP!AQ4AQLpMKFRZYlHFja7spuak1Eq_C4DoCZVc8qrx8L1ry.5B1LSIG_40GXjIqGyY_JCihNpeFT8JVdFvkEodeROS1PcgFRGD";
 		 String bOrgURL = "https://na34.salesforce.com"; 
 		 String refreshToken="5Aep861tbt360sO1.uO0UjNoRyP9rNbAguo__QeBtE9I0DtmCAWn8r4UIu4tzqbg2okzwzEmBzokQe8gXPTDFXb";
-		 String releaseParentName = "releasetest"; 
-		 String releaseParentId="a0B28000000fWDOEA2";
+		 String releaseParentName = "srikanth-release182"; 
+		 String releaseParentId="a0B610000023fCKEAY";
 		 String releaseStatus = "Active"; 
-		 String metadataLogId = "a05610000028bTU";
+		 String metadataLogId = "a0561000002BbX3";
          deploy(bOrgId, bOrgToken, bOrgURL, refreshToken, metadataLogId, true);		 
 
 		/*String metadataLogId = "a0361000004SosV";

@@ -42,6 +42,8 @@ public class ObjectFactory {
     
     private final static QName _ASAMetadataLogCASAActionC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASA__Action__c");
     private final static QName _ASAMetadataLogCASATargetOrgRefreshTokenC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASA__TargetOrgRefreshToken__c");
+    private final static QName _ASAMetadataLogCASAEnableVersionControlC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASA__Enable_Version_Control__c");
+    private final static QName _ASAMetadataLogCASAGITServerURLC_QNAME = new QName("urn:sobject.enterprise.soap.sforce.com", "ASA__GIT_Server_URL__c");
 
     
     
@@ -216,6 +218,21 @@ public class ObjectFactory {
     public JAXBElement<String> createASAMetadataLogCASASourceOrganizationURLC(String value) {
         return new JAXBElement<String>(_ASAMetadataLogCASASourceOrganizationURLC_QNAME, String.class, ASAMetadataLogC.class, value);
     }
-
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "ASA__Enable_Version_Control__c", scope = ASAMetadataLogC.class)
+    public JAXBElement<String> createASAMetadataLogCASAEnableVersionControlC(String value) {
+        return new JAXBElement<String>(_ASAMetadataLogCASAEnableVersionControlC_QNAME, String.class, ASAMetadataLogC.class, value);
+    }
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "urn:sobject.enterprise.soap.sforce.com", name = "ASA__GIT_Server_URL__c", scope = ASAMetadataLogC.class)
+    public JAXBElement<String> createASAMetadataLogCASAGITServerURLC(String value) {
+        return new JAXBElement<String>(_ASAMetadataLogCASAGITServerURLC_QNAME, String.class, ASAMetadataLogC.class, value);
+    }
 
 }

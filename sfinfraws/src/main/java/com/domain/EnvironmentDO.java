@@ -15,6 +15,8 @@ public class EnvironmentDO {
 	String orgId;
 	String tokenCodeNonEncrypted;
 	String serverURL;
+	String enableVersionControl;
+	String gitServerURL;
 
 	public EnvironmentDO() {
 		super();
@@ -47,6 +49,21 @@ public class EnvironmentDO {
 		this.refreshtoken = refreshtoken;
 		this.tokenCodeNonEncrypted = token;
 		this.serverURL = serverURL;
+	}
+
+	public EnvironmentDO(String id, String orgIdPlusUserId, String userName,
+			String orgId, String token, String serverURL, String refreshtoken,
+			String enableVersionControl, String gitServerURL) {
+		this.id = id;
+		this.orgIdPlusUserId = orgIdPlusUserId;
+		this.userName = userName;
+		this.orgId = orgId;
+		this.token = token;
+		this.refreshtoken = refreshtoken;
+		this.tokenCodeNonEncrypted = token;
+		this.serverURL = serverURL;
+		this.enableVersionControl = enableVersionControl;
+		this.gitServerURL = gitServerURL;
 	}
 
 	/**
@@ -234,4 +251,21 @@ public class EnvironmentDO {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getEnableVersionControl() {
+		return enableVersionControl;
+	}
+
+	public void setEnableVersionControl(String enableVersionControl) {
+		this.enableVersionControl = enableVersionControl;
+	}
+
+	public String getGitServerURL() {
+		return gitServerURL;
+	}
+
+	public void setGitServerURL(String gitServerURL) {
+		this.gitServerURL = gitServerURL;
+	}
+
 }

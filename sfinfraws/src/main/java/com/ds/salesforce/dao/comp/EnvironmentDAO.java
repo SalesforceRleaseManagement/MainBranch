@@ -49,10 +49,12 @@ public class EnvironmentDAO implements ISFBaseDAO {
 
 					System.out.println(" - Id: " + locObj.getId());
 					System.out.println(" - Id: " + locObj.getASA__Org_ID__c());
-					System.out.println(" - Name: " + locObj.getASA__User_Name__c());
+					System.out.println(" - Name: "
+							+ locObj.getASA__User_Name__c());
 					System.out.println(" - Org: "
 							+ locObj.getASA__OrganizationId__c());
-					System.out.println(" - token: " + locObj.getASA__TokenCode__c());
+					System.out.println(" - token: "
+							+ locObj.getASA__TokenCode__c());
 					System.out.println(" - refresh: "
 							+ locObj.getASA__RefreshTokenCode__c());
 					System.out.println(" - encr: "
@@ -60,12 +62,21 @@ public class EnvironmentDAO implements ISFBaseDAO {
 					System.out.println(" - server: "
 							+ locObj.getASA__Server_URL__c());
 
+					System.out.println(" - Enable Version Control: "
+							+ locObj.getASA__Enable_Version_Control__c());
+
+					System.out.println(" - Git URL: "
+							+ locObj.getASA__GIT_Server_URL__c());
+
 					retObj = new EnvironmentDO(locObj.getId(),
-							locObj.getASA__Org_ID__c(), locObj.getASA__User_Name__c(),
+							locObj.getASA__Org_ID__c(),
+							locObj.getASA__User_Name__c(),
 							locObj.getASA__OrganizationId__c(),
 							locObj.getASA__TokenCodeNonEncrypted__c(),
 							locObj.getASA__Server_URL__c(),
-							locObj.getASA__RefreshTokenCode__c());
+							locObj.getASA__RefreshTokenCode__c(),
+							locObj.getASA__Enable_Version_Control__c(),
+							locObj.getASA__GIT_Server_URL__c());
 					list.add(retObj);
 				}
 			} else {
@@ -101,7 +112,8 @@ public class EnvironmentDAO implements ISFBaseDAO {
 					com.sforce.soap.enterprise.sobject.ASA__Enviroment__c locObj = (com.sforce.soap.enterprise.sobject.ASA__Enviroment__c) queryResults
 							.getRecords()[i];
 					retObj = new EnvironmentDO(locObj.getId(),
-							locObj.getASA__Org_ID__c(), locObj.getASA__User_Name__c(),
+							locObj.getASA__Org_ID__c(),
+							locObj.getASA__User_Name__c(),
 							locObj.getASA__OrganizationId__c(),
 							locObj.getASA__TokenCodeNonEncrypted__c(),
 							locObj.getASA__Server_URL__c(),
@@ -207,7 +219,7 @@ public class EnvironmentDAO implements ISFBaseDAO {
 		}
 		return true;
 	}
-	
+
 	public boolean commit1(SObject[] sobjects, SFoAuthHandle sfHandle) {
 		try {
 			if (sobjects != null && sobjects.length > 0) {

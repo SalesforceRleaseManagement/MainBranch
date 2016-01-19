@@ -39,6 +39,9 @@ public class SFSoapDeployImpl implements NotificationPort {
 		String tOrgId = null;
 		String sOrgToken = null;
 		String tOrgToken = null;
+		String asversionControl = null;
+		String gitServerURL = "";
+
 		String bOrgRefreshToken = null;
 		int arrSize = notification.size();
 		String action = null;
@@ -54,12 +57,18 @@ public class SFSoapDeployImpl implements NotificationPort {
 			tOrgId = sobject.getASAOrganizationIdC().getValue();
 			bOrgRefreshToken = sobject.getASABaseOrgRefreshTokenC().getValue();
 			action = sobject.getASAActionC().getValue();
+			// asversionControl =
+			// sobject.getASAEnableVersionControlC().getValue();
+			// gitServerURL = sobject.getASAGITServerURLC().getValue();
 
 			System.out.println("bOrgId : " + bOrgId + "~" + "bOrgURL : "
-					+ bOrgURL + "~" + "bOrgToken : " + bOrgToken + "~");
-			
+					+ bOrgURL + "~" + "bOrgToken : " + bOrgToken + "~"
+					+ "AS Version Control ?" + asversionControl
+					+ "Git Server URL" + gitServerURL);
+
 			System.out.println("metadata Log Id: " + metadataLogId
 					+ "  -Org Id: " + tOrgId + "~" + action);
+
 			try {
 				ForceDepService deploymentService = new ForceDepService();
 				if ((metadataLogId != null && !metadataLogId.isEmpty())
@@ -80,7 +89,6 @@ public class SFSoapDeployImpl implements NotificationPort {
 							bOrgRefreshToken, metadataLogId, false);
 					return true;
 
-					
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

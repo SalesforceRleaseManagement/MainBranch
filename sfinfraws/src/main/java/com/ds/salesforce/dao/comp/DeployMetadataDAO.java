@@ -73,6 +73,8 @@ public class DeployMetadataDAO implements ISFBaseDAO {
 							+ retObj.getASA__SourceOrganizationId__c());
 					System.out.println(" - Target Org Id: "
 							+ retObj.getASA__OrganizationId__c());
+				
+				
 					System.out.println(" - Order: " + retObj.getASA__Order__c());
 					System.out.println(" - Package: " + retObj.getASA__Package__c());
 					PackageDO packageDO = null;

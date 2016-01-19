@@ -1,13 +1,32 @@
 package com.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
+import org.eclipse.jgit.api.CloneCommand;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+
+import com.domain.EnvironmentDO;
+import com.ds.salesforce.dao.comp.EnvironmentDAO;
 import com.exception.SFErrorCodes;
 import com.exception.SFException;
+import com.google.common.primitives.Bytes;
+import com.services.component.FDGetSFoAuthHandleService;
 import com.sforce.soap.metadata.AsyncResult;
 import com.sforce.soap.metadata.CodeCoverageWarning;
 import com.sforce.soap.metadata.DeployDetails;
@@ -41,13 +60,21 @@ public class FileBasedDeploy {
 	public FileBasedDeploy() {
 	}
 
-	public void deploy(SFoAuthHandle sfHandle, String packageName, boolean isValidate) throws SFException {
+	public void deploy(String bOrgId, String bOrgToken, String bOrgURL,
+			String refreshToken, SFoAuthHandle sfHandle, String packageName,
+			boolean isValidate) throws Exception {
+		System.out.println("Git Server OrgID :" + sfHandle.getOrgId());
+
+		SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService
+				.getSFoAuthHandle(bOrgId, bOrgToken, bOrgURL, refreshToken,
+						Constants.BaseOrgID);
+
 		byte zipBytes[] = readZipFile();
 		DeployOptions deployOptions = new DeployOptions();
 		deployOptions.setPerformRetrieve(false);
 		deployOptions.setRollbackOnError(true);
-		if(isValidate){
-			deployOptions.setCheckOnly(true);	
+		if (isValidate) {
+			deployOptions.setCheckOnly(true);
 		}
 		MetadataConnection conn = null;
 		AsyncResult asyncResult = null;
@@ -56,7 +83,8 @@ public class FileBasedDeploy {
 		} catch (Exception e) {
 			// e.printStackTrace();
 			System.out.println(e.toString());
-			throw new SFException("Error related to "+packageName+" Details: "+e.toString(),
+			throw new SFException("Error related to " + packageName
+					+ " Details: " + e.toString(),
 					SFErrorCodes.Metadata_Conn_Error);
 		}
 		try {
@@ -64,7 +92,8 @@ public class FileBasedDeploy {
 		} catch (Exception e) {
 			// e.printStackTrace();
 			System.out.println(e.toString());
-			throw new SFException("Error related to "+packageName+" Details: "+e.toString(),
+			throw new SFException("Error related to " + packageName
+					+ " Details: " + e.toString(),
 					SFErrorCodes.Metadata_Conn_Error);
 		}
 		try {
@@ -72,17 +101,95 @@ public class FileBasedDeploy {
 		} catch (ConnectionException e) {
 			// e.printStackTrace();
 			System.out.println(e.toString());
-			throw new SFException("Error related to "+packageName+" Details: "+e.toString(), SFErrorCodes.SF_Conn_Error);
+			throw new SFException("Error related to " + packageName
+					+ " Details: " + e.toString(), SFErrorCodes.SF_Conn_Error);
 		}
 
-		DeployResult result = waitForDeployCompletion(sfHandle,asyncResult.getId());
+		DeployResult result = waitForDeployCompletion(sfHandle,
+				asyncResult.getId());
 		if (!result.isSuccess()) {
 			String errors = printErrors(result, "Final list of failures:\n");
-			throw new SFException("Error related to "+packageName+" Details: "+errors, SFErrorCodes.FileDeploy_Error);
+			throw new SFException("Error related to " + packageName
+					+ " Details: " + errors, SFErrorCodes.FileDeploy_Error);
 			// throw new Exception("The files were not successfully deployed");
 		}
+
 		System.out.println("The file " + Constants.Component_Zip_FileName
 				+ " was successfully deployed\n");
+
+		EnvironmentDAO environmentDAO = new EnvironmentDAO();
+		List<Object> envList = environmentDAO.findById(sfHandle.getOrgId(),
+				sfBaseHandle);
+
+		// check whether version control yes or no
+
+		for (Iterator<Object> iterator = envList.iterator(); iterator.hasNext();) {
+			EnvironmentDO env = (EnvironmentDO) iterator.next();
+
+			if (env.getEnableVersionControl().equals("Yes")) {
+				// /get git URL from env ,clone and add deployed files to get
+				// and commit
+				
+				System.out
+						.println("Verion Control is Yes We can now Check in the files");
+				System.out.println("Git URL :" +env.getGitServerURL());
+
+				GitRepoDO gitRepoDO = new GitRepoDO(Constants.userName,
+						Constants.password, env.getGitServerURL().trim());
+		        RepoUtil.CheckIn(gitRepoDO);
+
+			}
+
+		}
+
+	}
+
+	public static void readFile() {
+
+		try {
+			ZipFile zf = new ZipFile(Constants.Component_Zip_FileName);
+			Enumeration entries = zf.entries();
+
+			while (entries.hasMoreElements()) {
+				ZipEntry ze = (ZipEntry) entries.nextElement();
+				String extension = ze.getName().substring(
+						ze.getName().lastIndexOf(".") + 1,
+						ze.getName().length());
+				if (extension.equals("cls")
+						|| !ze.getName().equals("unpackaged/package.xml")) {
+					System.out.println("Read " + ze.getName());
+
+					File file = new File("checkout/" + ze.getName());
+
+					// if file doesnt exists, then create it
+					if (!file.exists()) {
+						file.createNewFile();
+					}
+
+					System.out.println("Done");
+
+					long size = ze.getSize();
+					if (size > 0) {
+						System.out.println("Length is " + size);
+						FileWriter fw = new FileWriter(file.getAbsoluteFile());
+						BufferedWriter bw = new BufferedWriter(fw);
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(zf.getInputStream(ze)));
+						String line;
+						while ((line = br.readLine()) != null) {
+							bw.write(line);
+							System.out.println(line);
+						}
+						br.close();
+						bw.close();
+
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/*
@@ -176,8 +283,8 @@ public class FileBasedDeploy {
 		return stringBuilder.toString();
 	}
 
-	private DeployResult waitForDeployCompletion(SFoAuthHandle sfHandle, String asyncResultId)
-			throws SFException {
+	private DeployResult waitForDeployCompletion(SFoAuthHandle sfHandle,
+			String asyncResultId) throws SFException {
 		int poll = 0;
 		long waitTimeMilliSecs = ONE_SECOND;
 		DeployResult deployResult;
@@ -206,8 +313,8 @@ public class FileBasedDeploy {
 				// Fetch in-progress details once for every 3 polls
 				fetchDetails = (poll % 3 == 0);
 
-				deployResult = conn.checkDeployStatus(
-						asyncResultId, fetchDetails);
+				deployResult = conn.checkDeployStatus(asyncResultId,
+						fetchDetails);
 				System.out.println("Status is: " + deployResult.getStatus());
 				if (!deployResult.isDone() && fetchDetails) {
 					printErrors(deployResult,
@@ -224,7 +331,8 @@ public class FileBasedDeploy {
 			if (!deployResult.isSuccess()
 					&& deployResult.getErrorStatusCode() != null) {
 				throw new SFException(deployResult.getErrorStatusCode()
-						+ " msg: " + deployResult.getErrorMessage(),SFErrorCodes.FileDeploy_Error );
+						+ " msg: " + deployResult.getErrorMessage(),
+						SFErrorCodes.FileDeploy_Error);
 			}
 		} catch (Exception e) {
 			throw new SFException(
@@ -236,8 +344,7 @@ public class FileBasedDeploy {
 			// Get the final result with details if we didn't do it in the last
 			// attempt.
 			try {
-				deployResult = conn.checkDeployStatus(asyncResultId,
-						true);
+				deployResult = conn.checkDeployStatus(asyncResultId, true);
 			} catch (ConnectionException e) {
 				// e.printStackTrace();
 				System.out.println(e.toString());
@@ -246,4 +353,11 @@ public class FileBasedDeploy {
 		}
 		return deployResult;
 	}
+
+	public static String getCurrentPath() {
+		Path currentRelativePath = Paths.get("");
+		String path = currentRelativePath.toAbsolutePath().toString();
+		return path;
+	}
+
 }

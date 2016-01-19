@@ -28,31 +28,42 @@ public class Constants {
 	public static String token_type = "Bearer";
 	public static final String API_VERSION = "33.0";
 
-	public static final String[] SFTypes = { "ApexClass", "ApexComponent", "ApexPage", "ApexTrigger", "AppMenu",
-			"AssignmentRule", "AssignmentRules", "AutoResponseRules", "Community", "CustomApplication", "CustomField",
-			"CustomLabel", "CustomLabels", "CustomObject", "CustomObjectTranslation", "CustomTab", "Dashboard",
-			"Document", "EmailTemplate", "EscalationRule", "EscalationRules", "HomePageLayout", "Layout", "ListView",
-			"MatchingRules", "MatchingRules", "Profile", "PermissionSet", "QuickAction", "RemoteSiteSetting", "Report",
-			"ReportType", "Role", "Settings", "SharingRules", "StaticResource", "WebLink", "SharingSet",
-			"CustomPageWebLink", "Workflow", "Queue", "ApprovalProcess", "ActionLinkGroupTemplate", "CompactLayout",
-			"ConnectedApp", "CustomApplicationComponent", "CustomMetadata", "CustomPermission", "CustomSite",
-			"FieldSet", "RecordType", "ValidationRule", "AuthProvider", "PostTemplate", "WorkflowFieldUpdate",
-			"WorkflowRule", "WorkflowTask", "WorkflowOutboundMessage" ,"WorkflowAlert"};
+	public static final String[] SFTypes = { "ApexClass", "ApexComponent",
+			"ApexPage", "ApexTrigger", "AppMenu", "AssignmentRule",
+			"AssignmentRules", "AutoResponseRules", "Community",
+			"CustomApplication", "CustomField", "CustomLabel", "CustomLabels",
+			"CustomObject", "CustomObjectTranslation", "CustomTab",
+			"Dashboard", "Document", "EmailTemplate", "EscalationRule",
+			"EscalationRules", "HomePageLayout", "Layout", "ListView",
+			"MatchingRules", "MatchingRules", "Profile", "PermissionSet",
+			"QuickAction", "RemoteSiteSetting", "Report", "ReportType", "Role",
+			"Settings", "SharingRules", "StaticResource", "WebLink",
+			"SharingSet", "CustomPageWebLink", "Workflow", "Queue",
+			"ApprovalProcess", "ActionLinkGroupTemplate", "CompactLayout",
+			"ConnectedApp", "CustomApplicationComponent", "CustomMetadata",
+			"CustomPermission", "CustomSite", "FieldSet", "RecordType",
+			"ValidationRule", "AuthProvider", "PostTemplate",
+			"WorkflowFieldUpdate", "WorkflowRule", "WorkflowTask",
+			"WorkflowOutboundMessage", "WorkflowAlert" };
 
-	public static String userId="skrishna@developertest.com";
-	public static String passwd="infrascape4YKyRvo9lxSLmmr20xAQ72zhI";
-	public static String serverURL="https://na34.salesforce.com";
-	
+	public static String userId = "skrishna@developertest.com";
+	public static String passwd = "infrascape4YKyRvo9lxSLmmr20xAQ72zhI";
+	public static String serverURL = "https://na34.salesforce.com";
+
 	public static String base_username = "ikhan@infrascape.com";
-	public static String base_password = "infrascape3" + "cMN0SHllSbM6ireqkDbL7W3Qx";
+	public static String base_password = "infrascape3"
+			+ "cMN0SHllSbM6ireqkDbL7W3Qx";
 
 	public static String target_username = "skrishna@infrascape.com.copdesti";
-	public static String target_password = "infrascape3" + "1Ms5Ri5SwMLulCF60uFJMO0Z";
+	public static String target_password = "infrascape3"
+			+ "1Ms5Ri5SwMLulCF60uFJMO0Z";
 
 	public static String target3_username = "skrishna@desticorp2.com.com";
-	public static String target3_password = "infrascape4" + "G8ksxsN26GySSdYYMH0a05cF";
+	public static String target3_password = "infrascape4"
+			+ "G8ksxsN26GySSdYYMH0a05cF";
 	public static String target2_username = "skrishna@desticorp2.com.com";
-	public static String target2_password = "infrascape4" + "BNsc0IwBaduT5Qryw5G4SIulL";
+	public static String target2_password = "infrascape4"
+			+ "BNsc0IwBaduT5Qryw5G4SIulL";
 
 	public static final String SUCESS_MESSAGE = "MetadataLog record is sucessfully updated";
 	public static final String Package_FileName = "package.xml";
@@ -83,8 +94,8 @@ public class Constants {
 	public static String BaseOrgID = "0";
 	public static String CustomOrgID = "1";
 	public static String CustomBaseOrgID = "2";
-	public static String CustomClientOrgID="3";
-	
+	public static String CustomClientOrgID = "3";
+
 	public static String BaseOrgTypeID = "0";
 	public static String CustomOrgTypeID = "1";
 	public static String CustomBaseOrgTypeID = "2";
@@ -106,18 +117,24 @@ public class Constants {
 
 	public static String SALESFORCE_CLIENT_PKG = "SFClientPkg";
 	public static String SALESFORCE_SERVER_PKG = "SFServerPkg";
-	
 
 	public static String SF_REPO_CLIENT_PKG = "SfClientPkgs";
 	public static String SF_REPO_SERVER_PKG = "SfServerPkgs";
 	public static String SF_REPO_TEST_PKG = "mypkg";
 	public static String SF_REPO_CODE_PKG = "codepkg";
 	public static String SF_Config_File = "sfconfig.properties";
-	
+
 	public static String CLIENT = "client";
 	public static String SERVER = "server";
 	public static String SFClientSelfAuthType = "Self";
 	public static String SFClientServerAuthType = "Server";
-public static String testsri = "testsri";
+	public static String testsri = "testsri";
+	private static String CheckoutFolder = "checkout";
+	public static String DirSeperator = "/";
+	public static String CheckoutPath1 = AppUtil.getCurrentPath()
+			+ Constants.DirSeperator + Constants.CheckoutFolder;
+	
+	public static final  String userName = "skrishna@infrascape.com";
+	public static final   String password = "Yarragsa@01";
 
 }

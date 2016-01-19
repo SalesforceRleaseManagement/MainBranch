@@ -68,7 +68,7 @@ public class FDDeployCompService {
 				if (metadataLogDO.getStatus() != null
 						&& (metadataLogDO.getStatus()
 								.equals(Constants.PROCESSING_STATUS))) {
-					System.out.println("Action"+metadataLogDO.getAction());
+					System.out.println("Action" + metadataLogDO.getAction());
 					DeployMetadataDAO deployMetadataDAO = new DeployMetadataDAO();
 
 					// find to be deployed object list
@@ -92,44 +92,6 @@ public class FDDeployCompService {
 									.getTargetOrg(), bOrgId, bOrgToken,
 									bOrgURL, refreshToken,
 									Constants.CustomOrgID);
-
-					/*
-					 * for (Iterator iterator = deployList.iterator(); iterator
-					 * .hasNext();) { MetaBean object = (MetaBean)
-					 * iterator.next(); String templateType=object.getType();
-					 * 
-					 * if(templateType.equals("EmailTemplate")) {
-					 * templateType="Email"; String emailSQL =
-					 * "Select Id, Name,Type" +
-					 * " FROM Folder where Type = '"+templateType+"'";
-					 * 
-					 * EnterpriseConnection conn =
-					 * sfSourceHandle.getEnterpriseConnection();
-					 * System.out.println(conn.toString()); QueryResult
-					 * queryResults = conn.query(emailSQL);
-					 * System.out.println(queryResults.getSize()); if
-					 * (queryResults.getSize() > 0) { for (int i = 0; i <
-					 * queryResults.getRecords().length; i++) { // cast the
-					 * SObject to a strongly-typed Contact
-					 * com.sforce.soap.enterprise.sobject.Folder retObj =
-					 * (com.sforce.soap.enterprise.sobject.Folder) queryResults
-					 * .getRecords()[i]; String name=retObj.getName(); String
-					 * type=retObj.getType();
-					 * System.out.println("folder name"+name);
-					 * System.out.println("Type name"+type);
-					 * 
-					 * String accessType=retObj.getAccessType();
-					 * System.out.println("Access Type"+accessType); boolean
-					 * isReadonly=true; CustomObjectTest cot=new
-					 * CustomObjectTest();
-					 * cot.insert(name,type,accessType,sfTargetHandle); }
-					 * 
-					 * }
-					 * 
-					 * }
-					 * 
-					 * }
-					 */
 
 					// gets the map by order
 					LinkedHashMap<String, List<MetaBean>> deployMap = (new DeployList())
@@ -165,7 +127,8 @@ public class FDDeployCompService {
 						try {
 							FDSFXMLPackageCompService xmlService = new FDSFXMLPackageCompService();
 							xmlService.createPackageXML(metabeanList);
-							deployObjToTargetOrg(sfSourceHandle,
+							deployObjToTargetOrg(bOrgId, bOrgToken, bOrgURL,
+									refreshToken, sfSourceHandle,
 									sfTargetHandle, packageName, isValidate);
 
 							Thread.sleep(Constants.waitFor1Sec);
@@ -257,7 +220,8 @@ public class FDDeployCompService {
 		}
 	}
 
-	private void deployObjToTargetOrg(SFoAuthHandle sfSourceHandle,
+	private void deployObjToTargetOrg(String bOrgId, String bOrgToken,
+			String bOrgURL, String refreshToken, SFoAuthHandle sfSourceHandle,
 			SFoAuthHandle sfTargetHandle, String packageName, boolean isValidate)
 			throws SFException {
 
@@ -270,8 +234,8 @@ public class FDDeployCompService {
 		}
 
 		try {
-			(new FileBasedDeploy()).deploy(sfTargetHandle, packageName,
-					isValidate);
+			(new FileBasedDeploy()).deploy(bOrgId, bOrgToken, bOrgURL,
+					refreshToken, sfTargetHandle, packageName, isValidate);
 		} catch (Exception e) {
 			// e.printStackTrace();
 			// System.out.println(e.toString());

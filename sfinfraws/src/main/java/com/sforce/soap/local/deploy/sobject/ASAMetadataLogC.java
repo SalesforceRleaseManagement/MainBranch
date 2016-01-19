@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlType;
     "asaBaseOrgRefreshTokenC",
     "asaBaseOrgTokenC",
     "asaBaseOrgUrlC",
+    "asaEnableVersionControlC",
+    "asagitServerURLC",
     "asaidc",
     "asaOrganizationIdC",
     "asaRecordIdC",
@@ -71,6 +73,10 @@ public class ASAMetadataLogC
     protected JAXBElement<String> asaBaseOrgTokenC;
     @XmlElementRef(name = "ASA__BaseOrgUrl__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaBaseOrgUrlC;
+    @XmlElementRef(name = "ASA__Enable_Version_Control__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> asaEnableVersionControlC;
+    @XmlElementRef(name = "ASA__GIT_Server_URL__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> asagitServerURLC;
     @XmlElementRef(name = "ASA__ID__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
     protected JAXBElement<String> asaidc;
     @XmlElementRef(name = "ASA__OrganizationId__c", namespace = "urn:sobject.enterprise.soap.sforce.com", type = JAXBElement.class)
@@ -216,6 +222,55 @@ public class ASAMetadataLogC
     public void setASABaseOrgUrlC(JAXBElement<String> value) {
         this.asaBaseOrgUrlC = ((JAXBElement<String> ) value);
     }
+    
+    /**
+     * Gets the value of the asaEnableVersionControlC property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getASAEnableVersionControlC() {
+        return asaEnableVersionControlC;
+    }
+
+    /**
+     * Sets the value of the asaEnableVersionControlC property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setASAEnableVersionControlC(JAXBElement<String> value) {
+        this.asaEnableVersionControlC = value;
+    }
+
+    /**
+     * Gets the value of the asagitServerURLC property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getASAGITServerURLC() {
+        return asagitServerURLC;
+    }
+
+    /**
+     * Sets the value of the asagitServerURLC property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setASAGITServerURLC(JAXBElement<String> value) {
+        this.asagitServerURLC = value;
+    }
+
 
     /**
      * Gets the value of the asaidc property.

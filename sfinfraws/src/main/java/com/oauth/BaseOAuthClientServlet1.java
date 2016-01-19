@@ -39,12 +39,31 @@ import com.util.SFoAuthHandle;
  */
 
 @WebServlet(name = "baseoauthclientservlet", urlPatterns = {
-		"/baseoauthclientservlet/*", "/baseoauthclientservlet" })
-public class BaseOAuthClientServlet extends HttpServlet {
+		"/baseoauthclientservlet/*", "/baseoauthclientservlet" }, initParams = {
+// clientId is 'Consumer Key' in the Remote Access UI
+		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsZqXGXSs976uKfivATtaFl6rhaqwmMvzgd26NEEvc3wpiPBjxaMR2s3ITjsa"),
+		// clientSecret is 'Consumer Secret' in the Remote Access UI
+		@WebInitParam(name = "clientSecret", value = "4904334507055360250"),
+		// This must be identical to 'Callback URL' in the Remote Access UI
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://183.82.108.79/sfinfraws/customoauthservlet/callback"),
+		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/baseoauthclientservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://localhost:8443/SFSOAPWS/OAuthServlet/callback"),
+		// @WebInitParam(name = "environment", value =
+		// "https://emc--oppvis.cs1.my.salesforce.com"), })
+		// @WebInitParam(name = "environment", value =
+		// "https://test.salesforce.com"), })
+		@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
+public class BaseOAuthClientServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOG = LoggerFactory
-			.getLogger(BaseOAuthClientServlet.class);
+			.getLogger(BaseOAuthClientServlet1.class);
 
 	private String tokenFilePath = null;
 	private String clientId = null;
@@ -74,10 +93,10 @@ public class BaseOAuthClientServlet extends HttpServlet {
 			// TODO: handle exception
 		}
 
-		clientId = p.getProperty("baseclientclientId");
-		clientSecret = p.getProperty("baseclientclientSecret");
-		redirectUri = p.getProperty("baseclientredirectUri");
-		environment = p.getProperty("baseclientenvironment");
+		clientId = p.getProperty("clientId");
+		clientSecret = p.getProperty("clientSecret");
+		redirectUri = p.getProperty("redirectUri");
+		environment = p.getProperty("environment");
 
 		System.out.println("clientId -- " + clientId + " --clientSecret--"
 				+ clientSecret + "--redirectUri--" + redirectUri

@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -26,25 +25,46 @@ import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.domain.DeploymentSettingClientDO;
-import com.ds.salesforce.dao.comp.DeploySettingsClientDAO;
+import com.domain.DeploymentSettingsDO;
+import com.ds.salesforce.dao.comp.DeploySettingsDAO;
 import com.exception.SFErrorCodes;
 import com.exception.SFException;
 import com.services.component.FDGetSFoAuthHandleService;
 import com.util.Constants;
 import com.util.SFoAuthHandle;
 
+
+
 /**
  * Servlet parameters
  */
 
-@WebServlet(name = "baseoauthclientservlet", urlPatterns = {
-		"/baseoauthclientservlet/*", "/baseoauthclientservlet" })
-public class BaseOAuthClientServlet extends HttpServlet {
+@WebServlet(name = "baseoauthservlet", urlPatterns = { "/baseoauthservlet/*",
+		"/baseoauthservlet" }, initParams = {
+// clientId is 'Consumer Key' in the Remote Access UI
+		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsbYJXSOdJrdCVqxaLEyjnLDaPGLekViuBqlQJcWVyZodXI42r34WH9F5wexo"),
+		// clientSecret is 'Consumer Secret' in the Remote Access UI
+		@WebInitParam(name = "clientSecret", value = "1673914982220759042"),
+		// This must be identical to 'Callback URL' in the Remote Access UI
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://183.82.108.79/sfinfraws/customoauthservlet/callback"),
+		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/baseoauthservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
+		// @WebInitParam(name = "redirectUri", value =
+		// "https://localhost:8443/SFSOAPWS/OAuthServlet/callback"),
+		// @WebInitParam(name = "environment", value =
+		// "https://emc--oppvis.cs1.my.salesforce.com"), })
+		// @WebInitParam(name = "environment", value =
+		// "https://test.salesforce.com"), })
+		@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
+public class BaseOAuthServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOG = LoggerFactory
-			.getLogger(BaseOAuthClientServlet.class);
+			.getLogger(BaseOAuthServlet1.class);
 
 	private String tokenFilePath = null;
 	private String clientId = null;
@@ -57,27 +77,10 @@ public class BaseOAuthClientServlet extends HttpServlet {
 	private String idURL = null;
 
 	public void init() throws ServletException {
-		/*
-		 * clientId = this.getInitParameter("clientId"); clientSecret =
-		 * this.getInitParameter("clientSecret"); redirectUri =
-		 * this.getInitParameter("redirectUri"); environment =
-		 * this.getInitParameter("environment");
-		 */
-
-		Properties p = new Properties();
-
-		try {
-			p.load(getServletContext().getResourceAsStream(
-					"/WEB-INF/properties/config.properties"));
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		clientId = p.getProperty("baseclientclientId");
-		clientSecret = p.getProperty("baseclientclientSecret");
-		redirectUri = p.getProperty("baseclientredirectUri");
-		environment = p.getProperty("baseclientenvironment");
+		clientId = this.getInitParameter("clientId");
+		clientSecret = this.getInitParameter("clientSecret");
+		redirectUri = this.getInitParameter("redirectUri");
+		environment = this.getInitParameter("environment");
 
 		System.out.println("clientId -- " + clientId + " --clientSecret--"
 				+ clientSecret + "--redirectUri--" + redirectUri
@@ -99,11 +102,11 @@ public class BaseOAuthClientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String refreshToken = null;
-
+		
 		String accessToken = (String) request.getSession().getAttribute(
 				Constants.ACCESS_TOKEN);
 		processStateParam(request.getParameter("state"));
-
+		
 		System.out.println("main : " + request.getRequestURI());
 		System.out.println("tokenurl : " + tokenUrl);
 		System.out.println("authUrl : " + authUrl);
@@ -205,8 +208,9 @@ public class BaseOAuthClientServlet extends HttpServlet {
 			// Now lets use the standard java json classes to work with the
 			// results
 			try {
-				JSONObject jsonResponse = new JSONObject(new JSONTokener(
-						new InputStreamReader(get.getResponseBodyAsStream())));
+				JSONObject jsonResponse = new JSONObject(
+						new JSONTokener(new InputStreamReader(
+								get.getResponseBodyAsStream())));
 				System.out.println("Auth Response: {} "
 						+ jsonResponse.toString(2));
 				String userName = new String(
@@ -214,57 +218,64 @@ public class BaseOAuthClientServlet extends HttpServlet {
 				String orgId = new String(
 						(String) jsonResponse.get("organization_id"));
 
-				System.out.println("Creating DeploymentSettingClientDO : "
-						+ orgId + "~" + accessToken + "~" + instanceURL + "~"
-						+ refreshToken);
-				DeploymentSettingClientDO deploymentSettingsClientDO = new DeploymentSettingClientDO(
+				System.out
+						.println("Creating deploymentSettingsDO om CustomAuth : "
+								+ orgId
+								+ "~"
+								+ accessToken
+								+ "~"
+								+ instanceURL + "~" + refreshToken);
+				DeploymentSettingsDO deploymentSettingsDO = new DeploymentSettingsDO(
 						orgId, accessToken, instanceURL, refreshToken);
-				saveTokens(deploymentSettingsClientDO);
+				saveTokens(deploymentSettingsDO);
 			} catch (JSONException e) {
 				e.printStackTrace();
 				LOG.error(
 						"Error while getting JSONObject from the records {} ",
 						e.getMessage());
 				throw new ServletException(
-						"Error while getting JSONObject from the records: ", e);
+						"Error while getting JSONObject from the records: ",
+						e);
 			} catch (SFException e) {
 				throw (e);
 			}
 		}
 	}
 
-	public void saveTokens(DeploymentSettingClientDO deploymentSettingsClientDO)
+	public void saveTokens(DeploymentSettingsDO deploymentSettingsDO)
 			throws SFException {
-		DeploySettingsClientDAO deploymentSettingsClientDAO = new DeploySettingsClientDAO();
+		DeploySettingsDAO deploymentSettingsDAO = new DeploySettingsDAO();
 
 		try {
 			FDGetSFoAuthHandleService.setSfHandleToNUll();
 			SFoAuthHandle sfBaseHandle = FDGetSFoAuthHandleService
-					.getSFoAuthHandle(deploymentSettingsClientDO.getOrgId(),
-							deploymentSettingsClientDO.getToken(),
-							deploymentSettingsClientDO.getServerUrl(),
-							deploymentSettingsClientDO.getRefreshToken(),
-							Constants.BaseOrgID);
+					.getSFoAuthHandle(deploymentSettingsDO.getOrgId(),
+							deploymentSettingsDO.getToken(),
+							deploymentSettingsDO.getServerUrl(), deploymentSettingsDO.getRefreshToken(), Constants.BaseOrgID);
 
-			List deploymentSettingsClientList = deploymentSettingsClientDAO
-					.findById(deploymentSettingsClientDO.getOrgId(),
-							sfBaseHandle);
+			List deploymentSettingsList = deploymentSettingsDAO.findById(
+					deploymentSettingsDO.getOrgId(), sfBaseHandle);
 			// If should never occur
-			if (deploymentSettingsClientList.size() == 0) {
-				deploymentSettingsClientDAO.insert(deploymentSettingsClientDO,
-						sfBaseHandle);
+			if (deploymentSettingsList.size() == 0) {
+				deploymentSettingsDAO
+						.insert(deploymentSettingsDO, sfBaseHandle);
 
 			} else {
-				DeploymentSettingClientDO dsDO = null;
-				for (Iterator iterator = deploymentSettingsClientList
-						.iterator(); iterator.hasNext();) {
-					dsDO = (DeploymentSettingClientDO) iterator.next();
-					dsDO.setOrgId(deploymentSettingsClientDO.getOrgId());
-					dsDO.setServerUrl(deploymentSettingsClientDO.getServerUrl());
-					dsDO.setToken(deploymentSettingsClientDO.getToken());
-					dsDO.setRefreshToken(deploymentSettingsClientDO
-							.getRefreshToken());
-					deploymentSettingsClientDAO.update(dsDO, sfBaseHandle);
+				DeploymentSettingsDO dsDO = null;
+				for (Iterator iterator = deploymentSettingsList.iterator(); iterator
+						.hasNext();) {
+					dsDO = (DeploymentSettingsDO) iterator
+							.next();
+					dsDO.setOrgId(deploymentSettingsDO
+							.getOrgId());
+					dsDO.setServerUrl(deploymentSettingsDO
+							.getServerUrl());
+					dsDO.setToken(deploymentSettingsDO
+							.getToken());
+					dsDO.setRefreshToken(deploymentSettingsDO
+									.getRefreshToken());
+					deploymentSettingsDAO.update(dsDO,
+							sfBaseHandle);
 				}
 			}
 			FDGetSFoAuthHandleService.setSfHandleToNUll();

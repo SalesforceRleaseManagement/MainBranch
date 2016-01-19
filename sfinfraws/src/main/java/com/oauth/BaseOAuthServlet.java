@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -38,26 +39,7 @@ import com.util.SFoAuthHandle;
  */
 
 @WebServlet(name = "baseoauthservlet", urlPatterns = { "/baseoauthservlet/*",
-		"/baseoauthservlet" }, initParams = {
-// clientId is 'Consumer Key' in the Remote Access UI
-		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsbYJXSOdJrdCVqxaLEyjnLDaPGLekViuBqlQJcWVyZodXI42r34WH9F5wexo"),
-		// clientSecret is 'Consumer Secret' in the Remote Access UI
-		@WebInitParam(name = "clientSecret", value = "1673914982220759042"),
-		// This must be identical to 'Callback URL' in the Remote Access UI
-		// @WebInitParam(name = "redirectUri", value =
-		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
-		// @WebInitParam(name = "redirectUri", value =
-		// "https://183.82.108.79/sfinfraws/customoauthservlet/callback"),
-		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/baseoauthservlet/callback"),
-		// @WebInitParam(name = "redirectUri", value =
-		// "https://sfinfraws.herokuapp.com/customoauthservlet/callback"),
-		// @WebInitParam(name = "redirectUri", value =
-		// "https://localhost:8443/SFSOAPWS/OAuthServlet/callback"),
-		// @WebInitParam(name = "environment", value =
-		// "https://emc--oppvis.cs1.my.salesforce.com"), })
-		// @WebInitParam(name = "environment", value =
-		// "https://test.salesforce.com"), })
-		@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
+		"/baseoauthservlet" })
 public class BaseOAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -75,10 +57,25 @@ public class BaseOAuthServlet extends HttpServlet {
 	private String idURL = null;
 
 	public void init() throws ServletException {
-		clientId = this.getInitParameter("clientId");
+	/*	clientId = this.getInitParameter("clientId");
 		clientSecret = this.getInitParameter("clientSecret");
 		redirectUri = this.getInitParameter("redirectUri");
-		environment = this.getInitParameter("environment");
+		environment = this.getInitParameter("environment");*/
+		
+		Properties p = new Properties();
+
+		try {
+			p.load(getServletContext().getResourceAsStream(
+					"/WEB-INF/properties/config.properties"));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		clientId = p.getProperty("baseclientId");
+		clientSecret = p.getProperty("baseclientSecret");
+		redirectUri = p.getProperty("baseredirectUri");
+		environment = p.getProperty("baseenvironment");
 
 		System.out.println("clientId -- " + clientId + " --clientSecret--"
 				+ clientSecret + "--redirectUri--" + redirectUri

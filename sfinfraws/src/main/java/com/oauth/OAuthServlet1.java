@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.Properties;
 import java.util.StringTokenizer;
 
 import javax.servlet.FilterChain;
@@ -44,12 +43,20 @@ import com.util.SFoAuthHandle;
  */
 
 @WebServlet(name = "OAuthServlet", urlPatterns = { "/OAuthServlet/*",
-		"/OAuthServlet" })
-public class OAuthServlet extends HttpServlet {
+		"/OAuthServlet" }, initParams = {
+// clientId is 'Consumer Key' in the Remote Access UI
+		@WebInitParam(name = "clientId", value = "3MVG9fMtCkV6eLhckipcGtsdEsXpvuj0tgLP6bJJYaFcdwyUC5dmSJ.Oi2e6vkHAZMrNBY6k8y9Qf.QWFahCK"),
+		// clientSecret is 'Consumer Secret' in the Remote Access UI
+		@WebInitParam(name = "clientSecret", value = "7048969593420516911"),
+		// This must be identical to 'Callback URL' in the Remote Access UI
+		@WebInitParam(name = "redirectUri", value = "https://sfinfraws.herokuapp.com/OAuthServlet/callback"),
+		//this is the Environment Which is getting Back
+		@WebInitParam(name = "environment", value = "https://login.salesforce.com"), })
+public class OAuthServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOG = LoggerFactory
-			.getLogger(OAuthServlet.class);
+			.getLogger(OAuthServlet1.class);
 
 	private String clientId = null;
 	private String clientSecret = null;
@@ -63,25 +70,10 @@ public class OAuthServlet extends HttpServlet {
 	private String baseToken = null;
 
 	public void init() throws ServletException {
-		/*clientId = this.getInitParameter("clientId");
+		clientId = this.getInitParameter("clientId");
 		clientSecret = this.getInitParameter("clientSecret");
 		redirectUri = this.getInitParameter("redirectUri");
-		environment = this.getInitParameter("environment");*/
-		
-		Properties p = new Properties();
-
-		try {
-			p.load(getServletContext().getResourceAsStream(
-					"/WEB-INF/properties/config.properties"));
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		clientId = p.getProperty("nonbaseclientId");
-		clientSecret = p.getProperty("nonbaseclientSecret");
-		redirectUri = p.getProperty("nonbaseredirectUri");
-		environment = p.getProperty("nonbaseenvironment");
+		environment = this.getInitParameter("environment");
 
 	}
 
